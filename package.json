@@ -1,17 +1,29 @@
 {
-  "name": "fentriqapp",
-  "version": "0.1.0",
+  "name": "fentriq",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@calcom/embed-react": "^1.5.3",
+    "@hookform/resolvers": "^5.4.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.40.0",
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^1.20.0",
     "next": "16.2.9",
+    "next-intl": "^4.13.0",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-hook-form": "^7.79.0",
+    "resend": "^6.14.0",
+    "tailwind-merge": "^3.6.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -20,6 +32,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "sharp": "^0.35.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

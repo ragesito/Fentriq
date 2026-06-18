@@ -1,0 +1,22 @@
+{
+  "name": "Fentriq",
+  "short_name": "Fentriq",
+  "description": "Studio di sviluppo software: web, app, IA, automazioni, Web3.",
+  "theme_color": "#15171C",
+  "background_color": "#0B0C0F",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/fentriq-icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

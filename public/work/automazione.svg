@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-label="Automazione PMI">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8A6CFF" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#262B35" stop-opacity="0.10"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="#15171C"/>
+  <rect width="1200" height="750" fill="url(#g)"/>
+  <path d="M0 600 L1200 380 L1200 750 L0 750 Z" fill="#0B0C0F" opacity="0.55"/>
+  
+  <g transform="translate(820,90) scale(5.2)" opacity="0.9">
+    <path d="M26 30 L56 30 L42 54 L12 54 Z" fill="#4F5BF7"/>
+    <path d="M56 30 L86 30 L72 54 L42 54 Z" fill="#AEB4C2"/>
+    <path d="M42 54 L72 54 L58 78 L28 78 Z" fill="#FFFFFF"/>
+    <path d="M58 78 L72 54 L86 54 L72 78 Z" fill="#8A6CFF"/>
+  </g>
+  <text x="80" y="640" font-family="'Space Grotesk',sans-serif" font-size="84" font-weight="700" fill="#F4F6F8">Automazione PMI</text>
+  <text x="84" y="690" font-family="'JetBrains Mono',monospace" font-size="26" letter-spacing="3" fill="#9CA3B2">N8N · IA</text>
+</svg>

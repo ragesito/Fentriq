@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fentriq
 
-## Getting Started
+Sito web dello studio di sviluppo software **Fentriq** — landing dark, bilingue
+(IT/EN), ottimizzata per la conversione (prenota call → form → WhatsApp).
 
-First, run the development server:
+Costruita con **Next.js 16 (App Router) · TypeScript · Tailwind v4 · next-intl ·
+Framer Motion**. Static-first: tutto prerenderizzato tranne `/api/contact`.
+
+## Avvio rapido
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # compila le variabili
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Comandi:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run dev        # sviluppo
+npm run build      # build di produzione
+npm run start      # serve la build
+npm run lint       # eslint
+npm run typecheck  # tsc --noEmit
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Variabili d'ambiente
 
-## Learn More
+Vedi [`.env.example`](.env.example). Nessuna è obbligatoria per buildare; in
+produzione configura almeno:
 
-To learn more about Next.js, take a look at the following resources:
+| Variabile | Scopo |
+|---|---|
+| `NEXT_PUBLIC_SITE_URL` | URL canonico (sitemap, OG, JSON-LD) |
+| `NEXT_PUBLIC_CALCOM_LINK` | slug Cal.com, es. `fentriq/discovery` |
+| `NEXT_PUBLIC_WHATSAPP` | numero E.164 senza `+`, es. `39333…` |
+| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | dominio Plausible (vuoto = analytics off) |
+| `N8N_WEBHOOK_URL` | webhook n8n che riceve ogni lead |
+| `RESEND_API_KEY` / `RESEND_FROM` / `LEAD_EMAIL` | fallback email se n8n è giù |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Lead pipeline (il dogfooding)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`Form → POST /api/contact` → validazione Zod + honeypot + rate-limit per IP →
+**webhook n8n** (primario) → **Resend** (fallback se il webhook fallisce). Se
+entrambi i canali non sono configurati l'API risponde `502` e la UI propone
+WhatsApp. Configura il flusso n8n: Webhook → Telegram → Resend auto-reply →
+Google Sheets.
 
-## Deploy on Vercel
+## Struttura
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+├─ app/[locale]/        # pagine localizzate (home, lavori, contatti, legal)
+│  ├─ opengraph-image.tsx
+│  └─ ...
+├─ app/api/contact/     # route handler del form
+├─ app/{sitemap,robots}.ts
+├─ components/ui/        # primitive (Button, Card, Section, …)
+├─ components/sections/  # sezioni (Hero, Services, Work, ContactForm, …)
+├─ content/             # work.ts (casi studio) · legal.ts
+├─ messages/            # it.json · en.json (tutto il copy)
+├─ config/site.ts       # nav, contatti, link
+├─ i18n/                # routing, navigation, request (next-intl)
+├─ lib/                 # cn, analytics, contact-schema
+└─ proxy.ts             # middleware i18n (Next 16 "proxy")
+public/brand/           # logo SVG · public/work/ cover
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Da completare prima del lancio
+
+- [ ] **Copy italiano**: revisione da parte di un madrelingua.
+- [ ] **P.IVA** reale in `src/config/site.ts` (`vatNumber`).
+- [ ] **Numero WhatsApp**, **slug Cal.com**, **email** reali.
+- [ ] Verifica del dominio su **Resend** per inviare da `@fentriq.app`.
+- [ ] Configura il **flusso n8n** e imposta `N8N_WEBHOOK_URL`.
+- [ ] Cover reali dei progetti in `public/work/` (ora placeholder generati).
+- [ ] Deploy su **Vercel** + dominio `fentriq.app`.
+
+## Deploy
+
+```bash
+npx vercel        # preview
+npx vercel --prod # produzione
+```
+Imposta le variabili d'ambiente nel dashboard Vercel.

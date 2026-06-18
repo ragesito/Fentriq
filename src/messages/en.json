@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "title": "Fentriq | Software development studio | Web, Apps, AI, Automation",
+    "description": "Full-stack software development studio for Italian SMEs. Custom websites, applications, artificial intelligence and automation. From the first idea to production, fast.",
+    "ogAlt": "Fentriq — Software development studio"
+  },
+  "nav": {
+    "services": "Services",
+    "work": "Work",
+    "contact": "Contact",
+    "bookCall": "Book a call",
+    "menu": "Menu",
+    "close": "Close",
+    "openMenu": "Open menu"
+  },
+  "common": {
+    "bookCall": "Book a call",
+    "viewWork": "See our work",
+    "whatsapp": "Message us on WhatsApp",
+    "discover": "Learn more",
+    "backToWork": "Back to work",
+    "viewProject": "View project",
+    "viewCode": "Code",
+    "liveDemo": "Live demo",
+    "languageLabel": "Language",
+    "skipToContent": "Skip to content"
+  },
+  "hero": {
+    "eyebrow": "Software development studio",
+    "titleBefore": "We build the software that helps your business",
+    "titleHighlight": "grow",
+    "titleAfter": ".",
+    "subtitle": "Custom websites, applications, artificial intelligence and automation. From the first idea to production — fast, no fluff.",
+    "stack": "Next.js · React · Node · Solana · n8n · OpenAI"
+  },
+  "services": {
+    "eyebrow": "What we do",
+    "title": "One studio, the whole stack.",
+    "subtitle": "From the first line of code to production. What you need, built to measure.",
+    "items": {
+      "web": {
+        "title": "Web & App Development",
+        "description": "Fast, custom sites and applications, ready to scale. Full-stack with Next.js and React."
+      },
+      "automation": {
+        "title": "Automation & Integrations",
+        "description": "We connect your tools and automate repetitive processes. n8n flows, WhatsApp and Telegram bots."
+      },
+      "ai": {
+        "title": "Artificial Intelligence",
+        "description": "AI pipelines that read documents, extract data and flag anomalies in real time."
+      },
+      "web3": {
+        "title": "Web3 & Blockchain",
+        "description": "Smart contracts, wallets and dApps on Solana and EVM, in production."
+      }
+    }
+  },
+  "work": {
+    "eyebrow": "Projects",
+    "title": "What we've shipped recently.",
+    "subtitle": "Real products, in production. No mockups, no promises.",
+    "viewAll": "All work",
+    "featured": "Featured"
+  },
+  "process": {
+    "eyebrow": "The method",
+    "title": "From call to launch, no surprises.",
+    "subtitle": "A clear process designed to show you real results from day one.",
+    "steps": {
+      "discovery": {
+        "title": "Discovery",
+        "description": "A call to understand the problem, the goals and the numbers."
+      },
+      "proposal": {
+        "title": "Proposal",
+        "description": "Scope, timeline and price clear before we start."
+      },
+      "development": {
+        "title": "Development",
+        "description": "We show you real progress, not promises. Fast iterations."
+      },
+      "launch": {
+        "title": "Launch & support",
+        "description": "We ship to production and stay to help it grow."
+      }
+    }
+  },
+  "whyUs": {
+    "eyebrow": "Why us",
+    "title": "Studio speed, engineer's judgement.",
+    "items": {
+      "fast": {
+        "title": "Genuinely fast",
+        "description": "Prototypes and MVPs in days, not months."
+      },
+      "ownership": {
+        "title": "Your code, no lock-in",
+        "description": "The code is yours. No hidden dependencies."
+      },
+      "direct": {
+        "title": "One point of contact",
+        "description": "You talk to whoever builds it, not a salesperson."
+      },
+      "demo": {
+        "title": "This site is a demo",
+        "description": "The form below triggers a real automation: the same one we build for you."
+      }
+    }
+  },
+  "pricing": {
+    "eyebrow": "Collaboration",
+    "title": "Three ways to work together.",
+    "subtitle": "We pick the right format together after a free call.",
+    "items": {
+      "project": {
+        "title": "Project",
+        "description": "Fixed scope and budget. Ideal for a site, an app or a concrete automation."
+      },
+      "retainer": {
+        "title": "Monthly retainer",
+        "description": "A development team at your disposal, every month."
+      },
+      "consulting": {
+        "title": "Consulting",
+        "description": "Technical audit, stack selection, code review."
+      }
+    },
+    "cta": "Book a call for a quote"
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "What clients ask us most.",
+    "items": {
+      "cost": {
+        "q": "How much does a project cost?",
+        "a": "It depends on scope. After a free call we give you a clear, fixed quote."
+      },
+      "time": {
+        "q": "How long does delivery take?",
+        "a": "An MVP or a site in 1–3 weeks; larger projects in stages."
+      },
+      "where": {
+        "q": "Do you only work in Rome?",
+        "a": "We work with SMEs across Italy, remotely. In person in Rome, Milan and Florence."
+      },
+      "ownership": {
+        "q": "Is the code mine?",
+        "a": "Yes, always. No lock-in."
+      },
+      "scope": {
+        "q": "Do you only do automation?",
+        "a": "No: web, apps, AI, Web3 and automation. Full-stack."
+      }
+    }
+  },
+  "cta": {
+    "title": "Got an idea or a process to automate? Let's talk.",
+    "subtitle": "A free, no-strings 30-minute call. We'll tell you right away if we can help.",
+    "bookCall": "Book a call",
+    "whatsapp": "Message us on WhatsApp"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let's talk about your project.",
+    "subtitle": "Fill in the form or book a call directly. We reply within 24 hours.",
+    "demoNote": "This form triggers a real n8n automation: the same one we build for our clients.",
+    "bookTitle": "Rather talk it through?",
+    "bookSubtitle": "Pick a time for a 30-minute call.",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "you@company.com",
+      "company": "Company",
+      "companyPlaceholder": "Company name (optional)",
+      "budget": "Indicative budget",
+      "budgetPlaceholder": "Select…",
+      "message": "Message",
+      "messagePlaceholder": "Tell us about the problem or idea you want to build.",
+      "consent": "I consent to the processing of my data per the",
+      "consentLink": "Privacy Policy",
+      "submit": "Send request",
+      "submitting": "Sending…",
+      "successTitle": "Got it!",
+      "success": "We'll reply within 24 hours.",
+      "errorTitle": "Something went wrong.",
+      "error": "Try again or message us on WhatsApp.",
+      "errors": {
+        "name": "Enter your name (at least 2 characters).",
+        "email": "Enter a valid email.",
+        "message": "Write a message of at least 10 characters.",
+        "consent": "You must accept the privacy policy to submit."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Full-stack software development studio for Italian SMEs.",
+    "servicesTitle": "Services",
+    "workTitle": "Work",
+    "contactTitle": "Contact",
+    "legalTitle": "Legal",
+    "privacy": "Privacy Policy",
+    "cookie": "Cookie Policy",
+    "rights": "All rights reserved.",
+    "vat": "VAT"
+  },
+  "workPage": {
+    "eyebrow": "Projects",
+    "title": "Our work.",
+    "subtitle": "Real products in production: web, apps, AI, Web3 and automation.",
+    "sections": {
+      "problem": "The problem",
+      "solution": "The solution",
+      "build": "How we built it",
+      "result": "The result",
+      "stack": "Stack"
+    },
+    "year": "Year",
+    "roles": "Roles",
+    "nextProject": "Next project"
+  },
+  "legal": {
+    "lastUpdated": "Last updated",
+    "privacyTitle": "Privacy Policy",
+    "cookieTitle": "Cookie Policy"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has moved.",
+    "home": "Back to home"
+  }
+}

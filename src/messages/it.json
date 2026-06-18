@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "title": "Fentriq | Studio di sviluppo software | Web, App, IA, Automazioni",
+    "description": "Studio di sviluppo software full-stack per PMI italiane. Siti, applicazioni, intelligenza artificiale e automazioni su misura. Dalla prima idea al prodotto in produzione, veloci.",
+    "ogAlt": "Fentriq — Studio di sviluppo software"
+  },
+  "nav": {
+    "services": "Servizi",
+    "work": "Lavori",
+    "contact": "Contatti",
+    "bookCall": "Prenota una call",
+    "menu": "Menu",
+    "close": "Chiudi",
+    "openMenu": "Apri il menu"
+  },
+  "common": {
+    "bookCall": "Prenota una call",
+    "viewWork": "Guarda i lavori",
+    "whatsapp": "Scrivici su WhatsApp",
+    "discover": "Scopri",
+    "backToWork": "Torna ai lavori",
+    "viewProject": "Vedi il progetto",
+    "viewCode": "Codice",
+    "liveDemo": "Demo live",
+    "languageLabel": "Lingua",
+    "skipToContent": "Vai al contenuto"
+  },
+  "hero": {
+    "eyebrow": "Studio di sviluppo software",
+    "titleBefore": "Costruiamo il software che fa",
+    "titleHighlight": "crescere",
+    "titleAfter": "la tua impresa.",
+    "subtitle": "Siti, applicazioni, intelligenza artificiale e automazioni su misura. Dalla prima idea al prodotto in produzione — veloci, senza fronzoli.",
+    "stack": "Next.js · React · Node · Solana · n8n · OpenAI"
+  },
+  "services": {
+    "eyebrow": "Cosa facciamo",
+    "title": "Un unico studio, tutto lo stack.",
+    "subtitle": "Dalla prima riga di codice alla messa in produzione. Quello che ti serve, costruito su misura.",
+    "items": {
+      "web": {
+        "title": "Sviluppo Web & App",
+        "description": "Siti e applicazioni veloci e su misura, pronti a scalare. Full-stack con Next.js e React."
+      },
+      "automation": {
+        "title": "Automazioni & Integrazioni",
+        "description": "Colleghiamo i tuoi strumenti e automatizziamo i processi ripetitivi. Flussi n8n, bot WhatsApp e Telegram."
+      },
+      "ai": {
+        "title": "Intelligenza Artificiale",
+        "description": "Pipeline IA che leggono documenti, estraggono dati e segnalano anomalie in tempo reale."
+      },
+      "web3": {
+        "title": "Web3 & Blockchain",
+        "description": "Smart contract, wallet e dApp su Solana ed EVM, in produzione."
+      }
+    }
+  },
+  "work": {
+    "eyebrow": "Progetti",
+    "title": "Quello che abbiamo costruito di recente.",
+    "subtitle": "Prodotti reali, in produzione. Niente mockup, niente promesse.",
+    "viewAll": "Tutti i lavori",
+    "featured": "In evidenza"
+  },
+  "process": {
+    "eyebrow": "Il metodo",
+    "title": "Dalla call al lancio, senza sorprese.",
+    "subtitle": "Un processo chiaro, pensato per farti vedere risultati reali fin da subito.",
+    "steps": {
+      "discovery": {
+        "title": "Scoperta",
+        "description": "Una call per capire il problema, gli obiettivi e i numeri."
+      },
+      "proposal": {
+        "title": "Proposta",
+        "description": "Ambito, tempi e prezzo chiari prima di iniziare."
+      },
+      "development": {
+        "title": "Sviluppo",
+        "description": "Ti mostriamo avanzamenti reali, non promesse. Iterazioni rapide."
+      },
+      "launch": {
+        "title": "Lancio & supporto",
+        "description": "Mettiamo in produzione e restiamo per farlo crescere."
+      }
+    }
+  },
+  "whyUs": {
+    "eyebrow": "Perché noi",
+    "title": "Velocità da studio, criterio da ingegneri.",
+    "items": {
+      "fast": {
+        "title": "Veloci sul serio",
+        "description": "Prototipi e MVP in giorni, non mesi."
+      },
+      "ownership": {
+        "title": "Codice tuo, nessun lock-in",
+        "description": "Il codice è tuo. Niente dipendenze nascoste."
+      },
+      "direct": {
+        "title": "Un solo interlocutore",
+        "description": "Parli con chi costruisce, non con un commerciale."
+      },
+      "demo": {
+        "title": "Questo sito è una demo",
+        "description": "Il modulo qui sotto attiva un'automazione reale: la stessa che costruiamo per te."
+      }
+    }
+  },
+  "pricing": {
+    "eyebrow": "Collaborazione",
+    "title": "Tre modi per lavorare insieme.",
+    "subtitle": "Scegliamo insieme la formula giusta dopo una call gratuita.",
+    "items": {
+      "project": {
+        "title": "Progetto",
+        "description": "Ambito e budget fissi. Ideale per un sito, una app o un'automazione concreta."
+      },
+      "retainer": {
+        "title": "Retainer mensile",
+        "description": "Un team di sviluppo a disposizione, ogni mese."
+      },
+      "consulting": {
+        "title": "Consulenza",
+        "description": "Audit tecnico, scelta dello stack, revisione di codice."
+      }
+    },
+    "cta": "Prenota una call per un preventivo"
+  },
+  "faq": {
+    "eyebrow": "Domande frequenti",
+    "title": "Quello che ci chiedono più spesso.",
+    "items": {
+      "cost": {
+        "q": "Quanto costa un progetto?",
+        "a": "Dipende dall'ambito. Dopo una call gratuita ti diamo un preventivo chiaro e fisso."
+      },
+      "time": {
+        "q": "In quanto tempo consegnate?",
+        "a": "Un MVP o un sito in 1–3 settimane; progetti più grandi a tappe."
+      },
+      "where": {
+        "q": "Lavorate solo a Roma?",
+        "a": "Lavoriamo con PMI in tutta Italia, da remoto. Di persona a Roma, Milano e Firenze."
+      },
+      "ownership": {
+        "q": "Il codice è mio?",
+        "a": "Sì, sempre. Nessun lock-in."
+      },
+      "scope": {
+        "q": "Fate solo automazioni?",
+        "a": "No: web, app, IA, Web3 e automazioni. Full-stack."
+      }
+    }
+  },
+  "cta": {
+    "title": "Hai un'idea o un processo da automatizzare? Parliamone.",
+    "subtitle": "Una call di 30 minuti, gratuita e senza impegno. Ti diciamo subito se possiamo aiutarti.",
+    "bookCall": "Prenota una call",
+    "whatsapp": "Scrivici su WhatsApp"
+  },
+  "contact": {
+    "eyebrow": "Contatti",
+    "title": "Parliamo del tuo progetto.",
+    "subtitle": "Compila il modulo o prenota direttamente una call. Ti rispondiamo entro 24 ore.",
+    "demoNote": "Questo modulo attiva un'automazione reale n8n: la stessa che costruiamo per i nostri clienti.",
+    "bookTitle": "Preferisci parlarne a voce?",
+    "bookSubtitle": "Scegli un orario per una call di 30 minuti.",
+    "form": {
+      "name": "Nome",
+      "namePlaceholder": "Il tuo nome",
+      "email": "Email",
+      "emailPlaceholder": "nome@azienda.it",
+      "company": "Azienda",
+      "companyPlaceholder": "Nome dell'azienda (opzionale)",
+      "budget": "Budget indicativo",
+      "budgetPlaceholder": "Seleziona…",
+      "message": "Messaggio",
+      "messagePlaceholder": "Raccontaci il problema o l'idea che vuoi realizzare.",
+      "consent": "Acconsento al trattamento dei miei dati secondo la",
+      "consentLink": "Privacy Policy",
+      "submit": "Invia richiesta",
+      "submitting": "Invio in corso…",
+      "successTitle": "Ricevuto!",
+      "success": "Ti rispondiamo entro 24 ore.",
+      "errorTitle": "Qualcosa è andato storto.",
+      "error": "Riprova o scrivici su WhatsApp.",
+      "errors": {
+        "name": "Inserisci il tuo nome (almeno 2 caratteri).",
+        "email": "Inserisci un'email valida.",
+        "message": "Scrivi un messaggio di almeno 10 caratteri.",
+        "consent": "Devi accettare la privacy policy per inviare."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Studio di sviluppo software full-stack per le PMI italiane.",
+    "servicesTitle": "Servizi",
+    "workTitle": "Lavori",
+    "contactTitle": "Contatti",
+    "legalTitle": "Legale",
+    "privacy": "Privacy Policy",
+    "cookie": "Cookie Policy",
+    "rights": "Tutti i diritti riservati.",
+    "vat": "P.IVA"
+  },
+  "workPage": {
+    "eyebrow": "Progetti",
+    "title": "I nostri lavori.",
+    "subtitle": "Prodotti reali in produzione: web, app, IA, Web3 e automazioni.",
+    "sections": {
+      "problem": "Il problema",
+      "solution": "La soluzione",
+      "build": "Come l'abbiamo costruito",
+      "result": "Il risultato",
+      "stack": "Stack"
+    },
+    "year": "Anno",
+    "roles": "Ruoli",
+    "nextProject": "Prossimo progetto"
+  },
+  "legal": {
+    "lastUpdated": "Ultimo aggiornamento",
+    "privacyTitle": "Privacy Policy",
+    "cookieTitle": "Cookie Policy"
+  },
+  "notFound": {
+    "title": "Pagina non trovata",
+    "description": "La pagina che cerchi non esiste o è stata spostata.",
+    "home": "Torna alla home"
+  }
+}
