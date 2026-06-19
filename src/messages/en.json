@@ -16,14 +16,14 @@
   "common": {
     "bookCall": "Book a call",
     "viewWork": "See our work",
-    "whatsapp": "Message us on WhatsApp",
     "discover": "Learn more",
     "backToWork": "Back to work",
     "viewProject": "View project",
     "viewCode": "Code",
     "liveDemo": "Live demo",
     "languageLabel": "Language",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "chatWithAssistant": "Chat with the assistant"
   },
   "hero": {
     "eyebrow": "Software development studio",
@@ -158,7 +158,24 @@
     "title": "Got an idea or a process to automate? Let's talk.",
     "subtitle": "A free, no-strings 30-minute call. We'll tell you right away if we can help.",
     "bookCall": "Book a call",
-    "whatsapp": "Message us on WhatsApp"
+    "chat": "Chat with our assistant"
+  },
+  "chat": {
+    "open": "Open chat",
+    "close": "Close chat",
+    "title": "Fentriq Assistant",
+    "poweredBy": "AI · replies in seconds",
+    "greeting": "Hi! 👋 I'm the Fentriq assistant. I can help you understand what we do or book a call. How can I help?",
+    "placeholder": "Type a message…",
+    "send": "Send",
+    "error": "Oops, something went wrong. Try again or book a call.",
+    "notConfigured": "The chat isn't live yet. Write to info@fentriq.app or book a call.",
+    "disclaimer": "AI assistant. For binding details, book a call.",
+    "suggestions": [
+      "What exactly do you do?",
+      "How much does a project cost?",
+      "How long does delivery take?"
+    ]
   },
   "contact": {
     "eyebrow": "Contact",
@@ -185,7 +202,8 @@
       "successTitle": "Got it!",
       "success": "We'll reply within 24 hours.",
       "errorTitle": "Something went wrong.",
-      "error": "Try again or message us on WhatsApp.",
+      "error": "Try again or chat with our assistant.",
+      "chatFallback": "Chat with us",
       "errors": {
         "name": "Enter your name (at least 2 characters).",
         "email": "Enter a valid email.",

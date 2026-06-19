@@ -23,7 +23,7 @@ export const privacyDoc: LegalDoc = {
       {
         heading: "Titolare del trattamento",
         body: [
-          "Il Titolare del trattamento dei dati è Fentriq (P.IVA IT00000000000). Per qualsiasi richiesta relativa ai tuoi dati personali puoi scriverci a hello@fentriq.app.",
+          "Il Titolare del trattamento dei dati è Fentriq. Per qualsiasi richiesta relativa ai tuoi dati personali puoi scriverci a info@fentriq.app.",
         ],
       },
       {
@@ -49,7 +49,7 @@ export const privacyDoc: LegalDoc = {
       {
         heading: "I tuoi diritti",
         body: [
-          "Hai diritto di accedere, rettificare, cancellare e limitare il trattamento dei tuoi dati, oltre al diritto di opposizione e portabilità. Per esercitarli scrivici a hello@fentriq.app. Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali.",
+          "Hai diritto di accedere, rettificare, cancellare e limitare il trattamento dei tuoi dati, oltre al diritto di opposizione e portabilità. Per esercitarli scrivici a info@fentriq.app. Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali.",
         ],
       },
     ],
@@ -57,7 +57,7 @@ export const privacyDoc: LegalDoc = {
       {
         heading: "Data controller",
         body: [
-          "The data controller is Fentriq (VAT IT00000000000). For any request about your personal data, write to hello@fentriq.app.",
+          "The data controller is Fentriq. For any request about your personal data, write to info@fentriq.app.",
         ],
       },
       {
@@ -83,7 +83,7 @@ export const privacyDoc: LegalDoc = {
       {
         heading: "Your rights",
         body: [
-          "You have the right to access, rectify, erase and restrict the processing of your data, as well as the right to object and to data portability. To exercise them, write to hello@fentriq.app. You also have the right to lodge a complaint with the Italian Data Protection Authority.",
+          "You have the right to access, rectify, erase and restrict the processing of your data, as well as the right to object and to data portability. To exercise them, write to info@fentriq.app. You also have the right to lodge a complaint with the Italian Data Protection Authority.",
         ],
       },
     ],
@@ -111,7 +111,7 @@ export const cookieDoc: LegalDoc = {
       {
         heading: "Servizi esterni",
         body: [
-          "Quando prenoti una call tramite Cal.com o ci scrivi su WhatsApp, vieni reindirizzato a servizi di terze parti che applicano le proprie informative sulla privacy.",
+          "Quando prenoti una call tramite Cal.com vieni reindirizzato a un servizio di terze parti che applica la propria informativa sulla privacy. L'assistente IA del sito elabora i messaggi tramite un fornitore terzo (OpenAI) al solo scopo di rispondere alle tue domande.",
         ],
       },
     ],
@@ -132,7 +132,7 @@ export const cookieDoc: LegalDoc = {
       {
         heading: "External services",
         body: [
-          "When you book a call via Cal.com or message us on WhatsApp, you are redirected to third-party services that apply their own privacy policies.",
+          "When you book a call via Cal.com you are redirected to a third-party service that applies its own privacy policy. The site's AI assistant processes your messages through a third-party provider (OpenAI) solely to answer your questions.",
         ],
       },
     ],

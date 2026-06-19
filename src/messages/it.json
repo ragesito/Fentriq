@@ -16,20 +16,20 @@
   "common": {
     "bookCall": "Prenota una call",
     "viewWork": "Guarda i lavori",
-    "whatsapp": "Scrivici su WhatsApp",
     "discover": "Scopri",
     "backToWork": "Torna ai lavori",
     "viewProject": "Vedi il progetto",
     "viewCode": "Codice",
     "liveDemo": "Demo live",
     "languageLabel": "Lingua",
-    "skipToContent": "Vai al contenuto"
+    "skipToContent": "Vai al contenuto",
+    "chatWithAssistant": "Chatta con l'assistente"
   },
   "hero": {
     "eyebrow": "Studio di sviluppo software",
     "titleBefore": "Costruiamo il software che fa",
     "titleHighlight": "crescere",
-    "titleAfter": "la tua impresa.",
+    "titleAfter": " la tua impresa.",
     "subtitle": "Siti, applicazioni, intelligenza artificiale e automazioni su misura. Dalla prima idea al prodotto in produzione — veloci, senza fronzoli.",
     "stack": "Next.js · React · Node · Solana · n8n · OpenAI"
   },
@@ -158,7 +158,24 @@
     "title": "Hai un'idea o un processo da automatizzare? Parliamone.",
     "subtitle": "Una call di 30 minuti, gratuita e senza impegno. Ti diciamo subito se possiamo aiutarti.",
     "bookCall": "Prenota una call",
-    "whatsapp": "Scrivici su WhatsApp"
+    "chat": "Chatta con il nostro assistente"
+  },
+  "chat": {
+    "open": "Apri la chat",
+    "close": "Chiudi la chat",
+    "title": "Assistente Fentriq",
+    "poweredBy": "IA · risponde in pochi secondi",
+    "greeting": "Ciao! 👋 Sono l'assistente di Fentriq. Posso aiutarti a capire cosa facciamo o a prenotare una call. Come posso aiutarti?",
+    "placeholder": "Scrivi un messaggio…",
+    "send": "Invia",
+    "error": "Ops, qualcosa è andato storto. Riprova o prenota una call.",
+    "notConfigured": "La chat non è ancora attiva. Scrivici a info@fentriq.app o prenota una call.",
+    "disclaimer": "Assistente IA. Per dettagli vincolanti, prenota una call.",
+    "suggestions": [
+      "Cosa fate esattamente?",
+      "Quanto costa un progetto?",
+      "In quanto tempo consegnate?"
+    ]
   },
   "contact": {
     "eyebrow": "Contatti",
@@ -185,7 +202,8 @@
       "successTitle": "Ricevuto!",
       "success": "Ti rispondiamo entro 24 ore.",
       "errorTitle": "Qualcosa è andato storto.",
-      "error": "Riprova o scrivici su WhatsApp.",
+      "error": "Riprova o chatta con il nostro assistente.",
+      "chatFallback": "Chatta con noi",
       "errors": {
         "name": "Inserisci il tuo nome (almeno 2 caratteri).",
         "email": "Inserisci un'email valida.",

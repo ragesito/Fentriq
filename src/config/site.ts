@@ -13,7 +13,7 @@ export const siteConfig = {
     it: "Studio di sviluppo software. Web, app, IA e automazioni su misura.",
     en: "Full-stack software studio. Custom web, apps, AI and automation.",
   },
-  email: "hello@fentriq.app",
+  email: "info@fentriq.app",
   // E.164 without the "+" sign for the wa.me link (e.g. 39XXXXXXXXXX)
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP ?? "393000000000",
   // Cal.com booking slug (e.g. "fentriq/discovery")
@@ -21,7 +21,7 @@ export const siteConfig = {
   // Booking origin — use https://cal.eu for EU-region accounts, https://cal.com otherwise.
   calOrigin: process.env.NEXT_PUBLIC_CALCOM_ORIGIN ?? "https://cal.com",
   plausibleDomain: process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN ?? "fentriq.app",
-  vatNumber: "IT00000000000", // P.IVA — completare
+  vatNumber: "", // P.IVA — completare quando disponibile (lasciare vuoto la nasconde)
   social: {
     github: "https://github.com/ragesito",
     linkedin: "https://www.linkedin.com/company/fentriq",

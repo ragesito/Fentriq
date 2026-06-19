@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { CheckCircle2, AlertTriangle, Send, Workflow } from "lucide-react";
 import { contactSchema, budgetOptions, type ContactInput } from "@/lib/contact-schema";
 import { Button } from "@/components/ui/Button";
-import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { OpenChatButton } from "@/components/chat/OpenChatButton";
 import { Link } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
@@ -177,7 +177,7 @@ export function ContactForm() {
           {status === "submitting" ? tf("submitting") : tf("submit")}
         </Button>
         {status === "error" ? (
-          <WhatsAppButton size="lg">WhatsApp</WhatsAppButton>
+          <OpenChatButton size="lg">{t("form.chatFallback")}</OpenChatButton>
         ) : null}
       </div>
     </form>

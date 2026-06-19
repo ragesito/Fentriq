@@ -100,7 +100,7 @@ export async function POST(req: Request) {
       try {
         const resend = new Resend(apiKey);
         await resend.emails.send({
-          from: process.env.RESEND_FROM ?? "web@fentriq.app",
+          from: process.env.RESEND_FROM ?? "Fentriq <info@fentriq.app>",
           to,
           replyTo: payload.email,
           subject: `Nuovo lead: ${payload.name}${payload.company ? ` (${payload.company})` : ""}`,

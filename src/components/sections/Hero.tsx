@@ -13,17 +13,21 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-bg pt-20 pb-24 sm:pt-28 sm:pb-32">
-      {/* Ambient grid + glow */}
+      {/* Ambient grid + glows */}
       <div aria-hidden className="bg-grid absolute inset-0 opacity-60" />
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 right-0 h-[40rem] w-[40rem] rounded-full bg-accent/10 blur-[120px]"
+        className="animate-glow-pulse pointer-events-none absolute -top-40 right-0 h-[40rem] w-[40rem] rounded-full bg-accent/15 blur-[120px]"
+      />
+      <div
+        aria-hidden
+        className="animate-glow-pulse pointer-events-none absolute -bottom-48 -left-32 h-[34rem] w-[34rem] rounded-full bg-accent-2/10 blur-[130px] [animation-delay:-4s]"
       />
 
       {/* Folded Band ambient mark, aligned right */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-10 top-1/2 hidden -translate-y-1/2 opacity-[0.07] lg:block"
+        className="pointer-events-none absolute -right-10 top-1/2 hidden -translate-y-1/2 lg:block"
       >
         <Image
           src="/brand/fentriq-mark.svg"
@@ -31,6 +35,7 @@ export function Hero() {
           width={560}
           height={560}
           priority
+          className="opacity-[0.08]"
         />
       </div>
 
@@ -46,7 +51,9 @@ export function Hero() {
           <Reveal delay={0.05}>
             <h1 className="mt-6 text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.05]">
               {t("titleBefore")}{" "}
-              <span className="text-gradient">{t("titleHighlight")}</span>
+              <span className="text-gradient-animated">
+                {t("titleHighlight")}
+              </span>
               {t("titleAfter")}
             </h1>
           </Reveal>

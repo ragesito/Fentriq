@@ -9,7 +9,8 @@ type PlausibleEvent =
   | "cta_book_call"
   | "cta_whatsapp"
   | "form_submit"
-  | "view_case";
+  | "view_case"
+  | "chat_open";
 
 declare global {
   interface Window {

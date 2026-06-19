@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Calendar, Mail, MessageCircle } from "lucide-react";
+import { Calendar, Mail } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { CalButton } from "@/components/ui/CalButton";
 import { ContactForm } from "@/components/sections/ContactForm";
-import { siteConfig, whatsappUrl } from "@/config/site";
+import { OpenChatButton } from "@/components/chat/OpenChatButton";
+import { siteConfig } from "@/config/site";
 
 export async function generateMetadata({
   params,
@@ -74,7 +75,7 @@ export default async function ContactPage({
                 </CalButton>
               </div>
 
-              <div className="mt-7 space-y-3 border-t border-border pt-6">
+              <div className="mt-7 space-y-4 border-t border-border pt-6">
                 <a
                   href={`mailto:${siteConfig.email}`}
                   className="flex items-center gap-3 text-sm text-muted transition-colors hover:text-text"
@@ -82,15 +83,9 @@ export default async function ContactPage({
                   <Mail size={17} className="text-accent" aria-hidden />
                   {siteConfig.email}
                 </a>
-                <a
-                  href={whatsappUrl("Ciao Fentriq, vorrei parlare di un progetto.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm text-muted transition-colors hover:text-text"
-                >
-                  <MessageCircle size={17} className="text-accent" aria-hidden />
-                  WhatsApp
-                </a>
+                <OpenChatButton variant="secondary" size="md" className="w-full">
+                  {tc("chatWithAssistant")}
+                </OpenChatButton>
               </div>
             </div>
           </aside>

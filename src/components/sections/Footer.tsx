@@ -1,11 +1,11 @@
 import { useTranslations } from "next-intl";
-import { Mail, MessageCircle } from "lucide-react";
+import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 import { LocaleSwitcher } from "@/components/ui/LocaleSwitcher";
 import { Link } from "@/i18n/navigation";
-import { siteConfig, whatsappUrl } from "@/config/site";
+import { siteConfig } from "@/config/site";
 
 export function Footer() {
   const t = useTranslations("footer");
@@ -34,15 +34,6 @@ export function Footer() {
                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-accent/60 hover:text-text"
               >
                 <Mail size={17} aria-hidden />
-              </a>
-              <a
-                href={whatsappUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-accent/60 hover:text-text"
-              >
-                <MessageCircle size={17} aria-hidden />
               </a>
               <a
                 href={siteConfig.social.github}
@@ -125,8 +116,8 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-border pt-6 text-sm text-muted sm:flex-row sm:items-center">
           <p>
-            {t("vat")} {siteConfig.vatNumber} · © {year} {siteConfig.name}.{" "}
-            {t("rights")}
+            {siteConfig.vatNumber ? `${t("vat")} ${siteConfig.vatNumber} · ` : ""}
+            © {year} {siteConfig.name}. {t("rights")}
           </p>
           <LocaleSwitcher />
         </div>

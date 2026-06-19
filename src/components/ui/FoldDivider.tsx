@@ -17,6 +17,7 @@ export function FoldDivider({ flip = false }: { flip?: boolean }) {
           strokeWidth="1"
         />
         <path
+          className="animate-dash"
           d={flip ? "M0 8 L1200 24" : "M0 24 L1200 8"}
           stroke="url(#fold-grad)"
           strokeWidth="1"

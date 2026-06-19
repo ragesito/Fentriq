@@ -9,7 +9,7 @@ import { fontVariables } from "../fonts";
 import "../globals.css";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
-import { WhatsAppFloat } from "@/components/ui/WhatsAppButton";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -99,7 +99,7 @@ export default async function LocaleLayout({
             {children}
           </main>
           <Footer />
-          <WhatsAppFloat />
+          <ChatWidget />
         </NextIntlClientProvider>
         {siteConfig.plausibleDomain ? (
           <Script

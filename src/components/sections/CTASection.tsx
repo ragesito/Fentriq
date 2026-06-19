@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { CalButton } from "@/components/ui/CalButton";
-import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { OpenChatButton } from "@/components/chat/OpenChatButton";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function CTASection() {
@@ -35,7 +35,7 @@ export function CTASection() {
         <Reveal delay={0.1}>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <CalButton size="lg">{t("bookCall")}</CalButton>
-            <WhatsAppButton size="lg">{t("whatsapp")}</WhatsAppButton>
+            <OpenChatButton size="lg">{t("chat")}</OpenChatButton>
           </div>
         </Reveal>
       </Container>
