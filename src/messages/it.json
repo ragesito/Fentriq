@@ -31,7 +31,7 @@
     "titleHighlight": "crescere",
     "titleAfter": " la tua impresa.",
     "subtitle": "Siti, applicazioni, intelligenza artificiale e automazioni su misura. Dalla prima idea al prodotto in produzione — veloci, senza fronzoli.",
-    "stack": "Next.js · React · Node · Solana · n8n · OpenAI"
+    "stack": "Web · App · IA · Automazioni · Algoritmi · Software · Web3"
   },
   "services": {
     "eyebrow": "Cosa facciamo",
@@ -40,19 +40,19 @@
     "items": {
       "web": {
         "title": "Sviluppo Web & App",
-        "description": "Siti e applicazioni veloci e su misura, pronti a scalare. Full-stack con Next.js e React."
+        "description": "Siti e applicazioni veloci e su misura, pronti a scalare e a crescere con la tua impresa."
       },
       "automation": {
         "title": "Automazioni & Integrazioni",
-        "description": "Colleghiamo i tuoi strumenti e automatizziamo i processi ripetitivi. Flussi n8n, bot WhatsApp e Telegram."
+        "description": "Colleghiamo i tuoi strumenti e automatizziamo i processi ripetitivi, con bot e flussi di lavoro su misura."
       },
       "ai": {
-        "title": "Intelligenza Artificiale",
-        "description": "Pipeline IA che leggono documenti, estraggono dati e segnalano anomalie in tempo reale."
+        "title": "Intelligenza Artificiale & Algoritmi",
+        "description": "Pipeline IA e algoritmi che leggono documenti, estraggono dati e segnalano anomalie in tempo reale."
       },
       "web3": {
         "title": "Web3 & Blockchain",
-        "description": "Smart contract, wallet e dApp su Solana ed EVM, in produzione."
+        "description": "Smart contract, wallet e dApp in produzione, accessibili anche a chi non è del settore."
       }
     }
   },

@@ -17,13 +17,14 @@ export function OrganizationJsonLd({ locale }: { locale: string }) {
     areaServed: siteConfig.serviceAreas,
     knowsAbout: [
       "Web development",
-      "AI",
+      "Mobile and web apps",
+      "Artificial intelligence",
+      "Algorithms",
       "Automation",
+      "Software development",
       "Web3",
-      "Next.js",
-      "Solana",
     ],
-    sameAs: [siteConfig.social.github, siteConfig.social.linkedin],
+    sameAs: [siteConfig.social.x, siteConfig.social.instagram],
     priceRange: "€€",
   };
 

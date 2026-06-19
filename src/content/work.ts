@@ -46,8 +46,8 @@ export const caseStudies: CaseStudy[] = [
         en: "A pipeline that reads the invoice, extracts the line items, reconciles them against the product catalogue and flags anything that doesn't add up — in real time.",
       },
       build: {
-        it: "Front-end Next.js, estrazione con modelli OpenAI, logica di conciliazione su Node. Dal problema al prototipo funzionante in poche ore.",
-        en: "Next.js front-end, extraction with OpenAI models, reconciliation logic on Node. From problem to working prototype in a few hours.",
+        it: "Interfaccia web reattiva, estrazione dei dati guidata dall'intelligenza artificiale e logica di conciliazione sul backend. Dal problema al prototipo funzionante in poche ore.",
+        en: "Reactive web interface, AI-driven data extraction and reconciliation logic on the backend. From problem to a working prototype in a few hours.",
       },
       result: {
         it: "Un controllo che prima richiedeva ore si chiude in minuti, con le anomalie evidenziate prima che diventino un costo.",
@@ -78,8 +78,8 @@ export const caseStudies: CaseStudy[] = [
         en: "A platform where two people face off live on coding problems, with live code execution and instant grading.",
       },
       build: {
-        it: "Front-end Angular, partite in tempo reale con Socket.io, esecuzione sicura del codice con Judge0 in container Docker, pagamenti con Stripe e suggerimenti IA con OpenAI.",
-        en: "Angular front-end, real-time matches over Socket.io, sandboxed code execution with Judge0 in Docker containers, payments with Stripe and AI hints with OpenAI.",
+        it: "Partite in tempo reale, esecuzione sicura del codice in ambienti isolati, pagamenti integrati e suggerimenti generati dall'intelligenza artificiale.",
+        en: "Real-time matches, sandboxed code execution in isolated environments, integrated payments and AI-generated hints.",
       },
       result: {
         it: "Una piattaforma in tempo reale fluida, scalabile e pronta a monetizzare.",
@@ -110,8 +110,8 @@ export const caseStudies: CaseStudy[] = [
         en: "A real-time multiplayer platform with custodial wallets, so users play without worrying about blockchain complexity.",
       },
       build: {
-        it: "Next.js e Node, dati su MongoDB, multiplayer su WebSockets e integrazione con la SDK di Solana per gli asset on-chain.",
-        en: "Next.js and Node, data on MongoDB, multiplayer over WebSockets and integration with the Solana SDK for on-chain assets.",
+        it: "Esperienza multiplayer in tempo reale, dati persistenti e integrazione blockchain per gli asset on-chain, con wallet gestiti per l'utente.",
+        en: "Real-time multiplayer experience, persistent data and blockchain integration for on-chain assets, with wallets managed for the user.",
       },
       result: {
         it: "Una piattaforma Web3 in produzione, accessibile anche a chi non ha mai usato un wallet.",
@@ -143,8 +143,8 @@ export const caseStudies: CaseStudy[] = [
         en: "A flow that automatically reads emails and attachments, reconciles inventory on Google Sheets and delivers quotes via Telegram.",
       },
       build: {
-        it: "Orchestrazione con n8n, parsing e logica in Python, estrazione dati con OpenAI, notifiche su Telegram e inventario su Google Sheets. Tutto in un giorno.",
-        en: "Orchestration with n8n, parsing and logic in Python, data extraction with OpenAI, Telegram notifications and inventory on Google Sheets. All in one day.",
+        it: "Orchestrazione dei flussi di lavoro, lettura ed estrazione dei dati con l'intelligenza artificiale, notifiche istantanee su Telegram e inventario sincronizzato. Tutto in un giorno.",
+        en: "Workflow orchestration, AI-driven data reading and extraction, instant Telegram notifications and synced inventory. All in one day.",
       },
       result: {
         it: "Ore di lavoro manuale eliminate ogni giorno, con preventivi pronti in pochi minuti.",

@@ -31,7 +31,7 @@
     "titleHighlight": "grow",
     "titleAfter": ".",
     "subtitle": "Custom websites, applications, artificial intelligence and automation. From the first idea to production — fast, no fluff.",
-    "stack": "Next.js · React · Node · Solana · n8n · OpenAI"
+    "stack": "Web · App · AI · Automation · Algorithms · Software · Web3"
   },
   "services": {
     "eyebrow": "What we do",
@@ -40,19 +40,19 @@
     "items": {
       "web": {
         "title": "Web & App Development",
-        "description": "Fast, custom sites and applications, ready to scale. Full-stack with Next.js and React."
+        "description": "Fast, custom sites and applications, ready to scale and grow with your business."
       },
       "automation": {
         "title": "Automation & Integrations",
-        "description": "We connect your tools and automate repetitive processes. n8n flows, WhatsApp and Telegram bots."
+        "description": "We connect your tools and automate repetitive processes, with custom bots and workflows."
       },
       "ai": {
-        "title": "Artificial Intelligence",
-        "description": "AI pipelines that read documents, extract data and flag anomalies in real time."
+        "title": "Artificial Intelligence & Algorithms",
+        "description": "AI pipelines and algorithms that read documents, extract data and flag anomalies in real time."
       },
       "web3": {
         "title": "Web3 & Blockchain",
-        "description": "Smart contracts, wallets and dApps on Solana and EVM, in production."
+        "description": "Smart contracts, wallets and dApps in production, accessible even to non-technical users."
       }
     }
   },

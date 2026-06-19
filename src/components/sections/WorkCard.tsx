@@ -77,7 +77,7 @@ export function WorkCard({
         </div>
         <p className="mt-3 text-muted">{study.summary[locale]}</p>
         <div className="mt-5">
-          <StackChips items={study.stack} />
+          <StackChips items={study.roles[locale]} />
         </div>
       </div>
     </Link>

@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+import { XIcon, InstagramIcon } from "@/components/ui/BrandIcons";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 import { LocaleSwitcher } from "@/components/ui/LocaleSwitcher";
@@ -36,22 +36,22 @@ export function Footer() {
                 <Mail size={17} aria-hidden />
               </a>
               <a
-                href={siteConfig.social.github}
+                href={siteConfig.social.x}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="GitHub"
+                aria-label="X"
                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-accent/60 hover:text-text"
               >
-                <GithubIcon size={17} />
+                <XIcon size={16} />
               </a>
               <a
-                href={siteConfig.social.linkedin}
+                href={siteConfig.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn"
+                aria-label="Instagram"
                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-accent/60 hover:text-text"
               >
-                <LinkedinIcon size={17} />
+                <InstagramIcon size={17} />
               </a>
             </div>
           </div>

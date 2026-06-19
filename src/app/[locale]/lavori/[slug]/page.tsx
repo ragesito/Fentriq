@@ -6,7 +6,6 @@ import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/ui/BrandIcons";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
-import { StackChips } from "@/components/ui/StackChip";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/sections/CTASection";
 import { Link } from "@/i18n/navigation";
@@ -154,15 +153,6 @@ export default async function CaseStudyPage({
                 </section>
               </Reveal>
             ))}
-
-            <section>
-              <h2 className="font-mono text-xs uppercase tracking-[0.08em] text-accent">
-                {t("sections.stack")}
-              </h2>
-              <div className="mt-4">
-                <StackChips items={study.stack} />
-              </div>
-            </section>
           </div>
 
           {/* Next project */}

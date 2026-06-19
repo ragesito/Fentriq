@@ -23,8 +23,8 @@ export const siteConfig = {
   plausibleDomain: process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN ?? "fentriq.app",
   vatNumber: "", // P.IVA — completare quando disponibile (lasciare vuoto la nasconde)
   social: {
-    github: "https://github.com/ragesito",
-    linkedin: "https://www.linkedin.com/company/fentriq",
+    x: "https://x.com/fentriq",
+    instagram: "https://www.instagram.com/fentriq/",
   },
   serviceAreas: ["Roma", "Milano", "Firenze", "Italia"],
 } as const;
