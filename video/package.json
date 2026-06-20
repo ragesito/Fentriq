@@ -1,0 +1,23 @@
+{
+  "name": "fentriq-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Remotion compositions for Fentriq product showcase videos.",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render Showcase out/showcase.mp4 --codec=h264",
+    "poster": "remotion still Showcase out/poster.png --frame=70"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.481",
+    "@remotion/google-fonts": "^4.0.481",
+    "@remotion/transitions": "^4.0.481",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "remotion": "^4.0.481"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "typescript": "^5.9.3"
+  }
+}

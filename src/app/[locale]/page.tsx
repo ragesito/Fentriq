@@ -1,5 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/sections/Hero";
+import { Showcase } from "@/components/sections/Showcase";
 import { Services } from "@/components/sections/Services";
 import { Work } from "@/components/sections/Work";
 import { Process } from "@/components/sections/Process";
@@ -22,6 +23,7 @@ export default async function HomePage({
     <>
       <OrganizationJsonLd locale={locale} />
       <Hero />
+      <Showcase />
       <FoldDivider />
       <Services />
       <Work />

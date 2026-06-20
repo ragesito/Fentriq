@@ -56,6 +56,11 @@
       }
     }
   },
+  "showcase": {
+    "eyebrow": "Showreel",
+    "title": "I nostri prodotti, in un minuto.",
+    "subtitle": "Uno sguardo veloce a quello che costruiamo per le PMI."
+  },
   "work": {
     "eyebrow": "Progetti",
     "title": "Quello che abbiamo costruito di recente.",
