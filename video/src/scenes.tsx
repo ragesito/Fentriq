@@ -156,10 +156,7 @@ const DocSenseMock: React.FC = () => {
     ["Licenza SaaS", "3", "€ 270", false],
     ["Hosting", "1", "€ 1.900", true],
   ] as const;
-  const scan = interpolate(frame, [20, 120], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
+  const scan = (frame % 70) / 70; // continuous looping scan
   return (
     <Panel delay={6} faceted style={{ width: 760 }}>
       <WindowBar label="docSense — analisi fatture" />
@@ -270,11 +267,11 @@ const DocSenseMock: React.FC = () => {
               position: "absolute",
               left: -10,
               right: -10,
-              top: `${interpolate(scan, [0, 1], [12, 88])}%`,
+              top: `${interpolate(scan, [0, 1], [10, 90])}%`,
               height: 2,
               background: C.accent,
               boxShadow: `0 0 18px ${C.accent}`,
-              opacity: scan > 0 && scan < 1 ? 0.8 : 0,
+              opacity: 0.65,
             }}
           />
         </div>
@@ -416,9 +413,10 @@ const MatchMoodMock: React.FC = () => {
             height: 10,
             borderRadius: "50%",
             background: C.red,
+            opacity: 0.4 + 0.6 * Math.abs(Math.sin(frame / 12)),
           }}
         />
-        LIVE · 01:24
+        {`LIVE · 01:${String(24 + Math.floor(frame / 30)).padStart(2, "0")}`}
       </div>
     </div>
   );

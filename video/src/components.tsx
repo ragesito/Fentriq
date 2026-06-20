@@ -10,55 +10,101 @@ import {
 import { C, grad, grotesk, inter, mono } from "./theme";
 
 /* ----------------------------- Background ------------------------------- */
-export const Background: React.FC<{ children?: React.ReactNode }> = ({
-  children,
-}) => {
+const Blob: React.FC<{
+  x: number;
+  y: number;
+  size: number;
+  color: string;
+  opacity: number;
+  ax: number;
+  ay: number;
+  speed: number;
+  phase?: number;
+}> = ({ x, y, size, color, opacity, ax, ay, speed, phase = 0 }) => {
   const frame = useCurrentFrame();
-  const drift = interpolate(frame, [0, 300], [0, 30], {
-    extrapolateRight: "extend",
-  });
+  const dx = Math.sin((frame + phase) / speed) * ax;
+  const dy = Math.cos((frame + phase) / (speed * 1.25)) * ay;
   return (
-    <AbsoluteFill style={{ backgroundColor: C.bg, overflow: "hidden" }}>
-      {/* dot grid */}
-      <AbsoluteFill
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)",
-          backgroundSize: "40px 40px",
-          opacity: 0.6,
-        }}
-      />
-      {/* glow blobs */}
-      <div
-        style={{
-          position: "absolute",
-          top: -300 + drift,
-          right: -200,
-          width: 900,
-          height: 900,
-          borderRadius: "50%",
-          background: C.accent,
-          opacity: 0.14,
-          filter: "blur(160px)",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          bottom: -350 - drift,
-          left: -250,
-          width: 800,
-          height: 800,
-          borderRadius: "50%",
-          background: C.accent2,
-          opacity: 0.1,
-          filter: "blur(170px)",
-        }}
-      />
-      {children}
-    </AbsoluteFill>
+    <div
+      style={{
+        position: "absolute",
+        left: x + dx,
+        top: y + dy,
+        width: size,
+        height: size,
+        borderRadius: "50%",
+        background: color,
+        opacity,
+        filter: `blur(${Math.round(size / 4)}px)`,
+      }}
+    />
   );
 };
+
+const Particles: React.FC = () => {
+  const frame = useCurrentFrame();
+  const N = 18;
+  const H = 1180;
+  return (
+    <>
+      {Array.from({ length: N }).map((_, i) => {
+        const seed = i * 97 + 13;
+        const x = (seed * 137) % 1920;
+        const baseY = (seed * 71) % H;
+        const speed = 0.25 + (i % 4) * 0.12;
+        const y = (((baseY - frame * speed) % H) + H) % H - 40;
+        const sway = Math.sin((frame + i * 31) / 45) * 16;
+        const size = 2 + (i % 3);
+        const op = 0.08 + (i % 4) * 0.035;
+        return (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: x + sway,
+              top: y,
+              width: size,
+              height: size,
+              borderRadius: "50%",
+              background: i % 5 === 0 ? C.accent : C.facetLight,
+              opacity: op,
+            }}
+          />
+        );
+      })}
+    </>
+  );
+};
+
+export const Background: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => (
+  <AbsoluteFill style={{ backgroundColor: C.bg, overflow: "hidden" }}>
+    {/* dot grid */}
+    <AbsoluteFill
+      style={{
+        backgroundImage:
+          "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)",
+        backgroundSize: "40px 40px",
+        opacity: 0.5,
+      }}
+    />
+    {/* soft, drifting glows (blended, not hard circles) */}
+    <Blob x={-360} y={-420} size={1200} color={C.accent} opacity={0.12} ax={70} ay={50} speed={55} />
+    <Blob x={1080} y={420} size={1100} color={C.accent2} opacity={0.1} ax={80} ay={60} speed={68} phase={120} />
+    <Blob x={520} y={-240} size={820} color={C.accent} opacity={0.05} ax={60} ay={70} speed={80} phase={40} />
+    {/* drifting particles */}
+    <Particles />
+    {/* vignette for depth */}
+    <AbsoluteFill
+      style={{
+        background:
+          "radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.45) 100%)",
+      }}
+    />
+    {children}
+  </AbsoluteFill>
+);
 
 /* ------------------------------ Logo mark ------------------------------- */
 export const Mark: React.FC<{ size: number }> = ({ size }) => (

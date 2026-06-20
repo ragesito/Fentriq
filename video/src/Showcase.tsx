@@ -6,9 +6,9 @@ import { slide } from "@remotion/transitions/slide";
 import { Intro, DocSense, MatchMood, Asroma, Automazione, Outro } from "./scenes";
 import { C } from "./theme";
 
-const T = 16; // transition length (frames)
-const D = [120, 360, 330, 330, 330, 180]; // scene durations
-export const DURATION = D.reduce((a, b) => a + b, 0) - T * 5; // = 1570 frames (~52s @30fps)
+const T = 14; // transition length (frames)
+const D = [100, 200, 200, 200, 200, 140]; // scene durations (tighter, no dead air)
+export const DURATION = D.reduce((a, b) => a + b, 0) - T * 5; // ~970 frames (~32s @30fps)
 
 export const Showcase: React.FC = () => (
   <AbsoluteFill style={{ backgroundColor: C.bg }}>
