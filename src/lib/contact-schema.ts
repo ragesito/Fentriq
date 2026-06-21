@@ -19,4 +19,9 @@ export const contactSchema = z.object({
 
 export type ContactInput = z.infer<typeof contactSchema>;
 
-export const budgetOptions = ["<5k", "5-15k", "15-30k", ">30k", "?"] as const;
+export const budgetOptions = [
+  "100 – 500 €",
+  "500 – 1.000 €",
+  "1.000 – 2.000 €",
+  "> 2.000 €",
+] as const;

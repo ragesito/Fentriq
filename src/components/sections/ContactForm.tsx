@@ -124,9 +124,10 @@ export function ContactForm() {
             </option>
             {budgetOptions.map((b) => (
               <option key={b} value={b}>
-                {b === "?" ? "—" : `€ ${b}`}
+                {b}
               </option>
             ))}
+            <option value="undecided">{tf("budgetUndecided")}</option>
           </select>
         </Field>
       </div>

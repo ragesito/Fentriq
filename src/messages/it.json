@@ -198,6 +198,7 @@
       "companyPlaceholder": "Nome dell'azienda (opzionale)",
       "budget": "Budget indicativo",
       "budgetPlaceholder": "Seleziona…",
+      "budgetUndecided": "Non lo so ancora",
       "message": "Messaggio",
       "messagePlaceholder": "Raccontaci il problema o l'idea che vuoi realizzare.",
       "consent": "Acconsento al trattamento dei miei dati secondo la",

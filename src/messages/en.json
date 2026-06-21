@@ -198,6 +198,7 @@
       "companyPlaceholder": "Company name (optional)",
       "budget": "Indicative budget",
       "budgetPlaceholder": "Select…",
+      "budgetUndecided": "Not sure yet",
       "message": "Message",
       "messagePlaceholder": "Tell us about the problem or idea you want to build.",
       "consent": "I consent to the processing of my data per the",
