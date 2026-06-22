@@ -32,7 +32,7 @@ React Hook Form + Zod · Resend · OpenAI · Remotion
 
 ```bash
 npm install
-cp .env.example .env.local   # fill in the values you need
+# create a .env.local with the variables below (optional for local dev)
 npm run dev                  # http://localhost:3000
 ```
 
@@ -40,7 +40,7 @@ Scripts: `dev` · `build` · `start` · `lint` · `typecheck`
 
 ## Environment variables
 
-See [`.env.example`](.env.example). None are required to build; in production set:
+None are required to build; in production set:
 
 | Variable | Purpose |
 |---|---|
