@@ -9,7 +9,7 @@ import { Pricing } from "@/components/sections/Pricing";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
 import { FoldDivider } from "@/components/ui/FoldDivider";
-import { OrganizationJsonLd } from "@/components/JsonLd";
+import { FaqJsonLd, OrganizationJsonLd } from "@/components/JsonLd";
 
 export default async function HomePage({
   params,
@@ -22,9 +22,10 @@ export default async function HomePage({
   return (
     <>
       <OrganizationJsonLd locale={locale} />
+      <FaqJsonLd locale={locale} />
       <Hero />
+      {/* The cream→dark boundary is its own divider — no seam needed here. */}
       <Showcase />
-      <FoldDivider />
       <Services />
       <Work />
       <Process />

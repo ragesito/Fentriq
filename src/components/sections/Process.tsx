@@ -9,7 +9,10 @@ export function Process() {
   const t = useTranslations("process");
 
   return (
-    <Section tone="default">
+    <Section tone="light" containerClassName="relative">
+      <span aria-hidden className="ghost-num absolute -top-6 right-0 hidden lg:block">
+        03
+      </span>
       <div className="max-w-2xl">
         <Reveal>
           <Eyebrow>{t("eyebrow")}</Eyebrow>
@@ -24,14 +27,26 @@ export function Process() {
         </Reveal>
       </div>
 
-      <ol className="mt-12 grid gap-px overflow-hidden rounded-[var(--radius)] border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+      <ol className="relative mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+        {/* Connecting path (desktop) */}
+        <div
+          aria-hidden
+          className="absolute left-0 right-0 top-[5px] hidden h-px lg:block"
+        >
+          <div className="h-full w-full bg-gradient-to-r from-accent-deep via-accent-deep/40 to-transparent" />
+        </div>
+
         {STEPS.map((step, i) => (
-          <Reveal as="li" key={step} delay={0.05 * i} className="bg-surface">
-            <div className="flex h-full flex-col p-6">
-              <span className="font-mono text-sm font-medium text-accent">
+          <Reveal as="li" key={step} delay={0.06 * i} className="relative">
+            <div className="flex h-full flex-col">
+              <span
+                aria-hidden
+                className="relative z-10 h-[11px] w-[11px] rounded-full bg-accent-deep ring-4 ring-cream"
+              />
+              <span className="mt-5 font-mono text-sm font-medium text-accent-deep">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-4 text-lg font-semibold">
+              <h3 className="mt-2 text-lg font-semibold">
                 {t(`steps.${step}.title`)}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">

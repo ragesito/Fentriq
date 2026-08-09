@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/ui/BrandIcons";
+import { BrowserFrame } from "@/components/ui/BrowserFrame";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/ui/Reveal";
@@ -92,6 +93,9 @@ export default async function CaseStudyPage({
           <h1 className="mt-5 text-[clamp(2.5rem,6vw,4rem)] font-bold">
             {study.title}
           </h1>
+          <p className="mt-2 font-mono text-sm uppercase tracking-[0.06em] text-muted">
+            {study.sector[loc]}
+          </p>
           <p className="mt-4 text-lg text-muted sm:text-xl">
             {study.summary[loc]}
           </p>
@@ -126,16 +130,20 @@ export default async function CaseStudyPage({
 
         {study.cover ? (
           <Container className="mt-12 max-w-4xl">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-[var(--radius)] border border-border">
-              <Image
-                src={study.cover}
-                alt={study.title}
-                fill
-                priority
-                sizes="(min-width:1024px) 56rem, 100vw"
-                className="object-cover"
-              />
-            </div>
+            <BrowserFrame
+              label={study.links.live?.replace(/^https?:\/\//, "") ?? study.title}
+            >
+              <div className="relative aspect-[16/9]">
+                <Image
+                  src={study.cover}
+                  alt={study.title}
+                  fill
+                  priority
+                  sizes="(min-width:1024px) 56rem, 100vw"
+                  className="object-cover object-top"
+                />
+              </div>
+            </BrowserFrame>
           </Container>
         ) : null}
 

@@ -3,7 +3,7 @@ import { Package, Repeat, Compass } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { Card } from "@/components/ui/Card";
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { CalButton } from "@/components/ui/CalButton";
 
@@ -35,8 +35,16 @@ export function Pricing() {
       <ul className="mt-12 grid gap-5 md:grid-cols-3">
         {ITEMS.map(({ key, icon: Icon }, i) => (
           <Reveal as="li" key={key} delay={0.05 * i}>
-            <Card faceted interactive className="group h-full">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/12 text-accent ring-1 ring-inset ring-accent/20">
+            <SpotlightCard
+              faceted
+              interactive
+              className={
+                key === "retainer"
+                  ? "gradient-ring group h-full"
+                  : "group h-full"
+              }
+            >
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/12 text-accent ring-1 ring-inset ring-accent/20 transition-transform duration-300 group-hover:scale-110">
                 <Icon size={22} aria-hidden />
               </div>
               <h3 className="mt-5 text-xl font-semibold">
@@ -45,7 +53,7 @@ export function Pricing() {
               <p className="mt-2 text-sm leading-relaxed text-muted">
                 {t(`items.${key}.description`)}
               </p>
-            </Card>
+            </SpotlightCard>
           </Reveal>
         ))}
       </ul>

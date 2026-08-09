@@ -5,7 +5,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { WorkCard } from "@/components/sections/WorkCard";
 import { CTASection } from "@/components/sections/CTASection";
-import { getCaseStudies } from "@/content/work";
+import { getClientCases, getLabCases } from "@/content/work";
 
 export async function generateMetadata({
   params,
@@ -32,7 +32,8 @@ export default async function WorkPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("workPage");
-  const studies = getCaseStudies();
+  const clients = getClientCases();
+  const lab = getLabCases();
 
   return (
     <>
@@ -52,7 +53,26 @@ export default async function WorkPage({
         </div>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2">
-          {studies.map((study, i) => (
+          {clients.map((study, i) => (
+            <Reveal key={study.slug} delay={0.05 * Math.min(i, 4)}>
+              <WorkCard study={study} />
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mt-20 max-w-2xl">
+          <Reveal>
+            <h2 className="text-[clamp(1.6rem,3vw,2.25rem)] font-semibold">
+              {t("labTitle")}
+            </h2>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <p className="mt-3 text-muted">{t("labSubtitle")}</p>
+          </Reveal>
+        </div>
+
+        <div className="mt-8 grid gap-5 sm:grid-cols-2">
+          {lab.map((study, i) => (
             <Reveal key={study.slug} delay={0.05 * i}>
               <WorkCard study={study} />
             </Reveal>

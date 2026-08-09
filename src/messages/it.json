@@ -20,7 +20,7 @@
     "backToWork": "Torna ai lavori",
     "viewProject": "Vedi il progetto",
     "viewCode": "Codice",
-    "liveDemo": "Demo live",
+    "liveDemo": "Vedi il sito live",
     "languageLabel": "Lingua",
     "skipToContent": "Vai al contenuto",
     "chatWithAssistant": "Chatta con l'assistente"
@@ -31,7 +31,8 @@
     "titleHighlight": "crescere",
     "titleAfter": " la tua impresa.",
     "subtitle": "Siti, applicazioni, intelligenza artificiale e automazioni su misura. Dalla prima idea al prodotto in produzione — veloci, senza fronzoli.",
-    "stack": "Web · App · IA · Automazioni · Algoritmi · Software · Web3"
+    "stack": "Web · App · IA · Automazioni · Algoritmi · Software · Web3",
+    "proof": "{count} lavori per clienti reali"
   },
   "services": {
     "eyebrow": "Cosa facciamo",
@@ -57,14 +58,14 @@
     }
   },
   "showcase": {
-    "eyebrow": "Showreel",
-    "title": "I nostri prodotti, in un minuto.",
-    "subtitle": "Uno sguardo veloce a quello che costruiamo per le PMI."
+    "eyebrow": "La vetrina",
+    "title": "Lavori veri, per clienti veri.",
+    "subtitle": "Schermate reali dei siti e dei prodotti costruiti per attività con nome e cognome. Tocca una schermata per vedere il caso completo."
   },
   "work": {
-    "eyebrow": "Progetti",
-    "title": "Quello che abbiamo costruito di recente.",
-    "subtitle": "Prodotti reali, in produzione. Niente mockup, niente promesse.",
+    "eyebrow": "Clienti",
+    "title": "Attività reali che ci hanno scelto.",
+    "subtitle": "Ristoranti, palestre, negozi e botteghe del litorale romano: ogni progetto ha un cliente vero dietro, non un mockup.",
     "viewAll": "Tutti i lavori",
     "featured": "In evidenza"
   },
@@ -232,7 +233,9 @@
   "workPage": {
     "eyebrow": "Progetti",
     "title": "I nostri lavori.",
-    "subtitle": "Prodotti reali in produzione: web, app, IA, Web3 e automazioni.",
+    "subtitle": "Siti e prodotti costruiti per attività reali — ristoranti, palestre, negozi — più i prodotti che sviluppiamo in casa.",
+    "labTitle": "Dal nostro laboratorio.",
+    "labSubtitle": "Prodotti interni con cui spingiamo la tecnica: le stesse capacità che poi portiamo ai clienti.",
     "sections": {
       "problem": "Il problema",
       "solution": "La soluzione",

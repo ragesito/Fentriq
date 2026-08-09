@@ -4,17 +4,21 @@ import { Section } from "@/components/ui/Section";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Link } from "@/i18n/navigation";
-import { getCaseStudies } from "@/content/work";
+import { getClientCases } from "@/content/work";
 import { WorkCard } from "./WorkCard";
 
 export function Work() {
   const t = useTranslations("work");
-  const studies = getCaseStudies();
+  const studies = getClientCases();
   const featured = studies.find((s) => s.featured) ?? studies[0];
-  const rest = studies.filter((s) => s.slug !== featured.slug);
+  // Home shows the featured case + six more; the full list lives at /lavori.
+  const rest = studies.filter((s) => s.slug !== featured.slug).slice(0, 6);
 
   return (
-    <Section id="lavori" tone="surface">
+    <Section id="lavori" tone="surface" containerClassName="relative">
+      <span aria-hidden className="ghost-num absolute -top-6 right-0 hidden lg:block">
+        02
+      </span>
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div className="max-w-2xl">
           <Reveal>

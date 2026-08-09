@@ -13,15 +13,21 @@
   --color-accent: #4f5bf7;
   --color-accent-2: #8a6cff;
   --color-on-accent: #ffffff;
-  --color-bg-light: #f4f5f7;
-  --color-text-on-light: #15171c;
+
+  /* Warm "paper" counterpoint to the dark palette. Used for whole sections
+     (see the `light` Section tone) so the page breathes between dark blocks. */
+  --color-cream: #f3ece0;
+  --color-cream-2: #e4d9c5; /* hairlines / subtle fills on cream */
+  --color-ink: #15171c; /* body text on cream — 15:1 */
+  --color-ink-muted: #4e5462; /* secondary text on cream — 7:1 */
+  --color-accent-deep: #3b45d6; /* accent that still passes AA on cream */
 
   --font-display: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
   --radius: 14px;
-  --maxw: 1200px;
+  --maxw: 1360px;
 
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 30px rgba(0, 0, 0, 0.25);
   --shadow-glow: 0 10px 40px -12px rgba(79, 91, 247, 0.45);
@@ -102,6 +108,132 @@ a {
 }
 ::-webkit-scrollbar-corner {
   background: transparent;
+}
+
+/* ------------------------------------------------------------------ *
+ * Marquee (home showcase of real client screenshots)
+ * ------------------------------------------------------------------ */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 55s linear infinite;
+}
+
+.marquee-reverse {
+  animation-direction: reverse;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  .marquee {
+    overflow-x: auto;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Cream ("paper") sections — inverted blocks that break up the dark page.
+ * Scoped overrides so shared components keep working unchanged inside them.
+ * ------------------------------------------------------------------ */
+.on-cream {
+  /* Faint warm vignette so the paper isn't a flat fill. */
+  background-image: radial-gradient(
+    120% 80% at 50% 0%,
+    rgba(255, 255, 255, 0.6),
+    transparent 60%
+  );
+}
+
+.on-cream .text-muted {
+  color: var(--color-ink-muted);
+}
+
+.on-cream .eyebrow {
+  color: var(--color-accent-deep);
+}
+
+.on-cream .bg-accent\/60 {
+  background-color: color-mix(in srgb, var(--color-accent-deep) 60%, transparent);
+}
+
+.on-cream .ghost-num {
+  -webkit-text-stroke: 1px rgba(21, 23, 28, 0.16);
+}
+
+.on-cream .border-border {
+  border-color: var(--color-cream-2);
+}
+
+/* Grain reads as paper fibre when multiplied into the cream. */
+.on-cream .noise {
+  mix-blend-mode: multiply;
+  opacity: 0.09;
+}
+
+/* ------------------------------------------------------------------ *
+ * Texture & framing
+ * ------------------------------------------------------------------ */
+
+/* Film-grain overlay: tiny SVG turbulence tile, multiplied on top. */
+.noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* 1px gradient border that follows the rounded corners. */
+.gradient-ring {
+  position: relative;
+  background:
+    linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+    linear-gradient(135deg, rgba(79, 91, 247, 0.7), rgba(138, 108, 255, 0.25) 40%, rgba(79, 91, 247, 0.08) 70%, rgba(138, 108, 255, 0.5)) border-box;
+  border: 1px solid transparent;
+}
+
+/* Cursor-tracking glow for interactive cards (vars set from JS). */
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(99, 111, 255, 0.14),
+    transparent 65%
+  );
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Huge ghosted index numbers behind section headings. */
+.ghost-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(5rem, 14vw, 11rem);
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(156, 163, 178, 0.16);
+  user-select: none;
+  pointer-events: none;
 }
 
 /* ------------------------------------------------------------------ *
@@ -229,6 +361,36 @@ a {
 }
 .animate-glow-pulse {
   animation: glow-pulse 8s ease-in-out infinite;
+}
+
+/* Gentle float for the hero screenshot collage (staggered via delay). */
+@keyframes collage-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--tilt, 0deg));
+  }
+  50% {
+    transform: translateY(-10px) rotate(var(--tilt, 0deg));
+  }
+}
+.animate-collage {
+  animation: collage-float 7s ease-in-out infinite;
+}
+
+/* Slow sweeping light beam across the hero. */
+@keyframes beam-sweep {
+  0%,
+  100% {
+    transform: translateX(-12%) rotate(12deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateX(12%) rotate(12deg);
+    opacity: 0.9;
+  }
+}
+.animate-beam {
+  animation: beam-sweep 14s ease-in-out infinite;
 }
 
 /* Expanding ring behind the chat launcher. */

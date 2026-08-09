@@ -20,7 +20,7 @@
     "backToWork": "Back to work",
     "viewProject": "View project",
     "viewCode": "Code",
-    "liveDemo": "Live demo",
+    "liveDemo": "View live site",
     "languageLabel": "Language",
     "skipToContent": "Skip to content",
     "chatWithAssistant": "Chat with the assistant"
@@ -31,7 +31,8 @@
     "titleHighlight": "grow",
     "titleAfter": ".",
     "subtitle": "Custom websites, applications, artificial intelligence and automation. From the first idea to production — fast, no fluff.",
-    "stack": "Web · App · AI · Automation · Algorithms · Software · Web3"
+    "stack": "Web · App · AI · Automation · Algorithms · Software · Web3",
+    "proof": "{count} projects for real clients"
   },
   "services": {
     "eyebrow": "What we do",
@@ -57,14 +58,14 @@
     }
   },
   "showcase": {
-    "eyebrow": "Showreel",
-    "title": "Our products, in one minute.",
-    "subtitle": "A quick look at what we build for SMEs."
+    "eyebrow": "The shop window",
+    "title": "Real work, for real clients.",
+    "subtitle": "Actual screenshots of the sites and products we build for named businesses. Tap any screen to see the full case study."
   },
   "work": {
-    "eyebrow": "Projects",
-    "title": "What we've shipped recently.",
-    "subtitle": "Real products, in production. No mockups, no promises.",
+    "eyebrow": "Clients",
+    "title": "Real businesses that chose us.",
+    "subtitle": "Restaurants, gyms and local shops on the Roman coast: every project has a real client behind it, not a mockup.",
     "viewAll": "All work",
     "featured": "Featured"
   },
@@ -232,7 +233,9 @@
   "workPage": {
     "eyebrow": "Projects",
     "title": "Our work.",
-    "subtitle": "Real products in production: web, apps, AI, Web3 and automation.",
+    "subtitle": "Sites and products built for real businesses — restaurants, gyms, shops — plus the products we build in-house.",
+    "labTitle": "From our lab.",
+    "labSubtitle": "In-house products where we push the craft: the same capabilities we then bring to clients.",
     "sections": {
       "problem": "The problem",
       "solution": "The solution",

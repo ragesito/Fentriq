@@ -6,7 +6,9 @@ type Tone = "default" | "surface" | "light";
 const toneStyles: Record<Tone, string> = {
   default: "bg-bg text-text",
   surface: "bg-surface text-text",
-  light: "bg-bg-light text-text-on-light",
+  // Warm paper block. `on-cream` re-maps the shared muted/eyebrow/ghost
+  // utilities to ink equivalents (see globals.css) so children need no changes.
+  light: "on-cream bg-cream text-ink",
 };
 
 interface SectionProps extends React.HTMLAttributes<HTMLElement> {

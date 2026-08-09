@@ -34,11 +34,7 @@ export function WhyUs() {
           {ITEMS.map(({ key, icon: Icon, highlight }, i) => (
             <Reveal as="li" key={key} delay={0.05 * i}>
               <Card
-                className={
-                  highlight
-                    ? "h-full border-accent/40 bg-gradient-to-br from-accent/10 to-transparent"
-                    : "h-full"
-                }
+                className={highlight ? "gradient-ring h-full" : "h-full"}
               >
                 <Icon
                   size={22}

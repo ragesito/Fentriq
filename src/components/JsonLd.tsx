@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { siteConfig } from "@/config/site";
 
 /** ProfessionalService structured data for the home page. */
@@ -26,6 +27,29 @@ export function OrganizationJsonLd({ locale }: { locale: string }) {
     ],
     sameAs: [siteConfig.social.x, siteConfig.social.instagram],
     priceRange: "€€",
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
+/** FAQPage structured data — mirrors the five questions in the home FAQ. */
+export async function FaqJsonLd({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: "faq" });
+  const keys = ["cost", "time", "where", "ownership", "scope"] as const;
+
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: keys.map((key) => ({
+      "@type": "Question",
+      name: t(`items.${key}.q`),
+      acceptedAnswer: { "@type": "Answer", text: t(`items.${key}.a`) },
+    })),
   };
 
   return (

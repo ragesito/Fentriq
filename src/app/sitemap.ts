@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return paths.flatMap((path) =>
     routing.locales.map((locale) => ({
       url: url(locale, path),
-      lastModified: new Date("2026-06-18"),
+      lastModified: new Date("2026-08-10"),
       changeFrequency: path === "" ? ("weekly" as const) : ("monthly" as const),
       priority: path === "" ? 1 : 0.7,
       alternates: {
