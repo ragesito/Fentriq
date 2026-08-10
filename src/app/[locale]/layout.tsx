@@ -55,6 +55,9 @@ export async function generateMetadata({
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "any" },
+        // Google picks the largest declared icon for search results, and wants
+        // a multiple of 48px — keep every variant on the same blue mark.
+        { url: "/favicon-48.png", type: "image/png", sizes: "48x48" },
         { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
         { url: "/favicon-16.png", type: "image/png", sizes: "16x16" },
       ],
