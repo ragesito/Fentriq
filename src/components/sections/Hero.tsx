@@ -12,9 +12,9 @@ import { ArrowRight } from "lucide-react";
 /** Real screenshots stacked in the hero — evidence before words. */
 const COLLAGE = [
   {
-    slug: "matchmood",
-    cover: "/work/matchmood.jpg",
-    label: "matchmood.dev",
+    slug: "nonsolofitness",
+    cover: "/work/nonsolofitness.jpg",
+    label: "nonsolofitnesstorvaianica.com",
     className:
       "absolute right-0 top-0 w-[58%] [--tilt:2.5deg] [animation-delay:-2s]",
   },

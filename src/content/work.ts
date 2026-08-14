@@ -160,12 +160,12 @@ export const caseStudies: CaseStudy[] = [
     },
     cover: "/work/nonsolofitness.jpg",
     stack: ["Web", "SEO locale", "i18n"],
-    links: {},
+    links: { live: "https://www.nonsolofitnesstorvaianica.com" },
     roles: {
       it: ["Sito bilingue", "SEO locale", "Funnel recensioni QR"],
       en: ["Bilingual site", "Local SEO", "QR review funnel"],
     },
-    badge: { it: "In lancio", en: "Launching" },
+    badge: { it: "Online", en: "Live" },
     summary: {
       it: "Sito bilingue per la palestra di Davide e Dominica: una pagina dedicata a ogni corso, SEO locale e un circuito di recensioni con QR stampabili.",
       en: "Bilingual site for Davide and Dominica's gym: a dedicated page per course, local SEO and a review loop driven by printable QR signs.",
@@ -184,8 +184,8 @@ export const caseStudies: CaseStudy[] = [
         en: "Zero external requests, structured data for Google, and QR signs pointing at an updatable link: if the destination changes, nothing gets reprinted.",
       },
       result: {
-        it: "Pronto al lancio sul dominio della palestra, con contenuti e listino forniti direttamente dal cliente.",
-        en: "Ready to launch on the gym's domain, with content and pricing supplied directly by the client.",
+        it: "Online su nonsolofitnesstorvaianica.com, con contenuti e listino forniti direttamente dal cliente.",
+        en: "Live at nonsolofitnesstorvaianica.com, with content and pricing supplied directly by the client.",
       },
     },
   },
