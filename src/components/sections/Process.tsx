@@ -1,9 +1,16 @@
 import { useTranslations } from "next-intl";
+import { PhoneCall, FileText, Code2, Rocket } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 
-const STEPS = ["discovery", "proposal", "development", "launch"] as const;
+const STEPS: { key: string; icon: LucideIcon }[] = [
+  { key: "discovery", icon: PhoneCall },
+  { key: "proposal", icon: FileText },
+  { key: "development", icon: Code2 },
+  { key: "launch", icon: Rocket },
+];
 
 export function Process() {
   const t = useTranslations("process");
@@ -27,34 +34,49 @@ export function Process() {
         </Reveal>
       </div>
 
-      <ol className="relative mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-        {/* Connecting path (desktop) */}
+      <ol className="relative mt-16 grid gap-12 lg:grid-cols-4 lg:gap-8">
+        {/* Route line: horizontal through the icon stations (desktop),
+            vertical down their spine (mobile). */}
         <div
           aria-hidden
-          className="absolute left-0 right-0 top-[5px] hidden h-px lg:block"
-        >
-          <div className="h-full w-full bg-gradient-to-r from-accent-deep via-accent-deep/40 to-transparent" />
-        </div>
+          className="absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-accent-deep/60 via-ink/20 to-ink/5 lg:block"
+        />
+        <div
+          aria-hidden
+          className="absolute bottom-6 left-7 top-2 w-px bg-gradient-to-b from-accent-deep/60 via-ink/20 to-ink/5 lg:hidden"
+        />
 
-        {STEPS.map((step, i) => (
-          <Reveal as="li" key={step} delay={0.06 * i} className="relative">
-            <div className="flex h-full flex-col">
-              <span
-                aria-hidden
-                className="relative z-10 h-[11px] w-[11px] rounded-full bg-accent-deep ring-4 ring-cream"
-              />
-              <span className="mt-5 font-mono text-sm font-medium text-accent-deep">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-2 text-lg font-semibold">
-                {t(`steps.${step}.title`)}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
-                {t(`steps.${step}.description`)}
-              </p>
-            </div>
-          </Reveal>
-        ))}
+        {STEPS.map(({ key, icon: Icon }, i) => {
+          const last = i === STEPS.length - 1;
+          return (
+            <Reveal as="li" key={key} delay={0.07 * i} className="relative pl-20 lg:pl-0">
+              {/* Icon station, sitting on the line */}
+              <div className="absolute left-0 top-0 lg:relative lg:left-auto lg:top-auto">
+                <div
+                  className={
+                    last
+                      ? "relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-deep text-white shadow-[0_10px_30px_-8px_rgba(59,69,214,0.55)]"
+                      : "relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-accent-deep shadow-[0_10px_30px_-12px_rgba(21,23,28,0.35)] ring-1 ring-ink/10"
+                  }
+                >
+                  <Icon size={24} aria-hidden />
+                </div>
+              </div>
+
+              <div className="lg:mt-7">
+                <div className="flex items-baseline gap-3">
+                  <span className="font-mono text-sm font-semibold text-accent-deep">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="text-xl font-semibold">{t(`steps.${key}.title`)}</h3>
+                </div>
+                <p className="mt-2.5 max-w-xs text-[15px] leading-relaxed text-muted">
+                  {t(`steps.${key}.description`)}
+                </p>
+              </div>
+            </Reveal>
+          );
+        })}
       </ol>
     </Section>
   );
