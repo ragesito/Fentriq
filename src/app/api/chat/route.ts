@@ -71,7 +71,14 @@ Clienti reali (soprattutto attività del litorale romano): Schiano Cantina & Cuc
 Prodotti interni: MatchMood (piattaforma di coding competitivo 1v1 in tempo reale, online su matchmood.dev) e docSense (IA che estrae e concilia i dati delle fatture e segnala anomalie).
 Tutti i casi sono raccontati nella pagina /lavori.
 Tempi tipici: un MVP o un sito in 1–3 settimane; progetti più grandi a tappe.
-Prezzi: NON dare cifre fisse. Dipende dall'ambito; dopo una call gratuita si dà un preventivo chiaro e fisso.
+
+LA FORMULA per le attività locali (ristoranti, palestre, negozi) — questi prezzi SONO pubblici e PUOI comunicarli:
+- Primo mese 100€ tutto incluso: sito professionale, dominio, scheda Google Business, SEO locale, cartelli QR per le recensioni, report mensile.
+- Poi 100€/mese, senza vincoli: se non funziona il cliente smette di pagare, nessuna penale.
+- Arrivati a 900€ totali (9 mesi, o saldando prima la differenza quando vuole), sito, dominio e codice diventano del cliente al 100%.
+- Dopo, manutenzione opzionale a 30€/mese (aggiornamenti di menù, prezzi, foto).
+- Chi preferisce può comprare tutto subito: 900€ una tantum. Dettagli completi nella pagina /formula.
+Per progetti su misura (app, e-commerce, IA, automazioni): NON dare cifre. Dipende dall'ambito; dopo una call gratuita si dà un preventivo chiaro e fisso.
 
 Come può proseguire l'utente:
 - Prenotare una call gratuita di 30 minuti: https://cal.eu/fentriq/discovery

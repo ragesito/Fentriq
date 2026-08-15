@@ -6,6 +6,7 @@
   },
   "nav": {
     "services": "Services",
+    "formula": "€100 formula",
     "work": "Work",
     "contact": "Contact",
     "bookCall": "Book a call",
@@ -116,9 +117,14 @@
   },
   "pricing": {
     "eyebrow": "Collaboration",
-    "title": "Three ways to work together.",
-    "subtitle": "We pick the right format together after a free call.",
+    "title": "Four ways to work together.",
+    "subtitle": "Local businesses get a clear, risk-free formula. Everything else gets a custom quote after a free call.",
     "items": {
+      "local": {
+        "title": "Local businesses",
+        "description": "Site, Google and reviews: try the first month for €100. If it works you keep going, and at €900 the site is yours.",
+        "cta": "See the formula"
+      },
       "project": {
         "title": "Project",
         "description": "Fixed scope and budget. Ideal for a site, an app or a concrete automation."
@@ -134,13 +140,107 @@
     },
     "cta": "Book a call for a quote"
   },
+  "formula": {
+    "meta": {
+      "title": "Your business online in one month — €100",
+      "description": "A professional site, Google and reviews for your business. Try one month for €100: if it doesn't work, stop paying. At €900 the site is yours, forever."
+    },
+    "eyebrow": "For local businesses",
+    "titleBefore": "Your business online in one month.",
+    "titlePrice": "€100.",
+    "subtitle": "A professional site, your Google listing, reviews: everything live in one month. If it doesn't convince you, stop paying — you risked less than dinner for two. If it works, you keep going: and the site becomes yours.",
+    "badge": "No lock-in · cancel anytime",
+    "cta": "Book a free call",
+    "ctaSecondary": "Write to us",
+    "how": {
+      "eyebrow": "How it works",
+      "title": "You try. If it works, you continue. At €900 it's yours.",
+      "steps": {
+        "s1": {
+          "title": "Month 1 — €100",
+          "description": "We put everything live: site, domain, Google listing, local SEO and QR reviews. You see the result with your own eyes."
+        },
+        "s2": {
+          "title": "If it works, you continue",
+          "description": "€100 a month, no lock-in. Every month you get a clear report: visits, calls, reviews. Not convinced? You stop. That's it."
+        },
+        "s3": {
+          "title": "At €900 the site is yours",
+          "description": "Nine months at €100 — or settle the balance whenever you want. Domain, site and code transfer to you. Forever."
+        },
+        "s4": {
+          "title": "After: €30/month, if you want",
+          "description": "Menus, prices, photos and news kept fresh by us. Optional: the site stays yours either way."
+        }
+      }
+    },
+    "includes": {
+      "eyebrow": "The first month",
+      "title": "What your first €100 switches on.",
+      "items": {
+        "i1": "A professional custom site, not a template",
+        "i2": "Domain and hosting included",
+        "i3": "Google Business listing configured",
+        "i4": "Local SEO and Google indexing",
+        "i5": "Printable QR signs to collect reviews",
+        "i6": "A simple monthly report, on WhatsApp"
+      }
+    },
+    "paths": {
+      "eyebrow": "Other routes",
+      "title": "Prefer a different way?",
+      "upfront": {
+        "title": "Everything upfront",
+        "price": "€900 one-off",
+        "description": "Want the site to be yours from day one? Buy it outright, with everything from the first month included."
+      },
+      "custom": {
+        "title": "Custom projects",
+        "price": "Fixed quote",
+        "description": "Apps, e-commerce, AI, automation: for projects beyond the showcase we prepare a clear quote after a free call.",
+        "cta": "Let's talk"
+      }
+    },
+    "proof": {
+      "eyebrow": "Already on the coast",
+      "title": "Real local businesses, already online.",
+      "subtitle": "Nonsolofitness is live on its own domain. Restaurants and shops around Torvaianica and Ostia are already built and ready.",
+      "cta": "See all work"
+    },
+    "faq": {
+      "eyebrow": "Honest questions",
+      "title": "What you're probably wondering.",
+      "items": {
+        "stop": {
+          "q": "What if I don't want to continue in month two?",
+          "a": "You stop paying. No penalty, no lock-in. The site goes offline and you only spent the months you used."
+        },
+        "own": {
+          "q": "Who owns the site while I'm paying?",
+          "a": "Until you reach €900 it stays with Fentriq — that's why trying it costs so little. Once you complete €900, domain, site and code become 100% yours."
+        },
+        "fast": {
+          "q": "Can I close early and pay it all?",
+          "a": "Yes, anytime: settle the balance up to €900 and the site is yours from that moment."
+        },
+        "report": {
+          "q": "How do I know it's working?",
+          "a": "Every month you get a simple report on WhatsApp: how many people saw the site, how many called or booked, how your Google listing is doing. Numbers, not promises."
+        },
+        "after": {
+          "q": "And after it's mine?",
+          "a": "Run it yourself, or for €30 a month we keep it fresh: menus, prices, photos, news. No obligation."
+        }
+      }
+    }
+  },
   "faq": {
     "eyebrow": "FAQ",
     "title": "What clients ask us most.",
     "items": {
       "cost": {
         "q": "How much does a project cost?",
-        "a": "It depends on scope. After a free call we give you a clear, fixed quote."
+        "a": "For local businesses there's the Formula: first month at €100 all-in, then €100/month with no lock-in — at €900 the site is yours. For custom projects, a clear fixed quote after a free call."
       },
       "time": {
         "q": "How long does delivery take?",

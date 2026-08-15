@@ -6,6 +6,7 @@
   },
   "nav": {
     "services": "Servizi",
+    "formula": "Formula 100€",
     "work": "Lavori",
     "contact": "Contatti",
     "bookCall": "Prenota una call",
@@ -116,9 +117,14 @@
   },
   "pricing": {
     "eyebrow": "Collaborazione",
-    "title": "Tre modi per lavorare insieme.",
-    "subtitle": "Scegliamo insieme la formula giusta dopo una call gratuita.",
+    "title": "Quattro modi per lavorare insieme.",
+    "subtitle": "Per le attività locali c'è una formula chiara e senza rischi. Per tutto il resto, un preventivo su misura dopo una call gratuita.",
     "items": {
+      "local": {
+        "title": "Attività locali",
+        "description": "Sito, Google e recensioni: provi il primo mese a 100€. Se funziona continui, e a 900€ il sito è tuo.",
+        "cta": "Scopri la formula"
+      },
       "project": {
         "title": "Progetto",
         "description": "Ambito e budget fissi. Ideale per un sito, una app o un'automazione concreta."
@@ -134,13 +140,107 @@
     },
     "cta": "Prenota una call per un preventivo"
   },
+  "formula": {
+    "meta": {
+      "title": "La tua attività online in un mese — 100€",
+      "description": "Sito professionale, Google e recensioni per la tua attività. Provi un mese a 100€: se non funziona, smetti di pagare. A 900€ il sito è tuo, per sempre."
+    },
+    "eyebrow": "Per le attività locali",
+    "titleBefore": "La tua attività online in un mese.",
+    "titlePrice": "100€.",
+    "subtitle": "Sito professionale, scheda Google, recensioni: tutto attivo in un mese. Se non ti convince, smetti di pagare — hai rischiato meno di una cena per due. Se funziona, continui: e il sito diventa tuo.",
+    "badge": "Senza vincoli · disdici quando vuoi",
+    "cta": "Prenota una call gratuita",
+    "ctaSecondary": "Scrivici",
+    "how": {
+      "eyebrow": "Come funziona",
+      "title": "Provi. Se funziona, continui. A 900€ è tuo.",
+      "steps": {
+        "s1": {
+          "title": "Mese 1 — 100€",
+          "description": "Mettiamo online tutto: sito, dominio, scheda Google, SEO locale e recensioni via QR. Vedi il risultato con i tuoi occhi."
+        },
+        "s2": {
+          "title": "Se funziona, continui",
+          "description": "100€ al mese, senza vincoli. Ogni mese ricevi un report chiaro: visite, chiamate, recensioni. Se non ti convince, smetti. Fine."
+        },
+        "s3": {
+          "title": "A 900€ il sito è tuo",
+          "description": "Nove mesi da 100€ — oppure saldi la differenza quando vuoi. Dominio, sito e codice passano a te. Per sempre."
+        },
+        "s4": {
+          "title": "Dopo: 30€/mese, se vuoi",
+          "description": "Menù, prezzi, foto e novità sempre aggiornati da noi. Opzionale: il sito resta tuo anche senza."
+        }
+      }
+    },
+    "includes": {
+      "eyebrow": "Il primo mese",
+      "title": "Cosa attiviamo con i primi 100€.",
+      "items": {
+        "i1": "Sito professionale su misura, non un template",
+        "i2": "Dominio e hosting inclusi",
+        "i3": "Scheda Google Business configurata",
+        "i4": "SEO locale e indicizzazione su Google",
+        "i5": "Cartelli QR per raccogliere recensioni",
+        "i6": "Report mensile semplice, su WhatsApp"
+      }
+    },
+    "paths": {
+      "eyebrow": "Altre strade",
+      "title": "Preferisci fare diversamente?",
+      "upfront": {
+        "title": "Tutto subito",
+        "price": "900€ una tantum",
+        "description": "Vuoi il sito tuo dal primo giorno? Lo compri in un'unica soluzione, con tutto quello che attiviamo il primo mese incluso."
+      },
+      "custom": {
+        "title": "Progetti su misura",
+        "price": "Preventivo fisso",
+        "description": "App, e-commerce, intelligenza artificiale, automazioni: per i progetti oltre la vetrina prepariamo un preventivo chiaro dopo una call gratuita.",
+        "cta": "Parliamone"
+      }
+    },
+    "proof": {
+      "eyebrow": "Già sul litorale",
+      "title": "Attività vere della zona, già online.",
+      "subtitle": "Nonsolofitness è online sul suo dominio. Ristoranti e negozi di Torvaianica e Ostia sono già costruiti e pronti.",
+      "cta": "Guarda tutti i lavori"
+    },
+    "faq": {
+      "eyebrow": "Domande oneste",
+      "title": "Quello che ti starai chiedendo.",
+      "items": {
+        "stop": {
+          "q": "E se al secondo mese non voglio continuare?",
+          "a": "Smetti di pagare e basta. Nessuna penale, nessun vincolo. Il sito va offline e hai speso solo i mesi che hai usato."
+        },
+        "own": {
+          "q": "Di chi è il sito mentre pago?",
+          "a": "Finché non arrivi a 900€ resta di Fentriq — è per questo che puoi provarlo con così poco rischio. Completati i 900€, dominio, sito e codice diventano tuoi al 100%."
+        },
+        "fast": {
+          "q": "Posso chiudere prima e pagare tutto?",
+          "a": "Sì, quando vuoi: saldi la differenza fino a 900€ e da quel momento il sito è tuo."
+        },
+        "report": {
+          "q": "Come faccio a sapere se funziona?",
+          "a": "Ogni mese ti arriva un report semplice su WhatsApp: quante persone hanno visto il sito, quante hanno chiamato o prenotato, come va la tua scheda Google. Numeri, non promesse."
+        },
+        "after": {
+          "q": "E dopo che è mio?",
+          "a": "Puoi gestirlo da solo, oppure con 30€ al mese lo teniamo aggiornato noi: menù, prezzi, foto, novità. Nessun obbligo."
+        }
+      }
+    }
+  },
   "faq": {
     "eyebrow": "Domande frequenti",
     "title": "Quello che ci chiedono più spesso.",
     "items": {
       "cost": {
         "q": "Quanto costa un progetto?",
-        "a": "Dipende dall'ambito. Dopo una call gratuita ti diamo un preventivo chiaro e fisso."
+        "a": "Per le attività locali c'è la Formula: primo mese a 100€ tutto incluso, poi 100€/mese senza vincoli — a 900€ il sito è tuo. Per i progetti su misura, preventivo chiaro e fisso dopo una call gratuita."
       },
       "time": {
         "q": "In quanto tempo consegnate?",

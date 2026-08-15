@@ -37,6 +37,7 @@ export function whatsappUrl(prefill?: string): string {
 
 export const navItems = [
   { key: "services", href: "/#servizi" },
+  { key: "formula", href: "/formula" },
   { key: "work", href: "/lavori" },
   { key: "contact", href: "/contatti" },
 ] as const;

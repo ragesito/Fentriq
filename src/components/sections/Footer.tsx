@@ -82,6 +82,11 @@ export function Footer() {
             </h2>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
+                <Link href="/formula" className="text-muted transition-colors hover:text-text">
+                  {tn("formula")}
+                </Link>
+              </li>
+              <li>
                 <Link href="/lavori" className="text-muted transition-colors hover:text-text">
                   {tn("work")}
                 </Link>
