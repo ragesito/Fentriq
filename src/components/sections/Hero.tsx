@@ -87,8 +87,8 @@ export function Hero() {
             <Reveal delay={0.15}>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <CalButton size="lg">{tc("bookCall")}</CalButton>
-                <Link href="/lavori" className={buttonClasses("secondary", "lg")}>
-                  {tc("viewWork")}
+                <Link href="/formula" className={buttonClasses("secondary", "lg")}>
+                  {t("ctaFormula")}
                   <ArrowRight size={18} aria-hidden />
                 </Link>
               </div>
