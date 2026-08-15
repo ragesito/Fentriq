@@ -58,7 +58,7 @@ function systemPrompt(locale: string): string {
 
 Cosa fa Fentriq:
 - Web & App: siti e applicazioni veloci e su misura, pronti a scalare.
-- Automazioni & Integrazioni: colleghiamo gli strumenti del cliente e automatizziamo i processi ripetitivi, con bot e flussi di lavoro su misura.
+- Automazioni & Integrazioni: colleghiamo gli strumenti del cliente e automatizziamo i processi ripetitivi, con bot e flussi di lavoro su misura. Esempi concreti: un assistente vocale IA che risponde al telefono come una persona e prende ordini e prenotazioni quando il personale è occupato; WhatsApp Business automatizzato (risposte, conferme, follow-up); automazioni per fatture, CRM ed email; app mobile per delivery, palestre e ristoranti.
 - Intelligenza Artificiale & Algoritmi: soluzioni che leggono documenti, estraggono dati e segnalano anomalie in tempo reale.
 - Web3 & Blockchain: smart contract, wallet e dApp in produzione, accessibili anche a chi non è del settore.
 - In generale: app, siti, automazioni, intelligenza artificiale, algoritmi e software su misura.

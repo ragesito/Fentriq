@@ -201,6 +201,29 @@
         "cta": "Parliamone"
       }
     },
+    "modules": {
+      "eyebrow": "Non solo siti",
+      "title": "La vetrina è solo l'inizio.",
+      "subtitle": "Quando il sito lavora, possiamo aggiungere pezzi che lavorano con lui. Ognuno si concorda a parte, quando serve — mai prima.",
+      "items": {
+        "agent": {
+          "title": "Un'IA che risponde al telefono",
+          "description": "Il personale è occupato e il telefono squilla a vuoto? Un assistente vocale risponde come una persona, prende ordini e prenotazioni e te li passa già scritti."
+        },
+        "whatsapp": {
+          "title": "WhatsApp Business automatico",
+          "description": "Risposte immediate, conferme di prenotazione, promemoria e follow-up: il numero che i tuoi clienti già usano, senza tenerlo in mano tutto il giorno."
+        },
+        "flows": {
+          "title": "Automazioni su misura",
+          "description": "Fatture, CRM, email di follow-up, fogli e gestionali collegati tra loro: i lavori ripetitivi spariscono dalla tua giornata."
+        },
+        "apps": {
+          "title": "App mobile",
+          "description": "Delivery, abbonamenti in palestra, fidelizzazione: quando l'attività cresce, l'app arriva dallo stesso studio che ti ha fatto il sito."
+        }
+      }
+    },
     "proof": {
       "eyebrow": "Già sul litorale",
       "title": "Attività vere della zona, già online.",

@@ -8,6 +8,10 @@ import {
   Wrench,
   Check,
   ArrowRight,
+  PhoneCall,
+  MessageSquare,
+  Workflow,
+  Smartphone,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Section } from "@/components/ui/Section";
@@ -32,6 +36,13 @@ const STEPS: { key: "s1" | "s2" | "s3" | "s4"; icon: LucideIcon }[] = [
 ];
 
 const INCLUDE_KEYS = ["i1", "i2", "i3", "i4", "i5", "i6"] as const;
+
+const MODULES: { key: "agent" | "whatsapp" | "flows" | "apps"; icon: LucideIcon }[] = [
+  { key: "agent", icon: PhoneCall },
+  { key: "whatsapp", icon: MessageSquare },
+  { key: "flows", icon: Workflow },
+  { key: "apps", icon: Smartphone },
+];
 const FAQ_KEYS = ["stop", "own", "fast", "report", "after"] as const;
 const PROOF_SLUGS = ["nonsolofitness", "schiano", "cuocimi"] as const;
 
@@ -247,6 +258,41 @@ export default async function FormulaPage({
             </div>
           </div>
         </div>
+      </Section>
+
+      {/* Beyond the showcase — the rest of the catalog as upgrades */}
+      <Section tone="light">
+        <div className="max-w-2xl">
+          <Reveal>
+            <Eyebrow>{t("modules.eyebrow")}</Eyebrow>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-semibold">
+              {t("modules.title")}
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-4 text-lg text-muted">{t("modules.subtitle")}</p>
+          </Reveal>
+        </div>
+
+        <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {MODULES.map(({ key, icon: Icon }, i) => (
+            <Reveal as="li" key={key} delay={0.05 * i}>
+              <div className="h-full rounded-[var(--radius)] bg-white/70 p-6 shadow-[0_10px_30px_-16px_rgba(21,23,28,0.3)] ring-1 ring-ink/10">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-deep/10 text-accent-deep">
+                  <Icon size={22} aria-hidden />
+                </div>
+                <h3 className="mt-5 text-lg font-semibold">
+                  {t(`modules.items.${key}.title`)}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">
+                  {t(`modules.items.${key}.description`)}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </ul>
       </Section>
 
       {/* Local proof */}

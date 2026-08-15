@@ -201,6 +201,29 @@
         "cta": "Let's talk"
       }
     },
+    "modules": {
+      "eyebrow": "Not just websites",
+      "title": "The showcase is only the beginning.",
+      "subtitle": "Once the site is working, we can add pieces that work with it. Each one is agreed separately, when you need it — never before.",
+      "items": {
+        "agent": {
+          "title": "An AI that answers the phone",
+          "description": "Staff busy and the phone ringing unanswered? A voice assistant picks up like a person, takes orders and bookings, and hands them to you already written down."
+        },
+        "whatsapp": {
+          "title": "Automated WhatsApp Business",
+          "description": "Instant replies, booking confirmations, reminders and follow-ups: the number your customers already use, without holding it all day."
+        },
+        "flows": {
+          "title": "Custom automations",
+          "description": "Invoices, CRM, follow-up emails, spreadsheets and tools wired together: repetitive work disappears from your day."
+        },
+        "apps": {
+          "title": "Mobile apps",
+          "description": "Delivery, gym memberships, loyalty: when the business grows, the app comes from the same studio that built your site."
+        }
+      }
+    },
     "proof": {
       "eyebrow": "Already on the coast",
       "title": "Real local businesses, already online.",
