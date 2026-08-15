@@ -6,7 +6,7 @@
   },
   "nav": {
     "services": "Services",
-    "formula": "€100 formula",
+    "formula": "The Formula",
     "work": "Work",
     "contact": "Contact",
     "bookCall": "Book a call",
@@ -152,6 +152,19 @@
     "badge": "No lock-in · cancel anytime",
     "cta": "Book a free call",
     "ctaSecondary": "Write to us",
+    "receipt": {
+      "header": "The Formula",
+      "location": "Torvaianica · Roman coast",
+      "r1l": "Month 1 — everything live",
+      "r1v": "€100",
+      "r2l": "Each month, if it works",
+      "r2v": "€100",
+      "r3l": "After, if you want: updates",
+      "r3v": "€30/mo",
+      "totalLabel": "Total to make it yours",
+      "totalValue": "€900",
+      "footer": "No penalty · cancel anytime"
+    },
     "how": {
       "eyebrow": "How it works",
       "title": "You try. If it works, you continue. At €900 it's yours.",

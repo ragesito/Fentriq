@@ -88,36 +88,88 @@ export default async function FormulaPage({
         <div aria-hidden className="noise" />
 
         <Container className="relative">
-          <div className="max-w-3xl">
-            <Reveal>
-              <Eyebrow>{t("eyebrow")}</Eyebrow>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <h1 className="mt-5 text-[clamp(2.5rem,5.5vw,4rem)] font-bold leading-[1.06] tracking-[-0.03em]">
-                {t("titleBefore")}{" "}
-                <span className="text-gradient-animated">{t("titlePrice")}</span>
-              </h1>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-                {t("subtitle")}
-              </p>
-            </Reveal>
-            <Reveal delay={0.15}>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <CalButton size="lg">{t("cta")}</CalButton>
-                <Link
-                  href="/contatti"
-                  className={buttonClasses("secondary", "lg")}
-                >
-                  {t("ctaSecondary")}
-                  <ArrowRight size={18} aria-hidden />
-                </Link>
-              </div>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <div className="mt-8">
-                <Badge accent>{t("badge")}</Badge>
+          <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr]">
+            <div>
+              <Reveal>
+                <Eyebrow>{t("eyebrow")}</Eyebrow>
+              </Reveal>
+              <Reveal delay={0.05}>
+                <h1 className="mt-5 text-[clamp(2.5rem,5.5vw,4rem)] font-bold leading-[1.06] tracking-[-0.03em]">
+                  {t("titleBefore")}{" "}
+                  <span className="text-gradient-animated">{t("titlePrice")}</span>
+                </h1>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
+                  {t("subtitle")}
+                </p>
+              </Reveal>
+              <Reveal delay={0.15}>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <CalButton size="lg">{t("cta")}</CalButton>
+                  <Link
+                    href="/contatti"
+                    className={buttonClasses("secondary", "lg")}
+                  >
+                    {t("ctaSecondary")}
+                    <ArrowRight size={18} aria-hidden />
+                  </Link>
+                </div>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <div className="mt-8">
+                  <Badge accent>{t("badge")}</Badge>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* The formula as a till receipt — the object every shop owner knows */}
+            <Reveal delay={0.15} className="hidden lg:block">
+              <div className="relative mx-auto w-[340px] xl:w-[370px]">
+                <div
+                  aria-hidden
+                  className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/20 blur-[90px]"
+                />
+                <div className="animate-collage relative rotate-2 rounded-sm bg-cream px-7 pb-7 pt-6 font-mono text-[13px] text-ink shadow-[0_30px_70px_-25px_rgba(0,0,0,0.8)] [--tilt:2deg]">
+                  <div aria-hidden className="noise" />
+                  <p className="text-center text-sm font-bold uppercase tracking-[0.2em]">
+                    Fentriq
+                  </p>
+                  <p className="mt-1 text-center text-[11px] uppercase tracking-[0.12em] text-ink-muted">
+                    {t("receipt.header")} · {t("receipt.location")}
+                  </p>
+                  <div aria-hidden className="my-4 border-t border-dashed border-ink/25" />
+                  <dl className="space-y-2.5">
+                    <div className="flex items-baseline justify-between gap-4">
+                      <dt className="text-ink-muted">{t("receipt.r1l")}</dt>
+                      <dd className="font-semibold">{t("receipt.r1v")}</dd>
+                    </div>
+                    <div className="flex items-baseline justify-between gap-4">
+                      <dt className="text-ink-muted">{t("receipt.r2l")}</dt>
+                      <dd className="font-semibold">{t("receipt.r2v")}</dd>
+                    </div>
+                    <div className="flex items-baseline justify-between gap-4">
+                      <dt className="text-ink-muted">{t("receipt.r3l")}</dt>
+                      <dd className="font-semibold">{t("receipt.r3v")}</dd>
+                    </div>
+                  </dl>
+                  <div aria-hidden className="my-4 border-t border-dashed border-ink/25" />
+                  <div className="flex items-baseline justify-between gap-4 text-[15px] font-bold">
+                    <span className="uppercase tracking-wide">
+                      {t("receipt.totalLabel")}
+                    </span>
+                    <span className="text-accent-deep">{t("receipt.totalValue")}</span>
+                  </div>
+                  <div aria-hidden className="my-4 border-t border-dashed border-ink/25" />
+                  <p className="text-center text-[11px] uppercase tracking-[0.1em] text-ink-muted">
+                    {t("receipt.footer")}
+                  </p>
+                  {/* Barcode */}
+                  <div
+                    aria-hidden
+                    className="mt-4 h-9 w-full opacity-80 [background:repeating-linear-gradient(90deg,var(--color-ink)_0_2px,transparent_2px_5px),repeating-linear-gradient(90deg,var(--color-ink)_0_1px,transparent_1px_9px)]"
+                  />
+                </div>
               </div>
             </Reveal>
           </div>

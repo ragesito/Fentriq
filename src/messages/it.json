@@ -6,7 +6,7 @@
   },
   "nav": {
     "services": "Servizi",
-    "formula": "Formula 100€",
+    "formula": "La Formula",
     "work": "Lavori",
     "contact": "Contatti",
     "bookCall": "Prenota una call",
@@ -152,6 +152,19 @@
     "badge": "Senza vincoli · disdici quando vuoi",
     "cta": "Prenota una call gratuita",
     "ctaSecondary": "Scrivici",
+    "receipt": {
+      "header": "La Formula",
+      "location": "Torvaianica · Litorale romano",
+      "r1l": "Mese 1 — tutto attivo",
+      "r1v": "100€",
+      "r2l": "Ogni mese, se funziona",
+      "r2v": "100€",
+      "r3l": "Dopo, se vuoi: aggiornamenti",
+      "r3v": "30€/mese",
+      "totalLabel": "Totale per farlo tuo",
+      "totalValue": "900€",
+      "footer": "Nessuna penale · disdici quando vuoi"
+    },
     "how": {
       "eyebrow": "Come funziona",
       "title": "Provi. Se funziona, continui. A 900€ è tuo.",
