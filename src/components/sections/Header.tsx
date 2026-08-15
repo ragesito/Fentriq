@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Mail, Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 import { CalButton } from "@/components/ui/CalButton";
 import { LocaleSwitcher } from "@/components/ui/LocaleSwitcher";
-import { navItems } from "@/config/site";
+import { XIcon, InstagramIcon } from "@/components/ui/BrandIcons";
+import { navItems, siteConfig } from "@/config/site";
 import { cn } from "@/lib/cn";
 
 export function Header() {
@@ -85,8 +86,8 @@ export function Header() {
 
       {/* Mobile full-screen menu */}
       {open && (
-        <div className="fixed inset-0 top-16 z-40 bg-bg md:hidden">
-          <Container className="flex flex-col gap-2 py-8">
+        <div className="fixed inset-0 top-16 z-40 flex flex-col bg-bg md:hidden">
+          <Container className="flex flex-1 flex-col overflow-y-auto py-8">
             {navItems.map((item) => (
               <Link
                 key={item.key}
@@ -97,11 +98,41 @@ export function Header() {
                 {t(item.key)}
               </Link>
             ))}
-            <div className="mt-6 flex items-center justify-between">
-              <LocaleSwitcher />
-            </div>
-            <div className="mt-2">
-              <CalButton size="lg" className="w-full">
+
+            {/* Bottom block: socials + language on one row, CTA under them.
+                Extra bottom padding keeps clear of the floating chat bubble. */}
+            <div className="mt-auto pb-24 pt-10">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <a
+                    href={`mailto:${siteConfig.email}`}
+                    aria-label="Email"
+                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-accent/60 hover:text-text"
+                  >
+                    <Mail size={18} aria-hidden />
+                  </a>
+                  <a
+                    href={siteConfig.social.x}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="X"
+                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-accent/60 hover:text-text"
+                  >
+                    <XIcon size={17} />
+                  </a>
+                  <a
+                    href={siteConfig.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-accent/60 hover:text-text"
+                  >
+                    <InstagramIcon size={18} />
+                  </a>
+                </div>
+                <LocaleSwitcher />
+              </div>
+              <CalButton size="lg" className="mt-5 w-full">
                 {t("bookCall")}
               </CalButton>
             </div>
