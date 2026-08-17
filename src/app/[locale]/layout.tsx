@@ -64,6 +64,11 @@ export async function generateMetadata({
       apple: "/apple-touch-icon.png",
     },
     manifest: "/site.webmanifest",
+    // Fallback verification for Search Console when the DNS TXT record isn't
+    // used. Set NEXT_PUBLIC_GOOGLE_VERIFICATION in Vercel; omitted when unset.
+    verification: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION
+      ? { google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION }
+      : undefined,
   };
 }
 
