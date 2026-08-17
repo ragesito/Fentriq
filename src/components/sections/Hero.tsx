@@ -19,9 +19,9 @@ const COLLAGE = [
       "absolute right-0 top-0 w-[58%] [--tilt:2.5deg] [animation-delay:-2s]",
   },
   {
-    slug: "aulon-detailing",
-    cover: "/work/aulon-detailing.jpg",
-    label: "aulondetailing.com",
+    slug: "mecs-village",
+    cover: "/work/mecs-village.jpg",
+    label: "mecs-village.pages.dev",
     className:
       "absolute left-0 top-24 w-[52%] [--tilt:-3deg] [animation-delay:-5s]",
   },
