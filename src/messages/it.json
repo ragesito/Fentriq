@@ -33,7 +33,7 @@
     "titleAfter": " la tua impresa.",
     "subtitle": "Siti, applicazioni, intelligenza artificiale e automazioni su misura. Dalla prima idea al prodotto in produzione — veloci, senza fronzoli.",
     "stack": "Web · App · IA · Automazioni · Algoritmi · Software · Web3",
-    "proof": "{count} lavori per clienti reali",
+    "proof": "{clients} clienti online · {projects} progetti costruiti",
     "ctaFormula": "Scopri la Formula"
   },
   "services": {
@@ -66,10 +66,13 @@
   },
   "work": {
     "eyebrow": "Clienti",
-    "title": "Attività reali che ci hanno scelto.",
-    "subtitle": "Ristoranti, palestre, negozi e botteghe del litorale romano: ogni progetto ha un cliente vero dietro, non un mockup.",
+    "title": "Chi ci ha già scelto.",
+    "subtitle": "Attività che ci hanno affidato il loro sito: online, sul proprio dominio.",
     "viewAll": "Tutti i lavori",
-    "featured": "In evidenza"
+    "featured": "In evidenza",
+    "conceptsEyebrow": "Costruiti di nostra iniziativa",
+    "conceptsTitle": "Siti che aspettano il loro proprietario.",
+    "conceptsSubtitle": "Questi non sono clienti. Sono attività della zona per cui abbiamo costruito il sito senza che ce lo chiedessero, per far vedere cosa sappiamo fare. Se una di queste è la tua attività, il tuo sito esiste già."
   },
   "process": {
     "eyebrow": "Il metodo",
@@ -239,9 +242,9 @@
       }
     },
     "proof": {
-      "eyebrow": "Già sul litorale",
-      "title": "Attività vere della zona, già online.",
-      "subtitle": "Nonsolofitness è online sul suo dominio. Ristoranti e negozi di Torvaianica e Ostia sono già costruiti e pronti.",
+      "eyebrow": "Non è una promessa",
+      "title": "La Formula ha già il suo primo cliente.",
+      "subtitle": "Aulon Detailing è entrato con la Formula ed è online sul suo dominio. Nonsolofitness ci ha affidato il sito ed è online a Torvaianica. E per molte attività della zona il sito è già costruito, in attesa del loro via.",
       "cta": "Guarda tutti i lavori"
     },
     "faq": {
@@ -370,7 +373,11 @@
   "workPage": {
     "eyebrow": "Progetti",
     "title": "I nostri lavori.",
-    "subtitle": "Siti e prodotti costruiti per attività reali — ristoranti, palestre, negozi — più i prodotti che sviluppiamo in casa.",
+    "subtitle": "I siti dei nostri clienti, i progetti costruiti di nostra iniziativa per le attività della zona, e i prodotti che sviluppiamo in casa.",
+    "clientsTitle": "I nostri clienti.",
+    "clientsSubtitle": "Ci hanno affidato il loro sito: online, sul proprio dominio.",
+    "conceptsTitle": "Costruiti di nostra iniziativa.",
+    "conceptsSubtitle": "Questi non sono clienti. Sono attività della zona per cui abbiamo costruito il sito senza che ce lo chiedessero. Se una di queste è la tua, il tuo sito esiste già e ti sta aspettando.",
     "labTitle": "Dal nostro laboratorio.",
     "labSubtitle": "Prodotti interni con cui spingiamo la tecnica: le stesse capacità che poi portiamo ai clienti.",
     "sections": {

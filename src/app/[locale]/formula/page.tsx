@@ -44,7 +44,7 @@ const MODULES: { key: "agent" | "whatsapp" | "flows" | "apps"; icon: LucideIcon 
   { key: "apps", icon: Smartphone },
 ];
 const FAQ_KEYS = ["stop", "own", "fast", "report", "after"] as const;
-const PROOF_SLUGS = ["nonsolofitness", "schiano", "cuocimi"] as const;
+const PROOF_SLUGS = ["nonsolofitness", "aulon-detailing", "schiano"] as const;
 
 export async function generateMetadata({
   params,

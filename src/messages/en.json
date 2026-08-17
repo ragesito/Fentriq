@@ -33,7 +33,7 @@
     "titleAfter": ".",
     "subtitle": "Custom websites, applications, artificial intelligence and automation. From the first idea to production — fast, no fluff.",
     "stack": "Web · App · AI · Automation · Algorithms · Software · Web3",
-    "proof": "{count} projects for real clients",
+    "proof": "{clients} clients live · {projects} projects built",
     "ctaFormula": "Discover the Formula"
   },
   "services": {
@@ -66,10 +66,13 @@
   },
   "work": {
     "eyebrow": "Clients",
-    "title": "Real businesses that chose us.",
-    "subtitle": "Restaurants, gyms and local shops on the Roman coast: every project has a real client behind it, not a mockup.",
+    "title": "Who already chose us.",
+    "subtitle": "Businesses that trusted us with their site: live, on their own domain.",
     "viewAll": "All work",
-    "featured": "Featured"
+    "featured": "Featured",
+    "conceptsEyebrow": "Built on our own initiative",
+    "conceptsTitle": "Sites waiting for their owner.",
+    "conceptsSubtitle": "These are not clients. They're local businesses we built a site for without being asked, to show what we can do. If one of them is your business, your site already exists."
   },
   "process": {
     "eyebrow": "The method",
@@ -239,9 +242,9 @@
       }
     },
     "proof": {
-      "eyebrow": "Already on the coast",
-      "title": "Real local businesses, already online.",
-      "subtitle": "Nonsolofitness is live on its own domain. Restaurants and shops around Torvaianica and Ostia are already built and ready.",
+      "eyebrow": "Not a promise",
+      "title": "The Formula already has its first client.",
+      "subtitle": "Aulon Detailing joined through the Formula and is live on its own domain. Nonsolofitness trusted us with their site and is live in Torvaianica. And for many local businesses the site is already built, waiting for their go-ahead.",
       "cta": "See all work"
     },
     "faq": {
@@ -370,7 +373,11 @@
   "workPage": {
     "eyebrow": "Projects",
     "title": "Our work.",
-    "subtitle": "Sites and products built for real businesses — restaurants, gyms, shops — plus the products we build in-house.",
+    "subtitle": "Our clients' sites, the projects we built on our own initiative for local businesses, and the products we develop in-house.",
+    "clientsTitle": "Our clients.",
+    "clientsSubtitle": "They trusted us with their site: live, on their own domain.",
+    "conceptsTitle": "Built on our own initiative.",
+    "conceptsSubtitle": "These are not clients. They're local businesses we built a site for without being asked. If one of them is yours, your site already exists and is waiting for you.",
     "labTitle": "From our lab.",
     "labSubtitle": "In-house products where we push the craft: the same capabilities we then bring to clients.",
     "sections": {

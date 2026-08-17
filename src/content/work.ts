@@ -6,8 +6,13 @@ export interface CaseStudy {
   title: string;
   year: number;
   featured: boolean;
-  /** Client work vs in-house products/demos. */
-  kind: "client" | "lab";
+  /**
+   * client  — a paying client; the site is theirs and live.
+   * concept — built on our own initiative for a local business that has NOT
+   *           hired us. Shown honestly as a proposal, never as a client.
+   * lab     — in-house products and demos.
+   */
+  kind: "client" | "concept" | "lab";
   /** Short business line shown on cards, e.g. "Ristorante di pesce · Torvaianica". */
   sector: Record<Locale, string>;
   /** Optional cover image under /public/work. Falls back to a branded tile. */
@@ -27,132 +32,10 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "schiano",
-    title: "Schiano Cantina & Cucina",
-    year: 2026,
-    featured: true,
-    kind: "client",
-    sector: {
-      it: "Ristorante di pesce · Torvaianica (RM)",
-      en: "Seafood restaurant · Torvaianica (RM)",
-    },
-    cover: "/work/schiano.jpg",
-    stack: ["Web", "Design", "SEO"],
-    links: { live: "https://schiano.vercel.app" },
-    roles: {
-      it: ["Sito su misura", "Brand digitale", "SEO"],
-      en: ["Custom website", "Digital brand", "SEO"],
-    },
-    badge: { it: "Online", en: "Live" },
-    summary: {
-      it: "Sito editoriale per un ristorante di pesce sul mare dal 1960: narrativa a scroll, carta strutturata e prenotazione integrata nei canali che il locale già usa.",
-      en: "Editorial website for a seaside fish restaurant open since 1960: scroll-driven storytelling, a structured menu and booking wired into the channels the venue already uses.",
-    },
-    sections: {
-      problem: {
-        it: "Un'istituzione del litorale romano — dal 1960, 4,5 su Google con oltre 2.300 recensioni — con una presenza digitale sparsa tra portali e social, non all'altezza della sala.",
-        en: "An institution on the Roman coast — open since 1960, 4.5 on Google with 2,300+ reviews — whose digital presence was scattered across portals and social media, far below the standard of the dining room.",
-      },
-      solution: {
-        it: "Un sito scuro, fotografico, con narrativa a scroll: Storia, Cucina, Cantina, Esperienza, Eventi. La carta è una pagina strutturata, e la prenotazione porta ai canali reali del ristorante: telefono, WhatsApp e Google.",
-        en: "A dark, photographic site with scroll-driven storytelling: Story, Kitchen, Cellar, Experience, Events. The menu is a structured page, and booking routes to the restaurant's real channels: phone, WhatsApp and Google.",
-      },
-      build: {
-        it: "Design su misura, niente template: animazioni fluide che rispettano le preferenze di movimento dell'utente, foto a tutto schermo, menù gestito come dati e dati strutturati per Google.",
-        en: "Custom design, no templates: smooth animations that honour the user's motion preferences, full-bleed photography, the menu managed as data and structured data for Google.",
-      },
-      result: {
-        it: "Un sito online all'altezza del locale: veloce, curato e costruito per portare ogni visita verso la prenotazione.",
-        en: "A live site that matches the venue: fast, polished and built to walk every visit toward a booking.",
-      },
-    },
-  },
-  {
-    slug: "ottica-ramunno",
-    title: "Ottica Ramunno",
-    year: 2026,
-    featured: false,
-    kind: "client",
-    sector: {
-      it: "Ottica · Torvaianica (RM)",
-      en: "Optician · Torvaianica (RM)",
-    },
-    stack: ["Web app", "AR", "Gestionale"],
-    links: {},
-    roles: {
-      it: ["Prodotto web", "Prova virtuale AR", "Gestionale"],
-      en: ["Web product", "AR virtual try-on", "Admin panel"],
-    },
-    badge: { it: "In lancio", en: "Launching" },
-    summary: {
-      it: "Prova occhiali virtuale in tempo reale dal browser — senza app e senza registrazione — con catalogo filtrabile e pannello gestionale, per un'ottica attiva dal 1990.",
-      en: "Real-time virtual glasses try-on in the browser — no app, no sign-up — with a filterable catalogue and an admin panel, for an optician's shop open since 1990.",
-    },
-    sections: {
-      problem: {
-        it: "Per provare una montatura bisogna entrare in negozio. Un'ottica di quartiere attiva dal 1990 voleva portare online il catalogo e far provare gli occhiali anche da casa.",
-        en: "Trying on frames means walking into the shop. A neighbourhood optician's, open since 1990, wanted its catalogue online and a way for people to try frames from home.",
-      },
-      solution: {
-        it: "Catalogo online con filtri per forma, colore e calibro, e prova virtuale con la fotocamera direttamente dal browser. Il video non lascia mai il dispositivo: tutto il tracciamento avviene in locale, per privacy.",
-        en: "An online catalogue with shape, colour and size filters, plus a camera-based virtual try-on right in the browser. The video never leaves the device: all tracking runs locally, by design, for privacy.",
-      },
-      build: {
-        it: "Tracciamento del volto in tempo reale nel browser, montature rese in 3D sul viso, e un pannello riservato allo staff per gestire catalogo, foto e richieste di appuntamento. Funziona anche su iPhone, dove il tracciamento in-browser è notoriamente difficile.",
-        en: "Real-time face tracking in the browser, frames rendered in 3D on the face, and a private staff panel to manage the catalogue, photos and appointment requests. It works on iPhone too, where in-browser tracking is notoriously hard.",
-      },
-      result: {
-        it: "La piattaforma è completa e funzionante; si lancia con il caricamento del catalogo reale del negozio. La stessa base è pronta per essere offerta ad altre ottiche.",
-        en: "The platform is complete and working; it launches once the shop's real catalogue is loaded. The same foundation is ready to be offered to other opticians.",
-      },
-    },
-  },
-  {
-    slug: "fedele",
-    title: "Fedele Ristorante",
-    year: 2026,
-    featured: false,
-    kind: "client",
-    sector: {
-      it: "Cucina di mare · Torvaianica (RM)",
-      en: "Seafood restaurant · Torvaianica (RM)",
-    },
-    cover: "/work/fedele.jpg",
-    stack: ["Web", "Brand", "WhatsApp"],
-    links: {},
-    roles: {
-      it: ["Brand completo", "Sito one-page", "Prenotazione WhatsApp"],
-      en: ["Full brand", "One-page site", "WhatsApp booking"],
-    },
-    badge: { it: "In lancio", en: "Launching" },
-    summary: {
-      it: "Da zero presenza web a un sito che trasforma 4,8★ e 309 recensioni in prenotazioni via WhatsApp, a un tocco di distanza.",
-      en: "From no web presence at all to a site that turns 4.8★ and 309 reviews into WhatsApp bookings, one tap away.",
-    },
-    sections: {
-      problem: {
-        it: "4,8 su Google, Travelers' Choice 2025, la terrazza sul mare — e nessun sito. Tutto il traffico digitale passava da portali di terzi, con dati incoerenti e nessun menù consultabile.",
-        en: "4.8 on Google, Travelers' Choice 2025, a terrace over the sea — and no website. All digital traffic went through third-party listings with inconsistent data and no menu to browse.",
-      },
-      solution: {
-        it: "Un one-page mobile-first con WhatsApp come canale principale: pulsante di prenotazione con messaggio precompilato, stato aperto/chiuso in tempo reale e la riprova sociale (recensioni, riconoscimenti) come spina dorsale della pagina.",
-        en: "A mobile-first one-pager with WhatsApp as the primary channel: a booking button with a pre-filled message, live open/closed status, and social proof (reviews, awards) as the backbone of the page.",
-      },
-      build: {
-        it: "Prima il brand — logo, palette, tipografia — poi il sito: veloce, con dati strutturati completi di orari reali e anteprime curate per le condivisioni su WhatsApp.",
-        en: "Brand first — logo, palette, typography — then the site: fast, with structured data including real opening hours and previews crafted for WhatsApp shares.",
-      },
-      result: {
-        it: "Pronto al lancio sul dominio del ristorante: ogni visita finisce a un tocco dalla prenotazione.",
-        en: "Ready to launch on the restaurant's domain: every visit ends one tap away from a booking.",
-      },
-    },
-  },
-  {
     slug: "nonsolofitness",
     title: "Nonsolofitness",
     year: 2026,
-    featured: false,
+    featured: true,
     kind: "client",
     sector: {
       it: "Palestra · Torvaianica (RM)",
@@ -190,11 +73,174 @@ export const caseStudies: CaseStudy[] = [
     },
   },
   {
+    slug: "aulon-detailing",
+    title: "Aulon Detailing",
+    year: 2026,
+    featured: false,
+    kind: "client",
+    sector: {
+      it: "Detailing auto · Melrose Park, Illinois (USA)",
+      en: "Car detailing · Melrose Park, Illinois (USA)",
+    },
+    cover: "/work/aulon-detailing.jpg",
+    stack: ["Web", "Prenotazioni", "Pagamenti"],
+    links: { live: "https://aulondetailing.com" },
+    roles: {
+      it: ["Sito e prenotazioni", "Pagamenti online", "Pannello gestionale"],
+      en: ["Site and booking", "Online payments", "Admin panel"],
+    },
+    badge: { it: "Online", en: "Live" },
+    summary: {
+      it: "Sito con prenotazione online, acconto tramite pagamento sicuro e pannello per gestire gli appuntamenti. Il primo cliente entrato con la Formula.",
+      en: "Website with online booking, a secured deposit at checkout and an admin panel to manage appointments. The first client to join through the Formula.",
+    },
+    sections: {
+      problem: {
+        it: "Un servizio di detailing premium su appuntamento, con prenotazioni gestite a voce e nessun modo per bloccare davvero uno slot: chi non si presentava lasciava un buco in agenda.",
+        en: "A premium detailing service by appointment, with bookings handled by phone and no way to actually hold a slot: no-shows left holes in the calendar.",
+      },
+      solution: {
+        it: "Un sito dove il cliente sceglie il pacchetto, prenota il giorno e versa un piccolo acconto che conferma l'appuntamento e viene scalato dal totale. L'acconto filtra da solo chi non è serio.",
+        en: "A site where the customer picks a package, books a day and leaves a small deposit that confirms the appointment and is applied to the final price. The deposit filters out no-shows by itself.",
+      },
+      build: {
+        it: "Prenotazioni con pagamento sicuro, pannello riservato per vedere e gestire gli appuntamenti, contenuti (prezzi, pacchetti, galleria, recensioni) modificabili dal titolare senza toccare codice.",
+        en: "Bookings with secure payment, a private panel to see and manage appointments, and content (prices, packages, gallery, reviews) the owner can edit without touching code.",
+      },
+      result: {
+        it: "Online su aulondetailing.com, dagli Stati Uniti: la prova che la Formula funziona anche a distanza.",
+        en: "Live at aulondetailing.com, from the United States: proof the Formula works remotely too.",
+      },
+    },
+  },
+  {
+    slug: "schiano",
+    title: "Schiano Cantina & Cucina",
+    year: 2026,
+    featured: false,
+    kind: "concept",
+    sector: {
+      it: "Ristorante di pesce · Torvaianica (RM)",
+      en: "Seafood restaurant · Torvaianica (RM)",
+    },
+    cover: "/work/schiano.jpg",
+    stack: ["Web", "Design", "SEO"],
+    links: { live: "https://schiano.vercel.app" },
+    roles: {
+      it: ["Sito su misura", "Brand digitale", "SEO"],
+      en: ["Custom website", "Digital brand", "SEO"],
+    },
+    badge: { it: "Concept", en: "Concept" },
+    summary: {
+      it: "Sito editoriale per un ristorante di pesce sul mare dal 1960: narrativa a scroll, carta strutturata e prenotazione integrata nei canali che il locale già usa.",
+      en: "Editorial website for a seaside fish restaurant open since 1960: scroll-driven storytelling, a structured menu and booking wired into the channels the venue already uses.",
+    },
+    sections: {
+      problem: {
+        it: "Un'istituzione del litorale romano — dal 1960, 4,5 su Google con oltre 2.300 recensioni — con una presenza digitale sparsa tra portali e social, non all'altezza della sala.",
+        en: "An institution on the Roman coast — open since 1960, 4.5 on Google with 2,300+ reviews — whose digital presence was scattered across portals and social media, far below the standard of the dining room.",
+      },
+      solution: {
+        it: "Un sito scuro, fotografico, con narrativa a scroll: Storia, Cucina, Cantina, Esperienza, Eventi. La carta è una pagina strutturata, e la prenotazione porta ai canali reali del ristorante: telefono, WhatsApp e Google.",
+        en: "A dark, photographic site with scroll-driven storytelling: Story, Kitchen, Cellar, Experience, Events. The menu is a structured page, and booking routes to the restaurant's real channels: phone, WhatsApp and Google.",
+      },
+      build: {
+        it: "Design su misura, niente template: animazioni fluide che rispettano le preferenze di movimento dell'utente, foto a tutto schermo, menù gestito come dati e dati strutturati per Google.",
+        en: "Custom design, no templates: smooth animations that honour the user's motion preferences, full-bleed photography, the menu managed as data and structured data for Google.",
+      },
+      result: {
+        it: "Un sito online all'altezza del locale: veloce, curato e costruito per portare ogni visita verso la prenotazione.",
+        en: "A live site that matches the venue: fast, polished and built to walk every visit toward a booking.",
+      },
+    },
+  },
+  {
+    slug: "ottica-ramunno",
+    title: "Ottica Ramunno",
+    year: 2026,
+    featured: false,
+    kind: "concept",
+    sector: {
+      it: "Ottica · Torvaianica (RM)",
+      en: "Optician · Torvaianica (RM)",
+    },
+    stack: ["Web app", "AR", "Gestionale"],
+    links: {},
+    roles: {
+      it: ["Prodotto web", "Prova virtuale AR", "Gestionale"],
+      en: ["Web product", "AR virtual try-on", "Admin panel"],
+    },
+    badge: { it: "Concept", en: "Concept" },
+    summary: {
+      it: "Prova occhiali virtuale in tempo reale dal browser — senza app e senza registrazione — con catalogo filtrabile e pannello gestionale, per un'ottica attiva dal 1990.",
+      en: "Real-time virtual glasses try-on in the browser — no app, no sign-up — with a filterable catalogue and an admin panel, for an optician's shop open since 1990.",
+    },
+    sections: {
+      problem: {
+        it: "Per provare una montatura bisogna entrare in negozio. Un'ottica di quartiere attiva dal 1990 voleva portare online il catalogo e far provare gli occhiali anche da casa.",
+        en: "Trying on frames means walking into the shop. A neighbourhood optician's, open since 1990, wanted its catalogue online and a way for people to try frames from home.",
+      },
+      solution: {
+        it: "Catalogo online con filtri per forma, colore e calibro, e prova virtuale con la fotocamera direttamente dal browser. Il video non lascia mai il dispositivo: tutto il tracciamento avviene in locale, per privacy.",
+        en: "An online catalogue with shape, colour and size filters, plus a camera-based virtual try-on right in the browser. The video never leaves the device: all tracking runs locally, by design, for privacy.",
+      },
+      build: {
+        it: "Tracciamento del volto in tempo reale nel browser, montature rese in 3D sul viso, e un pannello riservato allo staff per gestire catalogo, foto e richieste di appuntamento. Funziona anche su iPhone, dove il tracciamento in-browser è notoriamente difficile.",
+        en: "Real-time face tracking in the browser, frames rendered in 3D on the face, and a private staff panel to manage the catalogue, photos and appointment requests. It works on iPhone too, where in-browser tracking is notoriously hard.",
+      },
+      result: {
+        it: "La piattaforma è completa e funzionante; si lancia con il caricamento del catalogo reale del negozio. La stessa base è pronta per essere offerta ad altre ottiche.",
+        en: "The platform is complete and working; it launches once the shop's real catalogue is loaded. The same foundation is ready to be offered to other opticians.",
+      },
+    },
+  },
+  {
+    slug: "fedele",
+    title: "Fedele Ristorante",
+    year: 2026,
+    featured: false,
+    kind: "concept",
+    sector: {
+      it: "Cucina di mare · Torvaianica (RM)",
+      en: "Seafood restaurant · Torvaianica (RM)",
+    },
+    cover: "/work/fedele.jpg",
+    stack: ["Web", "Brand", "WhatsApp"],
+    links: {},
+    roles: {
+      it: ["Brand completo", "Sito one-page", "Prenotazione WhatsApp"],
+      en: ["Full brand", "One-page site", "WhatsApp booking"],
+    },
+    badge: { it: "Concept", en: "Concept" },
+    summary: {
+      it: "Da zero presenza web a un sito che trasforma 4,8★ e 309 recensioni in prenotazioni via WhatsApp, a un tocco di distanza.",
+      en: "From no web presence at all to a site that turns 4.8★ and 309 reviews into WhatsApp bookings, one tap away.",
+    },
+    sections: {
+      problem: {
+        it: "4,8 su Google, Travelers' Choice 2025, la terrazza sul mare — e nessun sito. Tutto il traffico digitale passava da portali di terzi, con dati incoerenti e nessun menù consultabile.",
+        en: "4.8 on Google, Travelers' Choice 2025, a terrace over the sea — and no website. All digital traffic went through third-party listings with inconsistent data and no menu to browse.",
+      },
+      solution: {
+        it: "Un one-page mobile-first con WhatsApp come canale principale: pulsante di prenotazione con messaggio precompilato, stato aperto/chiuso in tempo reale e la riprova sociale (recensioni, riconoscimenti) come spina dorsale della pagina.",
+        en: "A mobile-first one-pager with WhatsApp as the primary channel: a booking button with a pre-filled message, live open/closed status, and social proof (reviews, awards) as the backbone of the page.",
+      },
+      build: {
+        it: "Prima il brand — logo, palette, tipografia — poi il sito: veloce, con dati strutturati completi di orari reali e anteprime curate per le condivisioni su WhatsApp.",
+        en: "Brand first — logo, palette, typography — then the site: fast, with structured data including real opening hours and previews crafted for WhatsApp shares.",
+      },
+      result: {
+        it: "Pronto al lancio sul dominio del ristorante: ogni visita finisce a un tocco dalla prenotazione.",
+        en: "Ready to launch on the restaurant's domain: every visit ends one tap away from a booking.",
+      },
+    },
+  },
+  {
     slug: "mecs-village",
     title: "Mecs Village",
     year: 2026,
     featured: false,
-    kind: "client",
+    kind: "concept",
     sector: {
       it: "Stabilimento balneare · Lido di Ostia (RM)",
       en: "Beach club · Lido di Ostia (RM)",
@@ -206,7 +252,7 @@ export const caseStudies: CaseStudy[] = [
       it: ["Sito vetrina", "Identità digitale"],
       en: ["Showcase site", "Digital identity"],
     },
-    badge: { it: "Online", en: "Live" },
+    badge: { it: "Concept", en: "Concept" },
     summary: {
       it: "Vetrina digitale per uno stabilimento con cucina di mare, dal 1997 sul litorale: veloce, senza cookie, con le foto vere del posto.",
       en: "Digital showcase for a beach club with a seafood kitchen, on the coast since 1997: fast, cookie-free, with real photos of the place.",
@@ -235,7 +281,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Happiness La Casetta",
     year: 2026,
     featured: false,
-    kind: "client",
+    kind: "concept",
     sector: {
       it: "Pizzeria e birreria · Torvaianica (RM)",
       en: "Pizzeria & beer house · Torvaianica (RM)",
@@ -247,7 +293,7 @@ export const caseStudies: CaseStudy[] = [
       it: ["Sito bilingue", "Zero dipendenze"],
       en: ["Bilingual site", "Zero dependencies"],
     },
-    badge: { it: "In lancio", en: "Launching" },
+    badge: { it: "Concept", en: "Concept" },
     summary: {
       it: "Sito bilingue, senza cookie e senza framework, per la pizzeria e birreria di Viale Danimarca, dal 1986.",
       en: "A bilingual, cookie-free, framework-free website for the pizzeria and beer house on Viale Danimarca, since 1986.",
@@ -276,7 +322,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Cuocimi",
     year: 2026,
     featured: false,
-    kind: "client",
+    kind: "concept",
     sector: {
       it: "Braceria, pesce e pizza · Torvaianica (RM)",
       en: "Grill, seafood & pizza · Torvaianica (RM)",
@@ -288,7 +334,7 @@ export const caseStudies: CaseStudy[] = [
       it: ["Sito vetrina", "Logo animato"],
       en: ["Showcase site", "Animated logo"],
     },
-    badge: { it: "Online", en: "Live" },
+    badge: { it: "Concept", en: "Concept" },
     summary: {
       it: "Il logo diventa animazione: la padella vola al suo posto come la O di CUOCIMI. Vetrina statica per la braceria sul lungomare di Torvaianica.",
       en: "The logo becomes the animation: the frying pan lands in place as the O of CUOCIMI. A static showcase for the grill house on the Torvaianica seafront.",
@@ -307,8 +353,8 @@ export const caseStudies: CaseStudy[] = [
         en: "The logo hand-re-vectorised in five variants and turned into the preloader: the pan drops onto the ember line and flies into place. Fully static, zero cookies.",
       },
       result: {
-        it: "Online, con il footer firmato Fentriq — il primo cliente a portare la nostra firma sul proprio sito.",
-        en: "Live, with a Fentriq-signed footer — the first client to carry our name on their site.",
+        it: "Il sito è online in anteprima, con il nostro footer già firmato: manca solo il via del locale.",
+        en: "The site is live as a preview, our footer already signed: it only needs the venue's go-ahead.",
       },
     },
   },
@@ -317,7 +363,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Zampami",
     year: 2026,
     featured: false,
-    kind: "client",
+    kind: "concept",
     sector: {
       it: "Negozio per animali · Torvaianica (RM)",
       en: "Pet shop · Torvaianica (RM)",
@@ -329,7 +375,7 @@ export const caseStudies: CaseStudy[] = [
       it: ["Sito vetrina", "E-commerce attivabile", "Area clienti"],
       en: ["Showcase site", "Switchable e-commerce", "Customer area"],
     },
-    badge: { it: "In lancio", en: "Launching" },
+    badge: { it: "Concept", en: "Concept" },
     summary: {
       it: "Vetrina di quartiere con un e-commerce completo dietro un interruttore: catalogo, carrello, pagamenti sicuri e area clienti senza password.",
       en: "A neighbourhood showcase with a full e-commerce hidden behind a switch: catalogue, cart, secure payments and a passwordless customer area.",
@@ -358,7 +404,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Talea Ristorante & Bistrot",
     year: 2026,
     featured: false,
-    kind: "client",
+    kind: "concept",
     sector: {
       it: "Ristorante e bistrot · Torvaianica (RM)",
       en: "Restaurant & bistrot · Torvaianica (RM)",
@@ -370,7 +416,7 @@ export const caseStudies: CaseStudy[] = [
       it: ["Design editoriale", "Illustrazioni animate"],
       en: ["Editorial design", "Animated illustrations"],
     },
-    badge: { it: "In lancio", en: "Launching" },
+    badge: { it: "Concept", en: "Concept" },
     summary: {
       it: "“Inchiostro e mare”: un sito editoriale che cambia colore mentre scorri, con le illustrazioni a penna del menù che si disegnano da sole. Lighthouse 100 su tutta la linea.",
       en: "“Ink and sea”: an editorial site that shifts colour as you scroll, with the menu's pen illustrations drawing themselves. Lighthouse 100 across the board.",
@@ -399,7 +445,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Osteria Del Mare",
     year: 2026,
     featured: false,
-    kind: "client",
+    kind: "concept",
     sector: {
       it: "Osteria di mare · Torvaianica (RM)",
       en: "Seafood osteria · Torvaianica (RM)",
@@ -411,7 +457,7 @@ export const caseStudies: CaseStudy[] = [
       it: ["Sito vetrina", "Identità digitale"],
       en: ["Showcase site", "Digital identity"],
     },
-    badge: { it: "In lancio", en: "Launching" },
+    badge: { it: "Concept", en: "Concept" },
     summary: {
       it: "Trenta coperti e prenotazione solo al telefono: un sito che rispetta com'è davvero il locale, invece di forzarlo dentro un widget.",
       en: "Thirty covers and phone-only booking: a site that respects how the place really works, instead of forcing it into a widget.",
@@ -520,6 +566,11 @@ export function getCaseStudies(): CaseStudy[] {
 
 export function getClientCases(): CaseStudy[] {
   return getCaseStudies().filter((c) => c.kind === "client");
+}
+
+/** Sites built on our own initiative — proposals, not client relationships. */
+export function getConceptCases(): CaseStudy[] {
+  return getCaseStudies().filter((c) => c.kind === "concept");
 }
 
 export function getLabCases(): CaseStudy[] {

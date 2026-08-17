@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
 import { Link } from "@/i18n/navigation";
 import { buttonClasses } from "@/components/ui/Button";
-import { getClientCases } from "@/content/work";
+import { getCaseStudies, getClientCases } from "@/content/work";
 import { ArrowRight } from "lucide-react";
 
 /** Real screenshots stacked in the hero — evidence before words. */
@@ -19,9 +19,9 @@ const COLLAGE = [
       "absolute right-0 top-0 w-[58%] [--tilt:2.5deg] [animation-delay:-2s]",
   },
   {
-    slug: "zampami",
-    cover: "/work/zampami.jpg",
-    label: "Zampami · Torvaianica",
+    slug: "aulon-detailing",
+    cover: "/work/aulon-detailing.jpg",
+    label: "aulondetailing.com",
     className:
       "absolute left-0 top-24 w-[52%] [--tilt:-3deg] [animation-delay:-5s]",
   },
@@ -38,6 +38,7 @@ export function Hero() {
   const t = useTranslations("hero");
   const tc = useTranslations("common");
   const clientCount = getClientCases().length;
+  const projectCount = getCaseStudies().length;
   const chips = t("stack").split("·").map((s) => s.trim()).filter(Boolean);
 
   return (
@@ -98,7 +99,7 @@ export function Hero() {
               <div className="mt-10 flex flex-wrap items-center gap-2">
                 <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] text-text">
                   <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  {t("proof", { count: clientCount })}
+                  {t("proof", { clients: clientCount, projects: projectCount })}
                 </span>
                 {chips.map((chip) => (
                   <span
