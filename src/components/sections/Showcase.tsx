@@ -6,7 +6,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Link } from "@/i18n/navigation";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
-import { getClientCases, type CaseStudy } from "@/content/work";
+import { getCaseStudies, type CaseStudy } from "@/content/work";
 import type { Locale } from "@/i18n/routing";
 
 /**
@@ -18,7 +18,9 @@ export function Showcase() {
   const t = useTranslations("showcase");
   const locale = useLocale() as Locale;
 
-  const shots = getClientCases().filter((s) => s.cover);
+  // Everything we've built, clients and self-initiated alike — the strip is
+  // about the craft; who is a client is stated in the Work section.
+  const shots = getCaseStudies().filter((s) => s.cover);
   const mid = Math.ceil(shots.length / 2);
   const rows: [CaseStudy[], CaseStudy[]] = [shots.slice(0, mid), shots.slice(mid)];
 
