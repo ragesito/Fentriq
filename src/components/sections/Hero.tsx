@@ -25,12 +25,12 @@ const COLLAGE = [
     className:
       "absolute left-0 top-24 w-[52%] [--tilt:-3deg] [animation-delay:-5s]",
   },
+  // Painted last so it sits in front: the newest client leads the collage.
   {
-    slug: "schiano",
-    cover: "/work/schiano.jpg",
-    label: "schiano.vercel.app",
-    className:
-      "absolute bottom-0 right-6 w-[72%] [--tilt:1.5deg]",
+    slug: "aulon-detailing",
+    cover: "/work/aulon-detailing.jpg",
+    label: "aulondetailing.com",
+    className: "absolute bottom-0 right-6 w-[72%] [--tilt:1.5deg]",
   },
 ];
 
@@ -133,7 +133,7 @@ export function Hero() {
                         alt=""
                         fill
                         sizes="420px"
-                        priority={item.slug === "schiano"}
+                        priority={item.slug === "aulon-detailing"}
                         className="object-cover object-top"
                       />
                     </div>

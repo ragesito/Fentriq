@@ -85,15 +85,15 @@ export const caseStudies: CaseStudy[] = [
       it: "Detailing auto · Melrose Park, Illinois (USA)",
       en: "Car detailing · Melrose Park, Illinois (USA)",
     },
-    // TODO: add the real screenshots of OUR build once the site is handed over
-    // to aulondetailing.com — the domain still serves the client's previous site.
+    cover: "/work/aulon-detailing.jpg",
+    mobile: "/work/mobile/aulon-detailing.jpg",
     stack: ["Web", "Prenotazioni", "Pagamenti"],
-    links: {},
+    links: { live: "https://aulondetailing.com" },
     roles: {
       it: ["Sito e prenotazioni", "Pagamenti online", "Pannello gestionale"],
       en: ["Site and booking", "Online payments", "Admin panel"],
     },
-    badge: { it: "In consegna", en: "Handover" },
+    badge: { it: "Online", en: "Live" },
     summary: {
       it: "Sito con prenotazione online, acconto tramite pagamento sicuro e pannello per gestire gli appuntamenti. Il primo cliente entrato con la Formula.",
       en: "Website with online booking, a secured deposit at checkout and an admin panel to manage appointments. The first client to join through the Formula.",
@@ -112,8 +112,8 @@ export const caseStudies: CaseStudy[] = [
         en: "Bookings with secure payment, a private panel to see and manage appointments, and content (prices, packages, gallery, reviews) the owner can edit without touching code.",
       },
       result: {
-        it: "Costruito e pagato: il primo cliente entrato con la Formula, dagli Stati Uniti. Va online sul suo dominio al passaggio di consegne.",
-        en: "Built and paid for: the first client to join through the Formula, from the United States. It goes live on their domain at handover.",
+        it: "Online su aulondetailing.com, dagli Stati Uniti: il primo cliente entrato con la Formula e la prova che funziona anche a distanza.",
+        en: "Live at aulondetailing.com, from the United States: the first client to join through the Formula, and proof it works remotely too.",
       },
     },
   },
