@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/ui/BrandIcons";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
+import { PhoneFrame } from "@/components/ui/PhoneFrame";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/ui/Reveal";
@@ -130,20 +131,32 @@ export default async function CaseStudyPage({
 
         {study.cover ? (
           <Container className="mt-12 max-w-4xl">
-            <BrowserFrame
-              label={study.links.live?.replace(/^https?:\/\//, "") ?? study.title}
-            >
-              <div className="relative aspect-[16/9]">
-                <Image
-                  src={study.cover}
-                  alt={study.title}
-                  fill
+            <div className="relative pb-10 pr-10 sm:pb-0 sm:pr-16">
+              <BrowserFrame
+                label={study.links.live?.replace(/^https?:\/\//, "") ?? study.title}
+              >
+                <div className="relative aspect-[16/9]">
+                  <Image
+                    src={study.cover}
+                    alt={study.title}
+                    fill
+                    priority
+                    sizes="(min-width:1024px) 56rem, 100vw"
+                    className="object-cover object-top"
+                  />
+                </div>
+              </BrowserFrame>
+              {/* The same site on a phone, where most visitors actually see it. */}
+              {study.mobile ? (
+                <PhoneFrame
+                  src={study.mobile}
+                  alt={`${study.title} — mobile`}
                   priority
-                  sizes="(min-width:1024px) 56rem, 100vw"
-                  className="object-cover object-top"
+                  className="absolute bottom-0 right-0 w-[28%] max-w-[190px] sm:-bottom-10"
+                  sizes="190px"
                 />
-              </div>
-            </BrowserFrame>
+              ) : null}
+            </div>
           </Container>
         ) : null}
 

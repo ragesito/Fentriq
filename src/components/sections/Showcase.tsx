@@ -6,6 +6,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Link } from "@/i18n/navigation";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
+import { PhoneFrame } from "@/components/ui/PhoneFrame";
 import { getCaseStudies, type CaseStudy } from "@/content/work";
 import type { Locale } from "@/i18n/routing";
 
@@ -74,22 +75,32 @@ export function Showcase() {
                         tabIndex={clone ? -1 : undefined}
                         className="group block w-[300px] shrink-0 transition-transform duration-300 hover:-translate-y-1 sm:w-[400px]"
                       >
-                        <BrowserFrame label={study.title}>
-                          <div className="relative aspect-[16/10]">
-                            <Image
-                              src={study.cover!}
-                              alt={study.title}
-                              fill
-                              sizes="400px"
-                              className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
-                            />
-                            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent p-3.5 pt-8">
-                              <p className="font-mono text-[10px] uppercase tracking-[0.06em] text-white/75">
-                                {study.sector[locale]}
-                              </p>
+                        <div className="relative pb-6 pr-6">
+                          <BrowserFrame label={study.title}>
+                            <div className="relative aspect-[16/10]">
+                              <Image
+                                src={study.cover!}
+                                alt={study.title}
+                                fill
+                                sizes="400px"
+                                className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                              />
+                              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent p-3.5 pt-8">
+                                <p className="font-mono text-[10px] uppercase tracking-[0.06em] text-white/75">
+                                  {study.sector[locale]}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </BrowserFrame>
+                          </BrowserFrame>
+                          {/* Same site on a phone — responsive, at a glance. */}
+                          {study.mobile ? (
+                            <PhoneFrame
+                              src={study.mobile}
+                              className="absolute bottom-0 right-0 w-[26%] transition-transform duration-500 group-hover:-translate-y-1"
+                              sizes="110px"
+                            />
+                          ) : null}
+                        </div>
                       </Link>
                     ))}
                   </div>

@@ -17,6 +17,8 @@ export interface CaseStudy {
   sector: Record<Locale, string>;
   /** Optional cover image under /public/work. Falls back to a branded tile. */
   cover?: string;
+  /** Optional mobile screenshot under /public/work/mobile — same site, phone. */
+  mobile?: string;
   stack: string[];
   links: { repo?: string; live?: string };
   roles: Record<Locale, string[]>;
@@ -42,6 +44,7 @@ export const caseStudies: CaseStudy[] = [
       en: "Gym · Torvaianica (RM)",
     },
     cover: "/work/nonsolofitness.jpg",
+    mobile: "/work/mobile/nonsolofitness.jpg",
     stack: ["Web", "SEO locale", "i18n"],
     links: { live: "https://www.nonsolofitnesstorvaianica.com" },
     roles: {
@@ -83,6 +86,7 @@ export const caseStudies: CaseStudy[] = [
       en: "Car detailing · Melrose Park, Illinois (USA)",
     },
     cover: "/work/aulon-detailing.jpg",
+    mobile: "/work/mobile/aulon-detailing.jpg",
     stack: ["Web", "Prenotazioni", "Pagamenti"],
     links: { live: "https://aulondetailing.com" },
     roles: {
@@ -124,6 +128,7 @@ export const caseStudies: CaseStudy[] = [
       en: "Seafood restaurant · Torvaianica (RM)",
     },
     cover: "/work/schiano.jpg",
+    mobile: "/work/mobile/schiano.jpg",
     stack: ["Web", "Design", "SEO"],
     links: { live: "https://schiano.vercel.app" },
     roles: {
@@ -205,6 +210,7 @@ export const caseStudies: CaseStudy[] = [
       en: "Seafood restaurant · Torvaianica (RM)",
     },
     cover: "/work/fedele.jpg",
+    mobile: "/work/mobile/fedele.jpg",
     stack: ["Web", "Brand", "WhatsApp"],
     links: {},
     roles: {
@@ -246,6 +252,7 @@ export const caseStudies: CaseStudy[] = [
       en: "Beach club · Lido di Ostia (RM)",
     },
     cover: "/work/mecs-village.jpg",
+    mobile: "/work/mobile/mecs-village.jpg",
     stack: ["Web", "Design", "Privacy"],
     links: { live: "https://mecs-village.pages.dev" },
     roles: {
@@ -287,6 +294,7 @@ export const caseStudies: CaseStudy[] = [
       en: "Pizzeria & beer house · Torvaianica (RM)",
     },
     cover: "/work/happiness.jpg",
+    mobile: "/work/mobile/happiness-la-casetta.jpg",
     stack: ["Web", "i18n", "Privacy"],
     links: {},
     roles: {
@@ -328,6 +336,7 @@ export const caseStudies: CaseStudy[] = [
       en: "Grill, seafood & pizza · Torvaianica (RM)",
     },
     cover: "/work/cuocimi.jpg",
+    mobile: "/work/mobile/cuocimi.jpg",
     stack: ["Web", "Brand", "Motion"],
     links: { live: "https://cuocimi.pages.dev" },
     roles: {
@@ -369,6 +378,7 @@ export const caseStudies: CaseStudy[] = [
       en: "Pet shop · Torvaianica (RM)",
     },
     cover: "/work/zampami.jpg",
+    mobile: "/work/mobile/zampami.jpg",
     stack: ["Web", "E-commerce", "Pagamenti"],
     links: {},
     roles: {
@@ -410,6 +420,7 @@ export const caseStudies: CaseStudy[] = [
       en: "Restaurant & bistrot · Torvaianica (RM)",
     },
     cover: "/work/talea.jpg",
+    mobile: "/work/mobile/talea.jpg",
     stack: ["Web", "Design editoriale", "Performance"],
     links: {},
     roles: {
@@ -451,6 +462,7 @@ export const caseStudies: CaseStudy[] = [
       en: "Seafood osteria · Torvaianica (RM)",
     },
     cover: "/work/osteria-del-mare.jpg",
+    mobile: "/work/mobile/osteria-del-mare.jpg",
     stack: ["Web", "Design", "Privacy"],
     links: {},
     roles: {
@@ -492,6 +504,7 @@ export const caseStudies: CaseStudy[] = [
       en: "In-house product · Platform",
     },
     cover: "/work/matchmood.jpg",
+    mobile: "/work/mobile/matchmood.jpg",
     stack: ["Real-time", "Sandbox", "Pagamenti"],
     links: { live: "https://matchmood.dev" },
     roles: { it: ["Full-stack", "Real-time"], en: ["Full-stack", "Real-time"] },
