@@ -146,13 +146,13 @@
   },
   "formula": {
     "meta": {
-      "title": "La tua attività online in un mese — 100€",
-      "description": "Sito professionale, Google e recensioni per la tua attività. In un mese sei online: questo è garantito. Poi decidi tu ogni mese, e a 900€ il sito è tuo per sempre."
+      "title": "La tua attività online in pochi giorni — 100€",
+      "description": "Sito professionale, Google e recensioni per la tua attività. In pochi giorni sei online: questo è garantito. Poi decidi tu ogni mese, e a 900€ il sito è tuo per sempre."
     },
     "eyebrow": "Per le attività locali",
-    "titleBefore": "La tua attività online in un mese.",
+    "titleBefore": "La tua attività online in pochi giorni.",
     "titlePrice": "100€.",
-    "subtitle": "In un mese la tua attività è online e ti trovano su Google: questo è garantito. Ogni mese ti mostro i numeri veri e decidi tu se andare avanti. Arrivati a 900€, il sito è tuo.",
+    "subtitle": "In pochi giorni la tua attività è online e ti trovano su Google: questo è garantito. Ogni mese ti mostro i numeri veri e decidi tu se andare avanti. Arrivati a 900€, il sito è tuo.",
     "badge": "Senza vincoli · disdici quando vuoi",
     "cta": "Prenota una call gratuita",
     "ctaSecondary": "Scrivici",
@@ -171,11 +171,11 @@
     },
     "how": {
       "eyebrow": "Come funziona",
-      "title": "In un mese sei online. Poi decidi tu, ogni mese.",
+      "title": "Online in pochi giorni. Poi decidi tu, ogni mese.",
       "steps": {
         "s1": {
-          "title": "Mese 1 — 100€, sei online",
-          "description": "Mettiamo online tutto: sito, dominio, scheda Google, SEO locale e recensioni via QR. Questo succede di sicuro, non è una scommessa."
+          "title": "Primo mese — 100€, sei online",
+          "description": "In pochi giorni metto online tutto: sito, dominio, scheda Google, SEO locale e recensioni via QR. Se il sito l'ho già costruito, anche domani."
         },
         "s2": {
           "title": "Ogni mese decidi tu",

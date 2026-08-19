@@ -146,13 +146,13 @@
   },
   "formula": {
     "meta": {
-      "title": "Your business online in one month — €100",
-      "description": "A professional site, Google and reviews for your business. In one month you're online — that part is guaranteed. Then you decide each month, and at €900 the site is yours forever."
+      "title": "Your business online in days — €100",
+      "description": "A professional site, Google and reviews for your business. You're online in days — that part is guaranteed. Then you decide each month, and at €900 the site is yours forever."
     },
     "eyebrow": "For local businesses",
-    "titleBefore": "Your business online in one month.",
+    "titleBefore": "Your business online in days.",
     "titlePrice": "€100.",
-    "subtitle": "In one month your business is online and people find you on Google: that part is guaranteed. Every month I show you the real numbers and you decide whether to carry on. At €900, the site is yours.",
+    "subtitle": "In a few days your business is online and people find you on Google: that part is guaranteed. Every month I show you the real numbers and you decide whether to carry on. At €900, the site is yours.",
     "badge": "No lock-in · cancel anytime",
     "cta": "Book a free call",
     "ctaSecondary": "Write to us",
@@ -171,11 +171,11 @@
     },
     "how": {
       "eyebrow": "How it works",
-      "title": "In one month you're online. Then you decide, every month.",
+      "title": "Online in days. Then you decide, every month.",
       "steps": {
         "s1": {
-          "title": "Month 1 — €100, you're online",
-          "description": "We put everything live: site, domain, Google listing, local SEO and QR reviews. That happens for certain — it is not a gamble."
+          "title": "First month — €100, you're online",
+          "description": "In a few days I put everything live: site, domain, Google listing, local SEO and QR reviews. If I already built your site, it can be tomorrow."
         },
         "s2": {
           "title": "Every month you decide",
