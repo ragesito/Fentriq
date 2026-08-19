@@ -126,7 +126,7 @@
     "items": {
       "local": {
         "title": "Attività locali",
-        "description": "Sito, Google e recensioni: provi il primo mese a 100€. Se funziona continui, e a 900€ il sito è tuo.",
+        "description": "Sito, Google e recensioni: il primo mese 100€ e sei online. Poi decidi tu ogni mese, e a 900€ il sito è tuo.",
         "cta": "Scopri la formula"
       },
       "project": {
@@ -147,12 +147,12 @@
   "formula": {
     "meta": {
       "title": "La tua attività online in un mese — 100€",
-      "description": "Sito professionale, Google e recensioni per la tua attività. Provi un mese a 100€: se non funziona, smetti di pagare. A 900€ il sito è tuo, per sempre."
+      "description": "Sito professionale, Google e recensioni per la tua attività. In un mese sei online: questo è garantito. Poi decidi tu ogni mese, e a 900€ il sito è tuo per sempre."
     },
     "eyebrow": "Per le attività locali",
     "titleBefore": "La tua attività online in un mese.",
     "titlePrice": "100€.",
-    "subtitle": "Sito professionale, scheda Google, recensioni: tutto attivo in un mese. Se non ti convince, smetti di pagare — hai rischiato meno di una cena per due. Se funziona, continui: e il sito diventa tuo.",
+    "subtitle": "In un mese la tua attività è online e ti trovano su Google: questo è garantito. Ogni mese ti mostro i numeri veri e decidi tu se andare avanti. Arrivati a 900€, il sito è tuo.",
     "badge": "Senza vincoli · disdici quando vuoi",
     "cta": "Prenota una call gratuita",
     "ctaSecondary": "Scrivici",
@@ -161,7 +161,7 @@
       "location": "Torvaianica · Litorale romano",
       "r1l": "Mese 1 — tutto attivo",
       "r1v": "100€",
-      "r2l": "Ogni mese, se funziona",
+      "r2l": "Ogni mese, decidi tu",
       "r2v": "100€",
       "r3l": "Dopo, se vuoi: aggiornamenti",
       "r3v": "30€/mese",
@@ -171,15 +171,15 @@
     },
     "how": {
       "eyebrow": "Come funziona",
-      "title": "Provi. Se funziona, continui. A 900€ è tuo.",
+      "title": "In un mese sei online. Poi decidi tu, ogni mese.",
       "steps": {
         "s1": {
-          "title": "Mese 1 — 100€",
-          "description": "Mettiamo online tutto: sito, dominio, scheda Google, SEO locale e recensioni via QR. Vedi il risultato con i tuoi occhi."
+          "title": "Mese 1 — 100€, sei online",
+          "description": "Mettiamo online tutto: sito, dominio, scheda Google, SEO locale e recensioni via QR. Questo succede di sicuro, non è una scommessa."
         },
         "s2": {
-          "title": "Se funziona, continui",
-          "description": "100€ al mese, senza vincoli. Ogni mese ricevi un report chiaro: visite, chiamate, recensioni. Se non ti convince, smetti. Fine."
+          "title": "Ogni mese decidi tu",
+          "description": "100€ al mese, senza vincoli. Ogni mese ricevi i numeri veri — visite, chiamate, recensioni — e decidi con quelli in mano. Smetti quando vuoi, senza penali."
         },
         "s3": {
           "title": "A 900€ il sito è tuo",

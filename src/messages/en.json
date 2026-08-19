@@ -126,7 +126,7 @@
     "items": {
       "local": {
         "title": "Local businesses",
-        "description": "Site, Google and reviews: try the first month for €100. If it works you keep going, and at €900 the site is yours.",
+        "description": "Site, Google and reviews: €100 the first month and you're online. Then you decide each month, and at €900 the site is yours.",
         "cta": "See the formula"
       },
       "project": {
@@ -147,12 +147,12 @@
   "formula": {
     "meta": {
       "title": "Your business online in one month — €100",
-      "description": "A professional site, Google and reviews for your business. Try one month for €100: if it doesn't work, stop paying. At €900 the site is yours, forever."
+      "description": "A professional site, Google and reviews for your business. In one month you're online — that part is guaranteed. Then you decide each month, and at €900 the site is yours forever."
     },
     "eyebrow": "For local businesses",
     "titleBefore": "Your business online in one month.",
     "titlePrice": "€100.",
-    "subtitle": "A professional site, your Google listing, reviews: everything live in one month. If it doesn't convince you, stop paying — you risked less than dinner for two. If it works, you keep going: and the site becomes yours.",
+    "subtitle": "In one month your business is online and people find you on Google: that part is guaranteed. Every month I show you the real numbers and you decide whether to carry on. At €900, the site is yours.",
     "badge": "No lock-in · cancel anytime",
     "cta": "Book a free call",
     "ctaSecondary": "Write to us",
@@ -161,7 +161,7 @@
       "location": "Torvaianica · Roman coast",
       "r1l": "Month 1 — everything live",
       "r1v": "€100",
-      "r2l": "Each month, if it works",
+      "r2l": "Each month, you decide",
       "r2v": "€100",
       "r3l": "After, if you want: updates",
       "r3v": "€30/mo",
@@ -171,15 +171,15 @@
     },
     "how": {
       "eyebrow": "How it works",
-      "title": "You try. If it works, you continue. At €900 it's yours.",
+      "title": "In one month you're online. Then you decide, every month.",
       "steps": {
         "s1": {
-          "title": "Month 1 — €100",
-          "description": "We put everything live: site, domain, Google listing, local SEO and QR reviews. You see the result with your own eyes."
+          "title": "Month 1 — €100, you're online",
+          "description": "We put everything live: site, domain, Google listing, local SEO and QR reviews. That happens for certain — it is not a gamble."
         },
         "s2": {
-          "title": "If it works, you continue",
-          "description": "€100 a month, no lock-in. Every month you get a clear report: visits, calls, reviews. Not convinced? You stop. That's it."
+          "title": "Every month you decide",
+          "description": "€100 a month, no lock-in. Every month you get the real numbers — visits, calls, reviews — and you decide with them in front of you. Stop whenever you like, no penalties."
         },
         "s3": {
           "title": "At €900 the site is yours",
