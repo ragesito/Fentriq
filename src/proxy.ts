@@ -7,6 +7,7 @@ export const config = {
   // Match all pathnames except for
   // - API routes
   // - Next.js internals (_next, _vercel)
+  // - the private admin (no locale prefixes there)
   // - static files (with a dot, e.g. favicon.ico, images, brand assets)
-  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+  matcher: ["/((?!api|admin|_next|_vercel|.*\\..*).*)"],
 };
