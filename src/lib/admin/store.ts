@@ -126,6 +126,22 @@ export async function ensureSchema(): Promise<void> {
 
 type Row = Record<string, unknown>;
 
+/**
+ * Postgres DATE values can arrive as a string or a Date depending on driver
+ * and column type. Everything downstream does date arithmetic on YYYY-MM-DD,
+ * and an unparseable value throws deep inside that maths, so normalise here.
+ */
+function isoDate(value: unknown): string {
+  if (value instanceof Date && !Number.isNaN(value.valueOf())) {
+    return value.toISOString().slice(0, 10);
+  }
+  const raw = String(value ?? "");
+  if (/^\d{4}-\d{2}-\d{2}/.test(raw)) return raw.slice(0, 10);
+  const parsed = new Date(raw);
+  if (!Number.isNaN(parsed.valueOf())) return parsed.toISOString().slice(0, 10);
+  return new Date().toISOString().slice(0, 10);
+}
+
 function toClient(r: Row): Client {
   return {
     id: String(r.id),
@@ -135,7 +151,7 @@ function toClient(r: Row): Client {
     siteUrl: String(r.site_url ?? ""),
     monthlyFeeCents: Number(r.monthly_fee_cents),
     totalPriceCents: Number(r.total_price_cents),
-    startedOn: String(r.started_on).slice(0, 10),
+    startedOn: isoDate(r.started_on),
     paused: Boolean(r.paused),
     notes: String(r.notes ?? ""),
   };
@@ -146,7 +162,7 @@ function toPayment(r: Row): Payment {
     id: String(r.id),
     clientId: String(r.client_id),
     amountCents: Number(r.amount_cents),
-    paidOn: String(r.paid_on).slice(0, 10),
+    paidOn: isoDate(r.paid_on),
     method: String(r.method) as Payment["method"],
     note: String(r.note ?? ""),
   };

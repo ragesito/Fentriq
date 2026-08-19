@@ -4,6 +4,7 @@ import { isAuthEnabled, isLoggedIn } from "@/lib/admin/auth";
 import { isConfigured, listClients, listPayments } from "@/lib/admin/store";
 import { computeProgress, euros } from "@/lib/admin/formula";
 import { AdminShell, Card, DueBadge, FormulaBar } from "@/components/admin/ui";
+import { ErrorPanel } from "@/components/admin/ErrorPanel";
 import { recordPayment } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -14,7 +15,12 @@ export default async function AdminHome() {
   if (!isConfigured()) return <Setup missing="DATABASE_URL" />;
 
   const now = new Date();
-  const [clients, payments] = await Promise.all([listClients(), listPayments()]);
+  let clients, payments;
+  try {
+    [clients, payments] = await Promise.all([listClients(), listPayments()]);
+  } catch (error) {
+    return <ErrorPanel error={error} />;
+  }
 
   const rows = clients
     .map((c) => ({
