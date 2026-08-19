@@ -126,7 +126,7 @@
     "items": {
       "local": {
         "title": "Attività locali",
-        "description": "Sito, Google e recensioni: il primo mese 100€ e sei online. Poi decidi tu ogni mese, e a 900€ il sito è tuo.",
+        "description": "Niente tutto-e-subito: inizi con 100€ e paghi 100€ al mese. Decidi tu ogni mese se continuare, e a 900€ il sito è tuo.",
         "cta": "Scopri la formula"
       },
       "project": {
@@ -147,12 +147,12 @@
   "formula": {
     "meta": {
       "title": "La tua attività online in pochi giorni — 100€",
-      "description": "Sito professionale, Google e recensioni per la tua attività. In pochi giorni sei online: questo è garantito. Poi decidi tu ogni mese, e a 900€ il sito è tuo per sempre."
+      "description": "Le agenzie chiedono tutto subito. Con la Formula inizi con 100€ e paghi 100€ al mese: decidi tu ogni mese se continuare, e a 900€ il sito è tuo per sempre."
     },
     "eyebrow": "Per le attività locali",
     "titleBefore": "La tua attività online in pochi giorni.",
     "titlePrice": "100€.",
-    "subtitle": "In pochi giorni la tua attività è online e ti trovano su Google: questo è garantito. Ogni mese ti mostro i numeri veri e decidi tu se andare avanti. Arrivati a 900€, il sito è tuo.",
+    "subtitle": "Le agenzie chiedono tutto subito, per una cosa che non hai mai avuto e di cui nessuno può dirti in anticipo cosa ti porterà: il rischio è tutto tuo. Con la Formula inizi con 100€ e paghi 100€ al mese — e sei tu a decidere, mese per mese, se continuare. Arrivati a 900€ il sito è tuo.",
     "badge": "Senza vincoli · disdici quando vuoi",
     "cta": "Prenota una call gratuita",
     "ctaSecondary": "Scrivici",
@@ -179,7 +179,7 @@
         },
         "s2": {
           "title": "Ogni mese decidi tu",
-          "description": "100€ al mese, senza vincoli. Ogni mese ricevi i numeri veri — visite, chiamate, recensioni — e decidi con quelli in mano. Smetti quando vuoi, senza penali."
+          "description": "100€ al mese, senza vincoli. Ogni mese ricevi i numeri veri — visite, chiamate, recensioni — e sei tu, con quelli in mano, a decidere se continuare. Se un mese decidi di no, ti fermi: nessuna penale."
         },
         "s3": {
           "title": "A 900€ il sito è tuo",

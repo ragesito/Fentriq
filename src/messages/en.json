@@ -126,7 +126,7 @@
     "items": {
       "local": {
         "title": "Local businesses",
-        "description": "Site, Google and reviews: €100 the first month and you're online. Then you decide each month, and at €900 the site is yours.",
+        "description": "No all-at-once: you start with €100 and pay €100 a month. You decide each month whether to carry on, and at €900 the site is yours.",
         "cta": "See the formula"
       },
       "project": {
@@ -147,12 +147,12 @@
   "formula": {
     "meta": {
       "title": "Your business online in days — €100",
-      "description": "A professional site, Google and reviews for your business. You're online in days — that part is guaranteed. Then you decide each month, and at €900 the site is yours forever."
+      "description": "Agencies ask for everything upfront. With the Formula you start with €100 and pay €100 a month: you decide each month whether to carry on, and at €900 the site is yours forever."
     },
     "eyebrow": "For local businesses",
     "titleBefore": "Your business online in days.",
     "titlePrice": "€100.",
-    "subtitle": "In a few days your business is online and people find you on Google: that part is guaranteed. Every month I show you the real numbers and you decide whether to carry on. At €900, the site is yours.",
+    "subtitle": "Agencies ask for everything upfront, for something you have never had and that nobody can tell you in advance what it will bring: the risk is all yours. With the Formula you start with €100 and pay €100 a month — and you are the one who decides, month by month, whether to carry on. At €900 the site is yours.",
     "badge": "No lock-in · cancel anytime",
     "cta": "Book a free call",
     "ctaSecondary": "Write to us",
@@ -179,7 +179,7 @@
         },
         "s2": {
           "title": "Every month you decide",
-          "description": "€100 a month, no lock-in. Every month you get the real numbers — visits, calls, reviews — and you decide with them in front of you. Stop whenever you like, no penalties."
+          "description": "€100 a month, no lock-in. Every month you get the real numbers — visits, calls, reviews — and you are the one who decides, with them in front of you. If one month you decide no, you stop: no penalties."
         },
         "s3": {
           "title": "At €900 the site is yours",
