@@ -47,12 +47,12 @@ export default async function AdminHome() {
   ).length;
 
   return (
-    <AdminShell title="I miei clienti">
+    <AdminShell title="Mis clientes">
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-        <Stat label="Incassato in totale" value={euros(collected)} />
-        <Stat label="Ricorrente al mese" value={euros(recurring)} />
+        <Stat label="Cobrado en total" value={euros(collected)} />
+        <Stat label="Recurrente al mes" value={euros(recurring)} />
         <Stat
-          label="Da incassare ora"
+          label="Por cobrar ahora"
           value={String(toCollect)}
           tone={toCollect > 0 ? "warn" : undefined}
           className="col-span-2 sm:col-span-1"
@@ -63,7 +63,7 @@ export default async function AdminHome() {
         {rows.length === 0 ? (
           <Card>
             <p className="text-muted">
-              Ancora nessun cliente. Aggiungi il primo per iniziare a tenere i conti.
+              Todavía no hay clientes. Añade el primero para empezar a llevar las cuentas.
             </p>
           </Card>
         ) : null}
@@ -96,13 +96,13 @@ export default async function AdminHome() {
                   type="submit"
                   className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-on-accent transition-colors hover:bg-accent-2"
                 >
-                  Segna {euros(client.monthlyFeeCents)} incassati
+                  Cobrados {euros(client.monthlyFeeCents)}
                 </button>
                 <Link
                   href={`/admin/clienti/${client.id}`}
                   className="text-sm text-muted transition-colors hover:text-text"
                 >
-                  Dettagli
+                  Detalles
                 </Link>
               </form>
             ) : null}
@@ -114,7 +114,7 @@ export default async function AdminHome() {
         href="/admin/clienti/nuovo"
         className="mt-8 inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium transition-colors hover:border-accent/60"
       >
-        + Aggiungi cliente
+        + Añadir cliente
       </Link>
     </AdminShell>
   );
@@ -149,23 +149,23 @@ function Setup({ missing }: { missing: string }) {
       <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">
         Fentriq · Admin
       </p>
-      <h1 className="mt-4 text-2xl font-bold">Manca una variabile: {missing}</h1>
+      <h1 className="mt-4 text-2xl font-bold">Falta una variable: {missing}</h1>
       <p className="mt-4 text-muted">
-        Imposta <code className="text-text">{missing}</code> nelle variabili
-        d&apos;ambiente del progetto (Vercel → Settings → Environment Variables) e
-        rifai il deploy.
+        Configura <code className="text-text">{missing}</code> en las variables
+        de entorno del proyecto (Vercel → Settings → Environment Variables) y vuelve
+        a desplegar.
       </p>
       <ul className="mt-6 space-y-2 text-sm text-muted">
         <li>
-          <code className="text-text">ADMIN_PASSWORD</code> — la password di accesso
+          <code className="text-text">ADMIN_PASSWORD</code> — la contraseña de acceso
         </li>
         <li>
-          <code className="text-text">ADMIN_SECRET</code> — una stringa lunga a caso,
-          per firmare il cookie
+          <code className="text-text">ADMIN_SECRET</code> — una cadena larga al azar,
+          para firmar la cookie
         </li>
         <li>
-          <code className="text-text">DATABASE_URL</code> — la connessione Postgres
-          (Neon, piano gratuito)
+          <code className="text-text">DATABASE_URL</code> — la conexión Postgres
+          (Neon, plan gratuito)
         </li>
       </ul>
     </div>

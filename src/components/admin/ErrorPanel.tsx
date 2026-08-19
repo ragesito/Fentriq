@@ -9,7 +9,7 @@
 export function ErrorPanel({ error }: { error: unknown }) {
   const raw = error instanceof Error ? error.message : String(error);
   const safe = raw
-    .replace(/postgres(?:ql)?:\/\/[^\s'"]+/gi, "postgresql://…(nascosto)")
+    .replace(/postgres(?:ql)?:\/\/[^\s'"]+/gi, "postgresql://…(oculto)")
     .replace(/([?&](?:password|sslmode|options)=)[^\s&'"]+/gi, "$1…");
 
   return (
@@ -17,21 +17,21 @@ export function ErrorPanel({ error }: { error: unknown }) {
       <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">
         Fentriq · Admin
       </p>
-      <h1 className="mt-4 text-2xl font-bold">Il database non risponde</h1>
+      <h1 className="mt-4 text-2xl font-bold">La base de datos no responde</h1>
       <p className="mt-4 text-muted">
-        Le variabili ci sono, ma la connessione è fallita. Messaggio esatto:
+        Las variables están puestas, pero la conexión falló. Mensaje exacto:
       </p>
       <pre className="mt-4 overflow-x-auto rounded-xl border border-border bg-surface p-4 text-sm text-red-300">
         {safe}
       </pre>
       <ul className="mt-6 space-y-2 text-sm text-muted">
         <li>
-          Controlla che <code className="text-text">DATABASE_URL</code> sia la sola
-          stringa che inizia con <code className="text-text">postgresql://</code> —
-          senza <code className="text-text">psql</code> davanti e senza virgolette.
+          Comprueba que <code className="text-text">DATABASE_URL</code> sea solo la
+          cadena que empieza por <code className="text-text">postgresql://</code> —
+          sin <code className="text-text">psql</code> delante y sin comillas.
         </li>
-        <li>Su Neon, copia la stringa dal riquadro «Connection string».</li>
-        <li>Dopo averla cambiata su Vercel, serve un nuovo deploy.</li>
+        <li>En Neon, copia la cadena del recuadro «Connection string».</li>
+        <li>Después de cambiarla en Vercel hace falta un nuevo despliegue.</li>
       </ul>
     </div>
   );

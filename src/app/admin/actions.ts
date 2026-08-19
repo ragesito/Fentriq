@@ -17,6 +17,7 @@ import {
   upsertClient,
 } from "@/lib/admin/store";
 import type { Client, Payment } from "@/lib/admin/formula";
+import { sourceLabels } from "@/lib/admin/i18n";
 
 /** Every mutating action re-checks the session: a stale form must not write. */
 async function requireSession(): Promise<void> {
@@ -45,7 +46,7 @@ function lines(value: FormDataEntryValue | null): string[] {
 
 export async function login(_prev: string | null, form: FormData) {
   const ok = await verifyPassword(str(form.get("password")));
-  if (!ok) return "Password sbagliata.";
+  if (!ok) return "Contraseña incorrecta.";
   await createSession();
   redirect("/admin");
 }
@@ -67,6 +68,7 @@ export async function saveClient(form: FormData) {
     monthlyFeeCents: cents(form.get("monthlyFee")),
     totalPriceCents: cents(form.get("totalPrice")),
     startedOn: str(form.get("startedOn")) || new Date().toISOString().slice(0, 10),
+    lang: str(form.get("lang")) === "en" ? "en" : "it",
     paused: form.get("paused") === "on",
     notes: str(form.get("notes")),
   };
@@ -120,6 +122,10 @@ export async function saveMonthlyReport(form: FormData) {
   const month = str(form.get("month"));
   if (!clientId || !month) return;
 
+  const client = await getClient(clientId);
+  if (!client) return;
+  const labels = sourceLabels[client.lang];
+
   const num = (k: string) => Math.max(0, Math.round(Number(str(form.get(k)) || 0)));
   const ratingRaw = str(form.get("rating")).replace(",", ".");
 
@@ -132,9 +138,9 @@ export async function saveMonthlyReport(form: FormData) {
     reviews: num("reviews"),
     rating: ratingRaw ? Number(ratingRaw) : null,
     sources: [
-      { label: "Ricerca Google", value: num("srcGoogle") },
-      { label: "Diretto", value: num("srcDirect") },
-      { label: "Social e QR", value: num("srcSocial") },
+      { label: labels.google, value: num("srcGoogle") },
+      { label: labels.direct, value: num("srcDirect") },
+      { label: labels.social, value: num("srcSocial") },
     ].filter((s) => s.value > 0),
     done: lines(form.get("done")),
     next: lines(form.get("next")),

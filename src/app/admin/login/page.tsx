@@ -15,9 +15,9 @@ export default function LoginPage() {
             Fentriq · Admin
           </p>
         </div>
-        <h1 className="mt-5 text-3xl font-bold">Accesso</h1>
+        <h1 className="mt-5 text-3xl font-bold">Acceso</h1>
         <p className="mt-2 text-sm text-muted">
-          Area privata. Solo per lo studio.
+          Área privada. Solo para el estudio.
         </p>
 
         <label htmlFor="password" className="mt-8 block text-sm text-muted">
@@ -43,7 +43,7 @@ export default function LoginPage() {
           disabled={pending}
           className="mt-6 h-12 w-full rounded-full bg-accent font-medium text-on-accent transition-colors hover:bg-accent-2 disabled:opacity-60"
         >
-          {pending ? "Un attimo…" : "Entra"}
+          {pending ? "Un momento…" : "Entrar"}
         </button>
       </form>
     </main>

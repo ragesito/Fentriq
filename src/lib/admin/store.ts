@@ -94,6 +94,8 @@ export async function ensureSchema(): Promise<void> {
     paused boolean NOT NULL DEFAULT false,
     notes text NOT NULL DEFAULT ''
   )`;
+  // Added after the first release; idempotent so old databases catch up.
+  await q`ALTER TABLE clients ADD COLUMN IF NOT EXISTS lang text NOT NULL DEFAULT 'it'`;
   await q`CREATE TABLE IF NOT EXISTS payments (
     id text PRIMARY KEY,
     client_id text NOT NULL REFERENCES clients(id) ON DELETE CASCADE,
@@ -152,6 +154,7 @@ function toClient(r: Row): Client {
     monthlyFeeCents: Number(r.monthly_fee_cents),
     totalPriceCents: Number(r.total_price_cents),
     startedOn: isoDate(r.started_on),
+    lang: (String(r.lang ?? "it") === "en" ? "en" : "it") as Client["lang"],
     paused: Boolean(r.paused),
     notes: String(r.notes ?? ""),
   };
@@ -193,13 +196,14 @@ export async function upsertClient(c: Client): Promise<void> {
   }
   await ensureSchema();
   await sql()`INSERT INTO clients
-    (id, name, sector, city, site_url, monthly_fee_cents, total_price_cents, started_on, paused, notes)
+    (id, name, sector, city, site_url, monthly_fee_cents, total_price_cents, started_on, lang, paused, notes)
     VALUES (${c.id}, ${c.name}, ${c.sector}, ${c.city}, ${c.siteUrl},
-            ${c.monthlyFeeCents}, ${c.totalPriceCents}, ${c.startedOn}, ${c.paused}, ${c.notes})
+            ${c.monthlyFeeCents}, ${c.totalPriceCents}, ${c.startedOn}, ${c.lang}, ${c.paused}, ${c.notes})
     ON CONFLICT (id) DO UPDATE SET
       name = EXCLUDED.name, sector = EXCLUDED.sector, city = EXCLUDED.city,
       site_url = EXCLUDED.site_url, monthly_fee_cents = EXCLUDED.monthly_fee_cents,
       total_price_cents = EXCLUDED.total_price_cents, started_on = EXCLUDED.started_on,
+      lang = EXCLUDED.lang,
       paused = EXCLUDED.paused, notes = EXCLUDED.notes`;
 }
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { logout } from "@/app/admin/actions";
-import { euros, itDate, type Progress } from "@/lib/admin/formula";
+import { euros, esDate, type Progress } from "@/lib/admin/formula";
 
 export function AdminShell({
   title,
@@ -34,7 +34,7 @@ export function AdminShell({
             type="submit"
             className="shrink-0 rounded-full border border-border px-3 py-1.5 font-mono text-xs uppercase tracking-wide text-muted transition-colors hover:border-accent/60 hover:text-text"
           >
-            Esci
+            Salir
           </button>
         </form>
       </header>
@@ -129,7 +129,7 @@ export function FormulaBar({ p }: { p: Progress }) {
           <span className="font-normal text-muted">/ {euros(p.totalCents)}</span>
         </span>
         <span className="font-mono text-xs text-muted">
-          {p.owned ? "completato" : `mese ${p.monthsPaid} di ${p.monthsTotal}`}
+          {p.owned ? "completado" : `mes ${p.monthsPaid} de ${p.monthsTotal}`}
         </span>
       </div>
       <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-surface-2">
@@ -147,36 +147,57 @@ export function DueBadge({ p }: { p: Progress }) {
   if (p.owned) {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-medium text-emerald-300">
-        ✓ Il sito è suo
+        ✓ La web ya es suya
       </span>
     );
   }
   if (p.status === "paused") {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-2 px-3 py-1 text-xs font-medium text-muted">
-        In pausa
+        En pausa
       </span>
     );
   }
   const d = p.daysUntilDue ?? 0;
-  const label = p.nextDueOn ? itDate(p.nextDueOn) : "";
+  const label = p.nextDueOn ? esDate(p.nextDueOn) : "";
   if (d < 0) {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full bg-red-500/15 px-3 py-1 text-xs font-medium text-red-300">
-        ⚠ In ritardo di {Math.abs(d)} g · {label}
+        ⚠ Con {Math.abs(d)} d de retraso · {label}
       </span>
     );
   }
   if (d <= 5) {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-3 py-1 text-xs font-medium text-amber-300">
-        ⏳ Da incassare fra {d} g · {label}
+        ⏳ Cobrar en {d} d · {label}
       </span>
     );
   }
   return (
     <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-2 px-3 py-1 text-xs font-medium text-muted">
-      Prossimo incasso {label}
+      Próximo cobro {label}
     </span>
+  );
+}
+
+/**
+ * Language of the report this client receives. It is not a UI preference:
+ * it decides what language the sheet and the WhatsApp message come out in,
+ * so an Italian restaurant and an American detailer both get read properly.
+ */
+export function LangSelect({ value = "it" }: { value?: "it" | "en" }) {
+  return (
+    <label className="block">
+      <span className="text-sm text-muted">Idioma del informe</span>
+      <select
+        name="lang"
+        defaultValue={value}
+        className="mt-1.5 w-full rounded-xl border border-border bg-surface-2 px-3.5 py-2.5 text-text outline-none focus:border-accent/60"
+      >
+        <option value="it">Italiano</option>
+        <option value="en">Inglés</option>
+      </select>
+    </label>
   );
 }

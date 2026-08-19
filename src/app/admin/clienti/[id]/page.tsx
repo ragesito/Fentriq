@@ -7,7 +7,8 @@ import {
   listPayments,
   listReportMonths,
 } from "@/lib/admin/store";
-import { computeProgress, euros, itDate } from "@/lib/admin/formula";
+import { computeProgress, euros, esDate } from "@/lib/admin/formula";
+import { sourceLabels } from "@/lib/admin/i18n";
 import { AdminShell, Card, DueBadge, Field, FormulaBar, TextArea } from "@/components/admin/ui";
 import { recordPayment, removePayment, saveMonthlyReport } from "../../actions";
 
@@ -38,9 +39,11 @@ export default async function ClientPage({
   const month = lastMonth(now);
   const draft = await getReport(id, month);
   const today = now.toISOString().slice(0, 10);
+  // Saved source labels are in the client's language, so look them up there.
+  const labels = sourceLabels[client.lang];
 
   return (
-    <AdminShell title={client.name} back={{ href: "/admin", label: "Clienti" }}>
+    <AdminShell title={client.name} back={{ href: "/admin", label: "Clientes" }}>
       <div className="flex flex-wrap items-center gap-3">
         <DueBadge p={progress} />
         {client.siteUrl ? (
@@ -57,7 +60,7 @@ export default async function ClientPage({
           href={`/admin/clienti/${id}/modifica`}
           className="text-sm text-muted transition-colors hover:text-text"
         >
-          Modifica dati
+          Editar datos
         </Link>
       </div>
 
@@ -65,37 +68,37 @@ export default async function ClientPage({
         <FormulaBar p={progress} />
         <p className="mt-3 text-sm text-muted">
           {progress.owned
-            ? "Ha completato il percorso: sito, dominio e codice sono suoi."
-            : `Mancano ${euros(progress.remainingCents)} — ${
+            ? "Completó el recorrido: web, dominio y código son suyos."
+            : `Faltan ${euros(progress.remainingCents)} — ${
                 progress.monthsTotal - progress.monthsPaid
-              } mesi al passaggio di proprietà.`}
+              } meses para el traspaso.`}
         </p>
       </Card>
 
       {/* Record a payment */}
       <h2 className="mt-10 font-mono text-xs uppercase tracking-[0.14em] text-accent">
-        Registra un incasso
+        Registrar un cobro
       </h2>
       <Card className="mt-3">
         <form action={recordPayment} className="grid gap-3 sm:grid-cols-4">
           <input type="hidden" name="clientId" value={client.id} />
           <Field
-            label="Importo €"
+            label="Importe €"
             name="amount"
             type="number"
             step="0.01"
             placeholder={String(client.monthlyFeeCents / 100)}
           />
-          <Field label="Data" name="paidOn" type="date" defaultValue={today} />
+          <Field label="Fecha" name="paidOn" type="date" defaultValue={today} />
           <label className="block">
-            <span className="text-sm text-muted">Metodo</span>
+            <span className="text-sm text-muted">Método</span>
             <select
               name="method"
               className="mt-1.5 w-full rounded-xl border border-border bg-surface-2 px-3.5 py-2.5 text-text outline-none focus:border-accent/60"
             >
-              <option value="contanti">Contanti</option>
-              <option value="bonifico">Bonifico</option>
-              <option value="altro">Altro</option>
+              <option value="contanti">Efectivo</option>
+              <option value="bonifico">Transferencia</option>
+              <option value="altro">Otro</option>
             </select>
           </label>
           <div className="flex items-end">
@@ -103,7 +106,7 @@ export default async function ClientPage({
               type="submit"
               className="h-11 w-full rounded-full bg-accent px-4 text-sm font-medium text-on-accent transition-colors hover:bg-accent-2"
             >
-              Salva
+              Guardar
             </button>
           </div>
         </form>
@@ -111,11 +114,11 @@ export default async function ClientPage({
 
       {/* Ledger */}
       <h2 className="mt-10 font-mono text-xs uppercase tracking-[0.14em] text-accent">
-        Incassi ({payments.length})
+        Cobros ({payments.length})
       </h2>
       <div className="mt-3 space-y-2">
         {payments.length === 0 ? (
-          <p className="text-sm text-muted">Nessun incasso registrato.</p>
+          <p className="text-sm text-muted">Ningún cobro registrado.</p>
         ) : null}
         {payments.map((p) => (
           <div
@@ -124,7 +127,7 @@ export default async function ClientPage({
           >
             <div className="min-w-0">
               <span className="font-semibold">{euros(p.amountCents)}</span>
-              <span className="ml-3 text-sm text-muted">{itDate(p.paidOn)}</span>
+              <span className="ml-3 text-sm text-muted">{esDate(p.paidOn)}</span>
               <span className="ml-3 font-mono text-xs uppercase text-muted/70">
                 {p.method}
               </span>
@@ -134,10 +137,10 @@ export default async function ClientPage({
               <input type="hidden" name="clientId" value={client.id} />
               <button
                 type="submit"
-                aria-label="Elimina incasso"
+                aria-label="Eliminar cobro"
                 className="text-sm text-muted transition-colors hover:text-red-400"
               >
-                Elimina
+                Eliminar
               </button>
             </form>
           </div>
@@ -146,15 +149,15 @@ export default async function ClientPage({
 
       {/* Monthly report data entry */}
       <h2 className="mt-10 font-mono text-xs uppercase tracking-[0.14em] text-accent">
-        Report del mese
+        Informe del mes
       </h2>
       <Card className="mt-3">
         <form action={saveMonthlyReport} className="space-y-4">
           <input type="hidden" name="clientId" value={client.id} />
           <div className="grid gap-3 sm:grid-cols-2">
-            <Field label="Mese (AAAA-MM)" name="month" defaultValue={draft?.month ?? month} required />
+            <Field label="Mes (AAAA-MM)" name="month" defaultValue={draft?.month ?? month} required />
             <Field
-              label="Media recensioni (opzionale)"
+              label="Media de reseñas (opcional)"
               name="rating"
               defaultValue={draft?.rating ?? ""}
               placeholder="4,6"
@@ -162,54 +165,54 @@ export default async function ClientPage({
           </div>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <Field label="Visite" name="visits" type="number" defaultValue={draft?.visits ?? ""} />
-            <Field label="Chiamate" name="calls" type="number" defaultValue={draft?.calls ?? ""} />
-            <Field label="Indicazioni" name="directions" type="number" defaultValue={draft?.directions ?? ""} />
-            <Field label="Recensioni" name="reviews" type="number" defaultValue={draft?.reviews ?? ""} />
+            <Field label="Visitas" name="visits" type="number" defaultValue={draft?.visits ?? ""} />
+            <Field label="Llamadas" name="calls" type="number" defaultValue={draft?.calls ?? ""} />
+            <Field label="Indicaciones" name="directions" type="number" defaultValue={draft?.directions ?? ""} />
+            <Field label="Reseñas" name="reviews" type="number" defaultValue={draft?.reviews ?? ""} />
           </div>
 
           <div className="grid grid-cols-3 gap-3">
             <Field
-              label="Da Google"
+              label="Desde Google"
               name="srcGoogle"
               type="number"
-              defaultValue={draft?.sources.find((s) => s.label === "Ricerca Google")?.value ?? ""}
+              defaultValue={draft?.sources.find((s) => s.label === labels.google)?.value ?? ""}
             />
             <Field
-              label="Diretto"
+              label="Directo"
               name="srcDirect"
               type="number"
-              defaultValue={draft?.sources.find((s) => s.label === "Diretto")?.value ?? ""}
+              defaultValue={draft?.sources.find((s) => s.label === labels.direct)?.value ?? ""}
             />
             <Field
-              label="Social e QR"
+              label="Redes y QR"
               name="srcSocial"
               type="number"
-              defaultValue={draft?.sources.find((s) => s.label === "Social e QR")?.value ?? ""}
+              defaultValue={draft?.sources.find((s) => s.label === labels.social)?.value ?? ""}
             />
           </div>
 
           <TextArea
-            label="Introduzione"
+            label="Introducción"
             name="intro"
             rows={2}
             defaultValue={draft?.intro ?? ""}
-            hint="una frase, in italiano semplice"
+            hint="una frase, en el idioma del cliente"
           />
           <TextArea
-            label="Cosa abbiamo fatto"
+            label="Lo que hicimos"
             name="done"
             defaultValue={draft?.done.join("\n") ?? ""}
-            hint="una riga per punto"
+            hint="una línea por punto"
           />
           <TextArea
-            label="Cosa facciamo il prossimo"
+            label="Lo que haremos"
             name="next"
             defaultValue={draft?.next.join("\n") ?? ""}
-            hint="una riga per punto"
+            hint="una línea por punto"
           />
           <TextArea
-            label="Nota per WhatsApp"
+            label="Nota para WhatsApp"
             name="whatsappNote"
             rows={2}
             defaultValue={draft?.whatsappNote ?? ""}
@@ -219,7 +222,7 @@ export default async function ClientPage({
             type="submit"
             className="h-12 w-full rounded-full bg-accent text-sm font-medium text-on-accent transition-colors hover:bg-accent-2 sm:w-auto sm:px-8"
           >
-            Salva e genera il report
+            Guardar y generar el informe
           </button>
         </form>
       </Card>

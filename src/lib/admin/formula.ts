@@ -9,6 +9,8 @@
  * Money is handled in cents to avoid float drift.
  */
 
+import type { ClientLang } from "./i18n";
+
 export type ClientStatus = "active" | "owned" | "paused";
 
 export interface Client {
@@ -23,6 +25,8 @@ export interface Client {
   totalPriceCents: number;
   /** ISO date (YYYY-MM-DD) of the first month. */
   startedOn: string;
+  /** Language of the report this client receives — not of the admin. */
+  lang: ClientLang;
   paused: boolean;
   notes: string;
 }
@@ -122,9 +126,9 @@ export function euros(cents: number): string {
   }).format(cents / 100);
 }
 
-/** "15 set 2026" */
-export function itDate(iso: string): string {
-  return new Intl.DateTimeFormat("it-IT", {
+/** "15 sept 2026" — for the admin, which is in Spanish. */
+export function esDate(iso: string): string {
+  return new Intl.DateTimeFormat("es-ES", {
     day: "numeric",
     month: "short",
     year: "numeric",

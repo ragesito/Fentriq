@@ -20,7 +20,7 @@ export function CopyButton({ text }: { text: string }) {
       }}
       className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-on-accent transition-colors hover:bg-accent-2"
     >
-      {done ? "Copiato ✓" : "Copia il messaggio"}
+      {done ? "Copiado ✓" : "Copiar el mensaje"}
     </button>
   );
 }
