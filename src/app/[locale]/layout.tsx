@@ -97,11 +97,14 @@ export default async function LocaleLayout({
     <html lang={locale} className={`${fontVariables} h-full`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col bg-bg text-text">
         {/* Runs before paint: marks the session so the entrance plays once,
-            and adds `intro-done` on every later view so it never flashes. */}
+            and adds `intro-done` on every later view so it never flashes.
+            In development, or with `?intro` in the URL, it replays on every
+            load so the animation can be iterated on and shown off. */}
         <script
           dangerouslySetInnerHTML={{
-            __html:
-              "(function(){try{var k='fq-intro';if(sessionStorage.getItem(k)){document.documentElement.classList.add('intro-done')}else{sessionStorage.setItem(k,'1')}}catch(e){}})()",
+            __html: `(function(){try{var k='fq-intro';var force=${
+              process.env.NODE_ENV === "development"
+            }||/[?&#]intro(?=$|[=&#])/.test(location.search+location.hash);if(force){sessionStorage.removeItem(k);return}if(sessionStorage.getItem(k)){document.documentElement.classList.add('intro-done')}else{sessionStorage.setItem(k,'1')}}catch(e){}})()`,
           }}
         />
         <IntroFold />
