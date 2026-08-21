@@ -541,7 +541,7 @@ export const caseStudies: CaseStudy[] = [
       it: "Demo interna · IA documentale",
       en: "In-house demo · Document AI",
     },
-    cover: "/work/docsense.svg",
+    // No cover on purpose: the old generated SVG tile is not a real screenshot.
     stack: ["IA", "Automazione"],
     links: { repo: "https://github.com/ragesito/docSense" },
     roles: { it: ["Full-stack", "IA"], en: ["Full-stack", "AI"] },
