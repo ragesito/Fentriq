@@ -21,6 +21,9 @@ export function IntroFold() {
       <div className="intro-half intro-half-b" />
       <div className="intro-seam" />
       <div className="intro-mark">
+        {/* Halo that blooms once the mark is whole; it lives inside the mark
+            so it scales and fades away with it. */}
+        <div className="intro-glow" />
         <svg viewBox="6 24 86 60" width="220" height="154">
           {/* Same four facets as the logo, each opening on its own beat. */}
           <path className="intro-f1" d="M26 30 L56 30 L42 54 L12 54 Z" fill="#4F5BF7" />
