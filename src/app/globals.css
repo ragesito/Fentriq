@@ -506,10 +506,10 @@ a {
 .intro-half-b::after { left: 0; }
 
 @keyframes intro-part-a {
-  to { transform: translate(-100%, -50%) rotate(var(--seam)) translateX(-80vmax); }
+  to { transform: translate(-100%, -50%) rotate(var(--seam)) translateX(-70vmax); }
 }
 @keyframes intro-part-b {
-  to { transform: translate(-1px, -50%) rotate(var(--seam)) translateX(80vmax); }
+  to { transform: translate(-1px, -50%) rotate(var(--seam)) translateX(70vmax); }
 }
 @keyframes intro-edge {
   0% { opacity: 0; }
