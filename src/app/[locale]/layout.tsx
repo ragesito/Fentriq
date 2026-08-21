@@ -10,6 +10,7 @@ import "../globals.css";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
 import { ChatWidget } from "@/components/chat/ChatWidget";
+import { IntroFold } from "@/components/IntroFold";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -95,6 +96,15 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${fontVariables} h-full`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col bg-bg text-text">
+        {/* Runs before paint: marks the session so the entrance plays once,
+            and adds `intro-done` on every later view so it never flashes. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var k='fq-intro';if(sessionStorage.getItem(k)){document.documentElement.classList.add('intro-done')}else{sessionStorage.setItem(k,'1')}}catch(e){}})()",
+          }}
+        />
+        <IntroFold />
         <NextIntlClientProvider>
           <a
             href="#main"

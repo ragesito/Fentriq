@@ -434,3 +434,141 @@ a {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ------------------------------------------------------------------ *
+ * Entrance — the fold opens
+ *
+ * The brand mark unfolds, then the screen parts along the same diagonal
+ * seam the FoldDivider draws between sections. Runs once per session; the
+ * `intro-done` class (set before paint by the layout's inline script) and
+ * prefers-reduced-motion both skip it entirely.
+ * ------------------------------------------------------------------ */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  overflow: hidden;
+  /* Never trap a click: the page underneath stays usable throughout. */
+  pointer-events: none;
+  animation: intro-retire 0.01s linear 1.7s forwards;
+}
+
+.intro-half {
+  position: absolute;
+  inset: -2px;
+  background: var(--color-bg);
+  will-change: transform;
+}
+
+/* The seam runs at the logo's own slant, not an arbitrary diagonal. */
+.intro-half-a {
+  clip-path: polygon(0 0, 68% 0, 32% 100%, 0 100%);
+  animation: intro-part-a 0.95s cubic-bezier(0.65, 0, 0.2, 1) 0.72s forwards;
+}
+.intro-half-b {
+  clip-path: polygon(68% 0, 100% 0, 100% 100%, 32% 100%);
+  animation: intro-part-b 0.95s cubic-bezier(0.65, 0, 0.2, 1) 0.72s forwards;
+}
+
+/* Each half carries its own lit edge, so the parting is visible even though
+   the page underneath is as dark as the curtain. The parent clip-path trims
+   each bar to its own side, and they travel apart with their half. */
+.intro-half::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  width: 2px;
+  height: 140%;
+  transform: translateX(-50%) rotate(21deg);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-accent) 30%,
+    var(--color-accent-2) 70%,
+    transparent
+  );
+  opacity: 0;
+  animation: intro-edge 0.95s ease-out 0.68s forwards;
+}
+
+@keyframes intro-edge {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.intro-seam {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  width: 1px;
+  height: 140%;
+  transform: translateX(-50%) rotate(21deg);
+  transform-origin: center;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-accent) 35%,
+    var(--color-accent-2) 65%,
+    transparent
+  );
+  opacity: 0;
+  animation: intro-seam 0.75s ease-out 0.38s forwards;
+}
+
+.intro-mark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: intro-mark 0.82s cubic-bezier(0.6, 0, 0.25, 1) forwards;
+}
+
+/* Each facet slides along the band before the screen opens. */
+.intro-mark path {
+  animation: intro-facet 0.6s cubic-bezier(0.5, 0, 0.2, 1) forwards;
+}
+.intro-f1 { --fx: -15px; --fy: -10px; animation-delay: 0.04s; }
+.intro-f2 { --fx: 15px; --fy: -10px; animation-delay: 0.10s; }
+.intro-f3 { --fx: -15px; --fy: 10px; animation-delay: 0.16s; }
+.intro-f4 { --fx: 15px; --fy: 10px; animation-delay: 0.22s; }
+
+@keyframes intro-facet {
+  0% { transform: translate(0, 0); opacity: 0; }
+  35% { opacity: 1; }
+  100% { transform: translate(var(--fx), var(--fy)); opacity: 1; }
+}
+
+@keyframes intro-mark {
+  0% { transform: translate(-50%, -50%) scale(0.86); }
+  62% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.28); opacity: 0; }
+}
+
+@keyframes intro-seam {
+  0% { opacity: 0; transform: translateX(-50%) rotate(21deg) scaleY(0.2); }
+  40% { opacity: 1; transform: translateX(-50%) rotate(21deg) scaleY(1); }
+  100% { opacity: 0; transform: translateX(-50%) rotate(21deg) scaleY(1); }
+}
+
+@keyframes intro-part-a {
+  to { transform: translate3d(-105%, -18%, 0); }
+}
+@keyframes intro-part-b {
+  to { transform: translate3d(105%, 18%, 0); }
+}
+
+@keyframes intro-retire {
+  to { visibility: hidden; }
+}
+
+/* Seen already this session, or motion is unwelcome: never show it at all. */
+.intro-done .intro {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    display: none;
+  }
+}
