@@ -21,9 +21,6 @@ export function IntroFold() {
       <div className="intro-half intro-half-b" />
       <div className="intro-seam" />
       <div className="intro-mark">
-        {/* Halo that blooms once the mark is whole; it lives inside the mark
-            so it scales and fades away with it. */}
-        <div className="intro-glow" />
         <svg viewBox="6 24 86 60" width="220" height="154">
           {/* The logo's four facets. The real mark cuts a 2-unit seam between
               blue|grey, grey|white and white|purple with a mask; since these
