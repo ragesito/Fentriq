@@ -22,8 +22,8 @@ function hostOf(url?: string): string | null {
 
 const KIND_DOT: Record<CaseStudy["kind"], string> = {
   client: "bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.8)]",
-  concept: "bg-accent shadow-[0_0_10px_rgba(79,91,247,0.8)]",
-  lab: "bg-accent-2 shadow-[0_0_10px_rgba(138,108,255,0.8)]",
+  concept: "bg-accent shadow-[0_0_10px_rgba(69,80,255,0.8)]",
+  lab: "bg-accent-2 shadow-[0_0_10px_rgba(138,92,255,0.8)]",
 };
 
 /**
@@ -78,7 +78,7 @@ export function WorkTile({ study, wide = false }: { study: CaseStudy; wide?: boo
               className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(135deg,rgba(79,91,247,0.25),rgba(138,108,255,0.12)_55%,transparent)]">
+            <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(135deg,rgba(69,80,255,0.25),rgba(138,92,255,0.12)_55%,transparent)]">
               <span className="px-6 text-center font-display text-2xl font-semibold text-text/90">
                 {study.title}
               </span>

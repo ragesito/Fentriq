@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { CalButton } from "@/components/ui/CalButton";
 import { Reveal } from "@/components/ui/Reveal";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
+import { PhoneFrame } from "@/components/ui/PhoneFrame";
 import { Link } from "@/i18n/navigation";
 import { buttonClasses } from "@/components/ui/Button";
 import { getCaseStudies, getClientCases } from "@/content/work";
@@ -29,6 +30,7 @@ const COLLAGE = [
   {
     slug: "aulon-detailing",
     cover: "/work/aulon-detailing.jpg",
+    mobile: "/work/mobile/aulon-detailing.jpg",
     label: "aulondetailing.com",
     className: "absolute bottom-0 right-6 w-[72%] [--tilt:1.5deg]",
   },
@@ -136,6 +138,11 @@ export function Hero() {
                         priority={item.slug === "aulon-detailing"}
                         className="object-cover object-top"
                       />
+                      {"mobile" in item && item.mobile ? (
+                        <div className="absolute bottom-0 right-3 w-[23%] translate-y-[8%]">
+                          <PhoneFrame src={item.mobile} alt="" sizes="120px" />
+                        </div>
+                      ) : null}
                     </div>
                   </BrowserFrame>
                 </Link>

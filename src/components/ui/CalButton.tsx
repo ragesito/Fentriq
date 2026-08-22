@@ -38,8 +38,8 @@ export function CalButton({
         cal("ui", {
           theme: "dark",
           cssVarsPerTheme: {
-            light: { "cal-brand": "#4F5BF7" },
-            dark: { "cal-brand": "#4F5BF7" },
+            light: { "cal-brand": "#4550FF" },
+            dark: { "cal-brand": "#4550FF" },
           },
           hideEventTypeDetails: false,
           layout: "month_view",

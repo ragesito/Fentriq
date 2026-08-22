@@ -161,7 +161,7 @@ export function ChatWidget() {
           aria-label={open ? t("close") : t("open")}
           aria-expanded={open}
           onClick={() => (open ? setOpen(false) : openChat())}
-          className="relative flex h-16 w-16 items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--color-accent),var(--color-accent-2))] text-on-accent shadow-[0_8px_30px_-4px_rgba(79,91,247,0.6)] ring-1 ring-white/10 transition-transform duration-200 hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="relative flex h-16 w-16 items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--color-accent),var(--color-accent-2))] text-on-accent shadow-[0_8px_30px_-4px_rgba(69,80,255,0.6)] ring-1 ring-white/10 transition-transform duration-200 hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           {/* "Online" indicator (only when closed) */}
           {!open ? (

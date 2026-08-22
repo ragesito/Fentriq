@@ -63,7 +63,7 @@ export default async function WorkPage({
 
           {/* The numbers that matter, at a glance */}
           <Reveal delay={0.15}>
-            <dl className="relative grid grid-cols-3 divide-x divide-white/10 overflow-hidden rounded-xl border border-accent/30 bg-gradient-to-br from-accent/20 via-surface to-accent-2/10 shadow-[0_20px_60px_-30px_rgba(79,91,247,0.6)] lg:min-w-[26rem]">
+            <dl className="relative grid grid-cols-3 divide-x divide-white/10 overflow-hidden rounded-xl border border-accent/30 bg-gradient-to-br from-accent/20 via-surface to-accent-2/10 shadow-[0_20px_60px_-30px_rgba(69,80,255,0.6)] lg:min-w-[26rem]">
               <div
                 aria-hidden
                 className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-accent/40 blur-3xl"

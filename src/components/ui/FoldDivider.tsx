@@ -26,9 +26,9 @@ export function FoldDivider({ flip = false }: { flip?: boolean }) {
         />
         <defs>
           <linearGradient id="fold-grad" x1="0" y1="0" x2="1200" y2="0">
-            <stop stopColor="#4F5BF7" stopOpacity="0" />
+            <stop stopColor="#4550FF" stopOpacity="0" />
             <stop offset="0.5" stopColor="#8A6CFF" stopOpacity="0.7" />
-            <stop offset="1" stopColor="#4F5BF7" stopOpacity="0" />
+            <stop offset="1" stopColor="#4550FF" stopOpacity="0" />
           </linearGradient>
         </defs>
       </svg>

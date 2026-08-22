@@ -10,8 +10,8 @@
   --color-border: #262b35;
   --color-text: #f4f6f8;
   --color-muted: #9ca3b2;
-  --color-accent: #4f5bf7;
-  --color-accent-2: #8a6cff;
+  --color-accent: #4550ff;
+  --color-accent-2: #8a5cff;
   --color-on-accent: #ffffff;
 
   /* Warm "paper" counterpoint to the dark palette. Used for whole sections
@@ -20,7 +20,7 @@
   --color-cream-2: #e4d9c5; /* hairlines / subtle fills on cream */
   --color-ink: #15171c; /* body text on cream — 15:1 */
   --color-ink-muted: #4e5462; /* secondary text on cream — 7:1 */
-  --color-accent-deep: #3b45d6; /* accent that still passes AA on cream */
+  --color-accent-deep: #2f3be2; /* accent that still passes AA on cream */
 
   --font-display: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -30,7 +30,7 @@
   --maxw: 1360px;
 
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 30px rgba(0, 0, 0, 0.25);
-  --shadow-glow: 0 10px 40px -12px rgba(79, 91, 247, 0.45);
+  --shadow-glow: 0 10px 40px -12px rgba(69, 80, 255, 0.55);
 }
 
 :root {
@@ -201,7 +201,7 @@ a {
   position: relative;
   background:
     linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
-    linear-gradient(135deg, rgba(79, 91, 247, 0.7), rgba(138, 108, 255, 0.25) 40%, rgba(79, 91, 247, 0.08) 70%, rgba(138, 108, 255, 0.5)) border-box;
+    linear-gradient(135deg, rgba(69, 80, 255, 0.7), rgba(138, 92, 255, 0.25) 40%, rgba(69, 80, 255, 0.08) 70%, rgba(138, 92, 255, 0.5)) border-box;
   border: 1px solid transparent;
 }
 
@@ -613,8 +613,8 @@ a {
     from var(--beam-angle),
     transparent 0deg,
     transparent 260deg,
-    rgba(79, 91, 247, 0.35) 300deg,
-    rgba(79, 91, 247, 1) 335deg,
+    rgba(69, 80, 255, 0.35) 300deg,
+    rgba(69, 80, 255, 1) 335deg,
     transparent 360deg
   );
   -webkit-mask:

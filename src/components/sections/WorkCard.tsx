@@ -55,7 +55,7 @@ export function WorkCard({
           </>
         ) : (
           // Branded tile for cases without a publishable screenshot yet.
-          <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(135deg,rgba(79,91,247,0.25),rgba(138,108,255,0.12)_55%,transparent)]">
+          <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(135deg,rgba(69,80,255,0.25),rgba(138,92,255,0.12)_55%,transparent)]">
             <span className="px-6 text-center font-display text-2xl font-semibold text-text/90">
               {study.title}
             </span>

@@ -74,7 +74,7 @@ export function Header() {
                   "relative py-1 text-sm font-semibold transition-colors duration-200",
                   "after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:rounded-full after:bg-gradient-to-r after:from-accent after:to-accent-2 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.22,1,0.36,1)]",
                   active
-                    ? "text-text after:origin-left after:scale-x-100 after:shadow-[0_0_12px_rgba(79,91,247,0.8)]"
+                    ? "text-text after:origin-left after:scale-x-100 after:shadow-[0_0_12px_rgba(69,80,255,0.8)]"
                     : "text-muted after:origin-right after:scale-x-0 hover:text-text hover:after:origin-left hover:after:scale-x-100",
                 )}
               >
