@@ -73,7 +73,7 @@ export default async function CaseStudyPage({
 
   return (
     <>
-      <article className="pt-28">
+      <article className="pt-16 sm:pt-20">
         <Container className="max-w-3xl">
           <Link
             href="/lavori"

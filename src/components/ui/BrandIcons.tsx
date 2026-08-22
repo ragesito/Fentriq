@@ -47,3 +47,17 @@ export function InstagramIcon({ size = 18 }: { size?: number }) {
     </svg>
   );
 }
+
+export function FacebookIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+    >
+      <path d="M13.5 21.9v-7.4h2.5l.4-3h-2.9V9.6c0-.9.3-1.5 1.5-1.5h1.6V5.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5v7.4a10 10 0 1 1 3 0Z" />
+    </svg>
+  );
+}

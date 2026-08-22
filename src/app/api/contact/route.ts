@@ -107,6 +107,7 @@ export async function POST(req: Request) {
           text: [
             `Nome: ${payload.name}`,
             `Email: ${payload.email}`,
+            `Telefono: ${payload.phone || "—"}`,
             `Azienda: ${payload.company || "—"}`,
             `Budget: ${payload.budget || "—"}`,
             `Lingua: ${payload.locale}`,

@@ -42,7 +42,7 @@ export function Hero() {
   const chips = t("stack").split("·").map((s) => s.trim()).filter(Boolean);
 
   return (
-    <section className="relative overflow-hidden bg-bg pt-20 pb-24 sm:pt-28 sm:pb-32">
+    <section className="relative overflow-hidden bg-bg pt-10 pb-24 sm:pt-28 sm:pb-32">
       {/* Ambient grid, glows, sweeping beam and grain */}
       <div aria-hidden className="bg-grid absolute inset-0 opacity-60" />
       <div

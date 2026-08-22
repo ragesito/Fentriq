@@ -79,7 +79,7 @@ export default async function FormulaPage({
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-bg pt-32 pb-20 sm:pb-24">
+      <section className="relative overflow-hidden bg-bg pt-16 pb-20 sm:pt-20 sm:pb-24">
         <div aria-hidden className="bg-grid absolute inset-0 opacity-60" />
         <div
           aria-hidden

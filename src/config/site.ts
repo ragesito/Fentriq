@@ -25,6 +25,7 @@ export const siteConfig = {
   social: {
     x: "https://x.com/fentriq",
     instagram: "https://www.instagram.com/fentriq/",
+    facebook: "https://www.facebook.com/profile.php?id=61590905591349",
   },
   serviceAreas: ["Roma", "Milano", "Firenze", "Italia"],
 } as const;

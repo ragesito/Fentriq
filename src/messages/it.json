@@ -356,7 +356,10 @@
         "message": "Scrivi un messaggio di almeno 10 caratteri.",
         "consent": "Devi accettare la privacy policy per inviare."
       },
-      "budgetFormula": "La Formula — 100 €/mese"
+      "budgetFormula": "La Formula",
+      "budgetFormulaHint": "100 €/mese",
+      "phone": "Telefono",
+      "phonePlaceholder": "333 1234567"
     },
     "points": {
       "reply": "Risposta entro 24 ore",
@@ -381,11 +384,11 @@
   "workPage": {
     "eyebrow": "Progetti",
     "title": "I nostri lavori.",
-    "subtitle": "I siti dei nostri clienti, i progetti costruiti di nostra iniziativa per le attività della zona, e i prodotti che sviluppiamo in casa.",
+    "subtitle": "Clienti online, siti già costruiti che aspettano il loro proprietario, e i prodotti che sviluppiamo in casa.",
     "clientsTitle": "I nostri clienti.",
     "clientsSubtitle": "Ci hanno affidato il loro sito: online, sul proprio dominio.",
     "conceptsTitle": "Costruiti di nostra iniziativa.",
-    "conceptsSubtitle": "Questi non sono clienti. Sono attività della zona per cui abbiamo costruito il sito senza che ce lo chiedessero. Se una di queste è la tua, il tuo sito esiste già e ti sta aspettando.",
+    "conceptsSubtitle": "Non sono clienti: sono attività della zona per cui abbiamo costruito il sito senza che ce lo chiedessero. Se una è la tua, il tuo sito esiste già.",
     "labTitle": "Dal nostro laboratorio.",
     "labSubtitle": "Prodotti interni con cui spingiamo la tecnica: le stesse capacità che poi portiamo ai clienti.",
     "sections": {
@@ -397,7 +400,28 @@
     },
     "year": "Anno",
     "roles": "Ruoli",
-    "nextProject": "Prossimo progetto"
+    "nextProject": "Prossimo progetto",
+    "stats": {
+      "clients": "clienti online",
+      "concepts": "siti pronti da consegnare",
+      "lab": "prodotti interni"
+    },
+    "filters": {
+      "label": "Filtra i lavori",
+      "all": "Tutti",
+      "client": "Clienti",
+      "concept": "Pronti per te",
+      "lab": "Lab"
+    },
+    "kindBadge": {
+      "client": "Online",
+      "concept": "Pronto",
+      "lab": "Lab"
+    },
+    "viewCase": "Vedi il caso",
+    "openSite": "Apri il sito",
+    "openPreview": "Anteprima",
+    "notPublished": "non ancora pubblicato"
   },
   "legal": {
     "lastUpdated": "Ultimo aggiornamento",

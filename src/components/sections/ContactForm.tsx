@@ -1,16 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useMemo, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale, useTranslations } from "next-intl";
 import { CheckCircle2, AlertTriangle, Send } from "lucide-react";
 import { contactSchema, budgetOptions, type ContactInput } from "@/lib/contact-schema";
 import { Button } from "@/components/ui/Button";
+import { Select } from "@/components/ui/Select";
+import { DIAL_CODES, countryName, defaultDial } from "@/lib/dial-codes";
 import { OpenChatButton } from "@/components/chat/OpenChatButton";
 import { Link } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
+import "flag-icons/css/flag-icons.min.css";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -19,9 +22,29 @@ export function ContactForm() {
   const tf = useTranslations("contact.form");
   const locale = useLocale();
   const [status, setStatus] = useState<Status>("idle");
+  const [dial, setDial] = useState(() => defaultDial(locale));
+  const dialOptions = useMemo(
+    () =>
+      DIAL_CODES.map(([iso, code]) => ({
+        value: iso,
+        label: `${countryName(iso, locale)} ${code}`,
+        triggerLabel: code,
+        icon: (
+          <span
+            aria-hidden
+            className={`fi fi-${iso.toLowerCase()} shrink-0 rounded-[3px] text-[13px] shadow-[0_0_0_1px_rgba(255,255,255,0.08)]`}
+          />
+        ),
+      })).sort((a, b) =>
+        a.value === "IT" ? -1 : b.value === "IT" ? 1 : a.label.localeCompare(b.label, locale),
+      ),
+    [locale],
+  );
+  const dialCode = DIAL_CODES.find(([iso]) => iso === dial)?.[1] ?? "";
 
   const {
     register,
+    control,
     handleSubmit,
     reset,
     formState: { errors },
@@ -36,7 +59,11 @@ export function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, locale }),
+        body: JSON.stringify({
+          ...values,
+          phone: values.phone ? `${dialCode} ${values.phone}`.trim() : "",
+          locale,
+        }),
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
@@ -78,7 +105,7 @@ export function ContactForm() {
         />
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-[1fr_1.1fr_1.1fr]">
         <Field label={tf("name")} error={errors.name && tf("errors.name")} htmlFor="name">
           <input
             id="name"
@@ -99,9 +126,50 @@ export function ContactForm() {
             {...register("email")}
           />
         </Field>
+        <Field label={tf("budget")} htmlFor="budget" optional>
+          <Controller
+            name="budget"
+            control={control}
+            render={({ field }) => (
+              <Select
+                id="budget"
+                value={field.value ?? ""}
+                onChange={field.onChange}
+                placeholder={tf("budgetPlaceholder")}
+                options={[
+                  { value: "La Formula (100 €/mese)", label: tf("budgetFormula"), hint: tf("budgetFormulaHint") },
+                  ...budgetOptions.map((b) => ({ value: b, label: b })),
+                  { value: "undecided", label: tf("budgetUndecided") },
+                ]}
+              />
+            )}
+          />
+        </Field>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
+        <Field label={tf("phone")} htmlFor="phone" optional>
+          <div className="flex gap-2">
+            <Select
+              value={dial}
+              onChange={setDial}
+              options={dialOptions}
+              placeholder="+"
+              rootClassName="w-[6.75rem] shrink-0"
+              className="px-3"
+              popoverClassName="w-64"
+            />
+            <input
+              id="phone"
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel-national"
+              placeholder={tf("phonePlaceholder")}
+              className={cn(inputCls(false), "min-w-0 flex-1")}
+              {...register("phone")}
+            />
+          </div>
+        </Field>
         <Field label={tf("company")} htmlFor="company" optional>
           <input
             id="company"
@@ -111,20 +179,6 @@ export function ContactForm() {
             className={inputCls(false)}
             {...register("company")}
           />
-        </Field>
-        <Field label={tf("budget")} htmlFor="budget" optional>
-          <select id="budget" className={inputCls(false)} defaultValue="" {...register("budget")}>
-            <option value="" disabled>
-              {tf("budgetPlaceholder")}
-            </option>
-            <option value="La Formula — 100 €/mese">{tf("budgetFormula")}</option>
-            {budgetOptions.map((b) => (
-              <option key={b} value={b}>
-                {b}
-              </option>
-            ))}
-            <option value="undecided">{tf("budgetUndecided")}</option>
-          </select>
         </Field>
       </div>
 

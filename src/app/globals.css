@@ -533,11 +533,13 @@ a {
     transparent 60%
   );
   opacity: 0;
-  animation: intro-seam 0.8s ease-out 2.38s both;
+  /* Flash peaks at 2.48s and is gone by 2.56s — the halves start to part at
+     2.5s, so the line never sits over an open gap. */
+  animation: intro-seam 0.2s ease-out 2.36s both;
 }
 @keyframes intro-seam {
   0% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--seam)) scaleY(0.3); }
-  40% { opacity: 1; transform: translate(-50%, -50%) rotate(var(--seam)) scaleY(1); }
+  60% { opacity: 1; transform: translate(-50%, -50%) rotate(var(--seam)) scaleY(1); }
   100% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--seam)) scaleY(1); }
 }
 
@@ -588,3 +590,73 @@ a {
     display: none;
   }
 }
+
+/* Border beam — a streak of light that travels around a card's edge in a loop.
+   A conic gradient spins behind a ring-shaped mask (padding-box XOR border-box),
+   so only the 1px edge ever shows. `@property` makes the angle animatable. */
+@property --beam-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.border-beam {
+  position: relative;
+}
+.border-beam::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--beam-angle),
+    transparent 0deg,
+    transparent 260deg,
+    rgba(79, 91, 247, 0.35) 300deg,
+    rgba(79, 91, 247, 1) 335deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: beam-spin 4.5s linear infinite;
+}
+@keyframes beam-spin {
+  to {
+    --beam-angle: 360deg;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .border-beam::before {
+    animation: none;
+    opacity: 0.5;
+  }
+}
+
+/* Mobile menu items — compositor-only stagger (transform + opacity). */
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+.menu-in {
+  animation: menu-in 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(40ms + var(--i, 0) * 55ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-in {
+    animation: none;
+  }
+}
+

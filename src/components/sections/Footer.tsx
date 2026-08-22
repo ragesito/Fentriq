@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Mail } from "lucide-react";
-import { XIcon, InstagramIcon } from "@/components/ui/BrandIcons";
+import { XIcon, InstagramIcon, FacebookIcon } from "@/components/ui/BrandIcons";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 import { LocaleSwitcher } from "@/components/ui/LocaleSwitcher";
@@ -52,6 +52,15 @@ export function Footer() {
                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-accent/60 hover:text-text"
               >
                 <InstagramIcon size={17} />
+              </a>
+              <a
+                href={siteConfig.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-accent/60 hover:text-text"
+              >
+                <FacebookIcon size={17} />
               </a>
             </div>
           </div>

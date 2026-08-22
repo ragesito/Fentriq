@@ -8,6 +8,7 @@ export const contactSchema = z.object({
   name: z.string().trim().min(2, { message: "name" }).max(120),
   email: z.email({ message: "email" }).max(200),
   company: z.string().trim().max(160).optional().or(z.literal("")),
+  phone: z.string().trim().max(40).optional().or(z.literal("")),
   message: z.string().trim().min(10, { message: "message" }).max(4000),
   budget: z.string().max(40).optional().or(z.literal("")),
   consent: z.literal(true, { message: "consent" }),

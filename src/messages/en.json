@@ -356,7 +356,10 @@
         "message": "Write a message of at least 10 characters.",
         "consent": "You must accept the privacy policy to submit."
       },
-      "budgetFormula": "The Formula — €100/month"
+      "budgetFormula": "The Formula",
+      "budgetFormulaHint": "€100/month",
+      "phone": "Phone",
+      "phonePlaceholder": "555 1234567"
     },
     "points": {
       "reply": "Reply within 24 hours",
@@ -381,11 +384,11 @@
   "workPage": {
     "eyebrow": "Projects",
     "title": "Our work.",
-    "subtitle": "Our clients' sites, the projects we built on our own initiative for local businesses, and the products we develop in-house.",
+    "subtitle": "Clients live, sites already built and waiting for their owner, and the products we develop in-house.",
     "clientsTitle": "Our clients.",
     "clientsSubtitle": "They trusted us with their site: live, on their own domain.",
     "conceptsTitle": "Built on our own initiative.",
-    "conceptsSubtitle": "These are not clients. They're local businesses we built a site for without being asked. If one of them is yours, your site already exists and is waiting for you.",
+    "conceptsSubtitle": "Not clients: local businesses we built a site for without being asked. If one is yours, your site already exists.",
     "labTitle": "From our lab.",
     "labSubtitle": "In-house products where we push the craft: the same capabilities we then bring to clients.",
     "sections": {
@@ -397,7 +400,28 @@
     },
     "year": "Year",
     "roles": "Roles",
-    "nextProject": "Next project"
+    "nextProject": "Next project",
+    "stats": {
+      "clients": "clients live",
+      "concepts": "sites ready to hand over",
+      "lab": "in-house products"
+    },
+    "filters": {
+      "label": "Filter work",
+      "all": "All",
+      "client": "Clients",
+      "concept": "Ready for you",
+      "lab": "Lab"
+    },
+    "kindBadge": {
+      "client": "Live",
+      "concept": "Ready",
+      "lab": "Lab"
+    },
+    "viewCase": "View case",
+    "openSite": "Open site",
+    "openPreview": "Preview",
+    "notPublished": "not published yet"
   },
   "legal": {
     "lastUpdated": "Last updated",

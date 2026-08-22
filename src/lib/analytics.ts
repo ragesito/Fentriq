@@ -10,6 +10,7 @@ type PlausibleEvent =
   | "cta_whatsapp"
   | "form_submit"
   | "view_case"
+  | "open_live"
   | "chat_open";
 
 declare global {

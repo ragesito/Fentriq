@@ -25,7 +25,7 @@ export function OrganizationJsonLd({ locale }: { locale: string }) {
       "Software development",
       "Web3",
     ],
-    sameAs: [siteConfig.social.x, siteConfig.social.instagram],
+    sameAs: [siteConfig.social.x, siteConfig.social.instagram, siteConfig.social.facebook],
     priceRange: "€€",
   };
 
