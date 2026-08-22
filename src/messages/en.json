@@ -327,7 +327,6 @@
     "eyebrow": "Contact",
     "title": "Let's talk about your project.",
     "subtitle": "Fill in the form or book a call directly. We reply within 24 hours.",
-    "demoNote": "This form triggers a real n8n automation: the same one we build for our clients.",
     "bookTitle": "Rather talk it through?",
     "bookSubtitle": "Pick a time for a 30-minute call.",
     "form": {
@@ -356,8 +355,17 @@
         "email": "Enter a valid email.",
         "message": "Write a message of at least 10 characters.",
         "consent": "You must accept the privacy policy to submit."
-      }
-    }
+      },
+      "budgetFormula": "The Formula — €100/month"
+    },
+    "points": {
+      "reply": "Reply within 24 hours",
+      "human": "A person answers you",
+      "noCommit": "No commitment"
+    },
+    "formulaTitle": "Run a local business?",
+    "formulaText": "With the Formula your site is live in a few days, for €100 a month with no lock-in. Send us the name of your business: often the site is already built.",
+    "formulaLink": "See the Formula"
   },
   "footer": {
     "tagline": "Full-stack software development studio for Italian SMEs.",

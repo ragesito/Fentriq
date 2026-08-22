@@ -327,7 +327,6 @@
     "eyebrow": "Contatti",
     "title": "Parliamo del tuo progetto.",
     "subtitle": "Compila il modulo o prenota direttamente una call. Ti rispondiamo entro 24 ore.",
-    "demoNote": "Questo modulo attiva un'automazione reale n8n: la stessa che costruiamo per i nostri clienti.",
     "bookTitle": "Preferisci parlarne a voce?",
     "bookSubtitle": "Scegli un orario per una call di 30 minuti.",
     "form": {
@@ -356,8 +355,17 @@
         "email": "Inserisci un'email valida.",
         "message": "Scrivi un messaggio di almeno 10 caratteri.",
         "consent": "Devi accettare la privacy policy per inviare."
-      }
-    }
+      },
+      "budgetFormula": "La Formula — 100 €/mese"
+    },
+    "points": {
+      "reply": "Risposta entro 24 ore",
+      "human": "Ti risponde una persona",
+      "noCommit": "Nessun impegno"
+    },
+    "formulaTitle": "Hai un’attività locale?",
+    "formulaText": "Con la Formula il tuo sito è online in pochi giorni, a 100 € al mese e senza vincoli. Scrivici il nome dell’attività: spesso il sito è già pronto.",
+    "formulaLink": "Scopri la Formula"
   },
   "footer": {
     "tagline": "Studio di sviluppo software full-stack per le PMI italiane.",

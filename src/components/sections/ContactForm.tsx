@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale, useTranslations } from "next-intl";
-import { CheckCircle2, AlertTriangle, Send, Workflow } from "lucide-react";
+import { CheckCircle2, AlertTriangle, Send } from "lucide-react";
 import { contactSchema, budgetOptions, type ContactInput } from "@/lib/contact-schema";
 import { Button } from "@/components/ui/Button";
 import { OpenChatButton } from "@/components/chat/OpenChatButton";
@@ -66,11 +66,6 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
-      <p className="flex items-start gap-2 rounded-lg border border-border bg-surface-2/50 p-3 text-sm text-muted">
-        <Workflow size={18} className="mt-0.5 shrink-0 text-accent" aria-hidden />
-        {t("demoNote")}
-      </p>
-
       {/* Honeypot — visually hidden, off-screen, not focusable */}
       <div aria-hidden className="absolute left-[-9999px] top-0 h-0 w-0 overflow-hidden">
         <label htmlFor="website">Website</label>
@@ -122,6 +117,7 @@ export function ContactForm() {
             <option value="" disabled>
               {tf("budgetPlaceholder")}
             </option>
+            <option value="La Formula — 100 €/mese">{tf("budgetFormula")}</option>
             {budgetOptions.map((b) => (
               <option key={b} value={b}>
                 {b}
