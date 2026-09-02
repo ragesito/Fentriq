@@ -20,9 +20,9 @@ const COLLAGE = [
       "absolute right-0 top-0 w-[58%] [--tilt:2.5deg] [animation-delay:-2s]",
   },
   {
-    slug: "mecs-village",
-    cover: "/work/mecs-village.jpg",
-    label: "mecs-village.pages.dev",
+    slug: "schiano",
+    cover: "/work/schiano.jpg",
+    label: "schiano.vercel.app",
     className:
       "absolute left-0 top-24 w-[52%] [--tilt:-3deg] [animation-delay:-5s]",
   },

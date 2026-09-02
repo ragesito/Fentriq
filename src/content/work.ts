@@ -242,48 +242,6 @@ export const caseStudies: CaseStudy[] = [
     },
   },
   {
-    slug: "mecs-village",
-    title: "Mecs Village",
-    year: 2026,
-    featured: false,
-    kind: "concept",
-    sector: {
-      it: "Stabilimento balneare · Lido di Ostia (RM)",
-      en: "Beach club · Lido di Ostia (RM)",
-    },
-    cover: "/work/mecs-village.jpg",
-    mobile: "/work/mobile/mecs-village.jpg",
-    stack: ["Web", "Design", "Privacy"],
-    links: { live: "https://mecs-village.pages.dev" },
-    roles: {
-      it: ["Sito vetrina", "Identità digitale"],
-      en: ["Showcase site", "Digital identity"],
-    },
-    badge: { it: "Concept", en: "Concept" },
-    summary: {
-      it: "Vetrina digitale per uno stabilimento con cucina di mare, dal 1997 sul litorale: veloce, senza cookie, con le foto vere del posto.",
-      en: "Digital showcase for a beach club with a seafood kitchen, on the coast since 1997: fast, cookie-free, with real photos of the place.",
-    },
-    sections: {
-      problem: {
-        it: "Un'attività viva soprattutto su Instagram, senza una casa digitale propria dove raccontarsi e farsi trovare.",
-        en: "A business that lived mostly on Instagram, with no digital home of its own to tell its story and be found.",
-      },
-      solution: {
-        it: "Un sito vetrina con la giornata al Mecs, la storia dal 1997, la galleria e i contatti — il tramonto dentro le lettere del logo come firma visiva.",
-        en: "A showcase site with the day at Mecs, the story since 1997, the gallery and contacts — the sunset inside the logo's letters as the visual signature.",
-      },
-      build: {
-        it: "Completamente statico: niente cookie, niente script di terzi, intestazioni di sicurezza rigorose e contenuti gestiti come dati. Ogni informazione non confermata dal cliente resta fuori, per costruzione.",
-        en: "Fully static: no cookies, no third-party scripts, strict security headers and content managed as data. Anything not confirmed by the client stays out, by construction.",
-      },
-      result: {
-        it: "Online in anteprima, in attesa del dominio definitivo dell'attività.",
-        en: "Live in preview, awaiting the business's final domain.",
-      },
-    },
-  },
-  {
     slug: "happiness-la-casetta",
     title: "Happiness La Casetta",
     year: 2026,
