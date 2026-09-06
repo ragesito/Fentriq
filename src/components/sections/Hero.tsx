@@ -13,25 +13,25 @@ import { ArrowRight } from "lucide-react";
 /** Real screenshots stacked in the hero — evidence before words. */
 const COLLAGE = [
   {
-    slug: "nonsolofitness",
-    cover: "/work/nonsolofitness.jpg",
-    label: "nonsolofitnesstorvaianica.com",
+    slug: "aulon-detailing",
+    cover: "/work/aulon-detailing.jpg",
+    label: "aulondetailing.com",
     className:
       "absolute right-0 top-0 w-[58%] [--tilt:2.5deg] [animation-delay:-2s]",
   },
   {
-    slug: "schiano",
-    cover: "/work/schiano.jpg",
-    label: "schiano.vercel.app",
+    slug: "salone-meraviglie",
+    cover: "/work/salone-meraviglie.jpg",
+    label: "salone-meraviglie.workers.dev",
     className:
       "absolute left-0 top-24 w-[52%] [--tilt:-3deg] [animation-delay:-5s]",
   },
-  // Painted last so it sits in front: the newest client leads the collage.
+  // Painted last so it sits in front.
   {
-    slug: "aulon-detailing",
-    cover: "/work/aulon-detailing.jpg",
-    mobile: "/work/mobile/aulon-detailing.jpg",
-    label: "aulondetailing.com",
+    slug: "nonsolofitness",
+    cover: "/work/nonsolofitness.jpg",
+    mobile: "/work/mobile/nonsolofitness.jpg",
+    label: "nonsolofitnesstorvaianica.com",
     className: "absolute bottom-0 right-6 w-[72%] [--tilt:1.5deg]",
   },
 ];
@@ -135,7 +135,7 @@ export function Hero() {
                         alt=""
                         fill
                         sizes="420px"
-                        priority={item.slug === "aulon-detailing"}
+                        priority={item.slug === "nonsolofitness"}
                         className="object-cover object-top"
                       />
                       {"mobile" in item && item.mobile ? (
