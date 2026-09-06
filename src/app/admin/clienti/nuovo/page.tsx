@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { isLoggedIn } from "@/lib/admin/auth";
 import { AdminShell, Card, Field, LangSelect, TextArea } from "@/components/admin/ui";
+import { PlanPreset } from "@/components/admin/PlanPreset";
 import { saveClient } from "../../actions";
 
 export const dynamic = "force-dynamic";
@@ -12,13 +13,14 @@ export default async function NewClientPage() {
   return (
     <AdminShell title="Nuevo cliente" back={{ href: "/admin", label: "Clientes" }}>
       <Card>
-        <form action={saveClient} className="space-y-4">
+        <form action={saveClient} data-client-form className="space-y-4">
           <Field label="Nombre" name="name" required placeholder="Nonsolofitness" />
           <div className="grid gap-3 sm:grid-cols-2">
             <Field label="Sector" name="sector" placeholder="Gimnasio" />
             <Field label="Ciudad" name="city" placeholder="Torvaianica" />
           </div>
           <Field label="Web" name="siteUrl" placeholder="https://…" />
+          <PlanPreset />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <Field label="Cuota mensual €" name="monthlyFee" type="number" step="0.01" defaultValue={100} />
             <Field label="Precio total €" name="totalPrice" type="number" step="0.01" defaultValue={900} />

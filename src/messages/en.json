@@ -126,7 +126,7 @@
     "items": {
       "local": {
         "title": "Local businesses",
-        "description": "No all-at-once: you start with €100 and pay €100 a month. You decide each month whether to carry on, and at €900 the site is yours.",
+        "description": "No all-at-once: you start with €100 and pay €100 a month. You decide each month whether to carry on, and at €900 the site is yours. Pro and Max for bookings, orders and automatic replies.",
         "cta": "See the formula"
       },
       "project": {
@@ -147,7 +147,7 @@
   "formula": {
     "meta": {
       "title": "Your business online in days — €100",
-      "description": "Agencies ask for everything upfront. With the Formula you start with €100 and pay €100 a month: you decide each month whether to carry on, and at €900 the site is yours forever."
+      "description": "Agencies ask for everything upfront. With the Formula you start with €100 and pay €100 a month: you decide each month whether to carry on, and at €900 the site is yours forever. Formula Pro for sites with online bookings and orders."
     },
     "eyebrow": "For local businesses",
     "titleBefore": "Your business online in days.",
@@ -173,23 +173,123 @@
       "eyebrow": "How it works",
       "title": "Online in days. Then you decide, every month.",
       "steps": {
-        "s1": {
-          "title": "First month — €100, you're online",
-          "description": "In a few days I put everything live: site, domain, Google listing, local SEO and QR reviews. If I already built your site, it can be tomorrow."
+        "base": {
+          "s1": {
+            "title": "First month — €100, you're online",
+            "description": "In a few days I put everything live: site, domain, Google listing, local SEO and QR reviews. If I already built your site, it can be tomorrow."
+          },
+          "s2": {
+            "title": "Every month you decide",
+            "description": "€100 a month, no lock-in. Every month you get the real numbers — visits, calls, reviews — and you are the one who decides, with them in front of you. If one month you decide no, you stop: no penalties."
+          },
+          "s3": {
+            "title": "At €900 the site is yours",
+            "description": "Nine months at €100 — or settle the balance whenever you want. Domain, site and code transfer to you. Forever."
+          },
+          "s4": {
+            "title": "After: €30/month, if you want",
+            "description": "Menus, prices, photos and news kept fresh by us. Optional: the site stays yours either way."
+          }
         },
-        "s2": {
-          "title": "Every month you decide",
-          "description": "€100 a month, no lock-in. Every month you get the real numbers — visits, calls, reviews — and you are the one who decides, with them in front of you. If one month you decide no, you stop: no penalties."
+        "pro": {
+          "s1": {
+            "title": "First month — €150, you're online",
+            "description": "In a few days I put everything live: site, domain, Google listing, local SEO, QR reviews — and the booking or ordering system, with your own panel. If I already built your site, it can be tomorrow."
+          },
+          "s2": {
+            "title": "Every month you decide",
+            "description": "€150 a month, no lock-in. Every month you get the real numbers — visits, bookings, orders — and you are the one who decides, with them in front of you. If one month you decide no, you stop: no penalties."
+          },
+          "s3": {
+            "title": "At €1,350 the site is yours",
+            "description": "Nine months at €150 — or settle the balance whenever you want. Domain, site, system and code transfer to you. Forever."
+          },
+          "s4": {
+            "title": "After: €50/month, if you want",
+            "description": "Menus, prices, photos and news kept fresh by us, and the booking system kept running. Optional: the site stays yours either way."
+          }
         },
-        "s3": {
-          "title": "At €900 the site is yours",
-          "description": "Nine months at €100 — or settle the balance whenever you want. Domain, site and code transfer to you. Forever."
-        },
-        "s4": {
-          "title": "After: €30/month, if you want",
-          "description": "Menus, prices, photos and news kept fresh by us. Optional: the site stays yours either way."
+        "max": {
+          "s1": {
+            "title": "First month — €200, you're online",
+            "description": "In a few days I put everything live: site, bookings and orders, automated WhatsApp and the AI that answers the phone. If I already built your site, it can be tomorrow."
+          },
+          "s2": {
+            "title": "Every month you decide",
+            "description": "€200 a month, no lock-in. Every month you get the real numbers — bookings, orders, calls handled — and you are the one who decides, with them in front of you. If one month you decide no, you stop: no penalties."
+          },
+          "s3": {
+            "title": "At €1,800 it's all yours",
+            "description": "Nine months at €200 — or settle the balance whenever you want. Domain, site, system and code transfer to you. Forever."
+          },
+          "s4": {
+            "title": "After: €80/month, if you want",
+            "description": "Updates, priority support and the services that answer for you — WhatsApp and phone — kept live by us. Optional: the site stays yours either way."
+          }
         }
-      }
+      },
+      "switch": "Choose the formula"
+    },
+    "tiers": {
+      "eyebrow": "Three formulas",
+      "title": "A showcase, or a site that works for you.",
+      "subtitle": "Same rules for all: you pay month by month, no lock-in, and in nine months the site is yours. Only what's inside changes.",
+      "monthLabel": "a month",
+      "totalLabel": "Total to make it yours",
+      "afterLabel": "After, if you want",
+      "includesLabel": "What's included",
+      "base": {
+        "name": "Formula",
+        "tagline": "Your business's showcase.",
+        "price": "€100",
+        "total": "€900",
+        "months": "9 months at €100, or settle early",
+        "after": "€30/month for updates",
+        "for": "For restaurants, shops, gyms, practices: anyone who needs to be found and make a good impression.",
+        "items": {
+          "i1": "A professional custom site, bilingual if needed",
+          "i2": "Domain, hosting, Google listing and local SEO",
+          "i3": "QR signs to collect reviews",
+          "i4": "Monthly report on WhatsApp"
+        }
+      },
+      "pro": {
+        "name": "Formula Pro",
+        "badge": "Most chosen",
+        "tagline": "A site with a system inside.",
+        "price": "€150",
+        "total": "€1,350",
+        "months": "9 months at €150, or settle early",
+        "after": "€50/month for updates and support",
+        "for": "For those who want the site to do a job: take bookings, orders, payments. That needs a system running every day, and we keep it running.",
+        "items": {
+          "i1": "Everything in the Formula",
+          "i2": "Online bookings or orders, with automatic confirmations",
+          "i3": "Full menu or catalogue, with search and categories",
+          "i4": "Your own admin panel: bookings, hours, prices",
+          "i5": "Deposits and online payments, when needed"
+        }
+      },
+      "max": {
+        "name": "Formula Max",
+        "badge": "All included",
+        "tagline": "The site, and everything that works around it.",
+        "price": "€200",
+        "total": "€1,800",
+        "months": "9 months at €200, or settle early",
+        "after": "€80/month for updates and priority support",
+        "for": "For those who want to stop living on the phone: bookings, orders and customer questions arrive already handled, from the site, from WhatsApp and from the phone.",
+        "items": {
+          "i1": "Everything in Pro",
+          "i2": "Automated WhatsApp Business: confirmations, reminders, replies",
+          "i3": "An AI that answers the phone and takes orders and bookings",
+          "i4": "Orders and delivery with online payment",
+          "i5": "Priority support, changes within the day"
+        }
+      },
+      "note": "Not sure which one fits? We'll tell you, looking at the business: nobody gets pushed onto Pro if they don't need it.",
+      "cta": "Start with the {name}",
+      "ownedLabel": "yours"
     },
     "includes": {
       "eyebrow": "The first month",
@@ -208,8 +308,8 @@
       "title": "Prefer a different way?",
       "upfront": {
         "title": "Everything upfront",
-        "price": "€900 one-off",
-        "description": "Want the site to be yours from day one? Buy it outright, with everything from the first month included."
+        "price": "€900, €1,350 or €1,800 one-off",
+        "description": "Want the site to be yours from day one? Buy it outright — €900 for the Formula, €1,350 for Pro, €1,800 for Max — with everything from the first month included."
       },
       "custom": {
         "title": "Custom projects",
@@ -255,13 +355,17 @@
           "q": "What if I don't want to continue in month two?",
           "a": "You stop paying. No penalty, no lock-in. The site goes offline and you only spent the months you used."
         },
+        "which": {
+          "q": "Formula, Pro or Max?",
+          "a": "If you need to be found and make a good impression, Formula. If you want the site to take bookings or orders on its own, Pro. If you want WhatsApp and the phone to answer on their own too, Max. Same rules: month by month, no lock-in, and in nine months it's yours."
+        },
         "own": {
           "q": "Who owns the site while I'm paying?",
-          "a": "Until you reach €900 it stays with Fentriq — that's why trying it costs so little. Once you complete €900, domain, site and code become 100% yours."
+          "a": "Until you reach your formula's total — €900, €1,350 or €1,800 — it stays with Fentriq: that's why trying it costs so little. Once you complete the total, domain, site and code become 100% yours."
         },
         "fast": {
           "q": "Can I close early and pay it all?",
-          "a": "Yes, anytime: settle the balance up to €900 and the site is yours from that moment."
+          "a": "Yes, anytime: settle the balance up to your formula's total and the site is yours from that moment."
         },
         "report": {
           "q": "How do I know it's working?",
@@ -269,7 +373,7 @@
         },
         "after": {
           "q": "And after it's mine?",
-          "a": "Run it yourself, or for €30 a month we keep it fresh: menus, prices, photos, news. No obligation."
+          "a": "Run it yourself, or we keep it fresh: €30 a month with the Formula, €50 with Pro, €80 with Max, because the more there is inside the more there is to keep running. No obligation."
         }
       }
     }

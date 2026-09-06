@@ -2,16 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
-  Sparkles,
-  TrendingUp,
-  Key,
-  Wrench,
   Check,
   ArrowRight,
   PhoneCall,
   MessageSquare,
   Workflow,
   Smartphone,
+  Store,
+  CalendarCheck,
+  Bot,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Section } from "@/components/ui/Section";
@@ -25,15 +24,13 @@ import { BrowserFrame } from "@/components/ui/BrowserFrame";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { Accordion } from "@/components/ui/Accordion";
 import { CTASection } from "@/components/sections/CTASection";
+import { FormulaSteps } from "@/components/sections/FormulaSteps";
 import { Link } from "@/i18n/navigation";
 import { getCaseStudy } from "@/content/work";
+import { cn } from "@/lib/cn";
 
-const STEPS: { key: "s1" | "s2" | "s3" | "s4"; icon: LucideIcon }[] = [
-  { key: "s1", icon: Sparkles },
-  { key: "s2", icon: TrendingUp },
-  { key: "s3", icon: Key },
-  { key: "s4", icon: Wrench },
-];
+const STEP_KEYS = ["s1", "s2", "s3", "s4"] as const;
+const TIER_KEYS = ["base", "pro", "max"] as const;
 
 const INCLUDE_KEYS = ["i1", "i2", "i3", "i4", "i5", "i6"] as const;
 
@@ -43,7 +40,17 @@ const MODULES: { key: "agent" | "whatsapp" | "flows" | "apps"; icon: LucideIcon 
   { key: "flows", icon: Workflow },
   { key: "apps", icon: Smartphone },
 ];
-const FAQ_KEYS = ["stop", "own", "fast", "report", "after"] as const;
+const FAQ_KEYS = ["stop", "which", "own", "fast", "report", "after"] as const;
+const TIERS: { key: "base" | "pro" | "max"; icon: LucideIcon }[] = [
+  { key: "base", icon: Store },
+  { key: "pro", icon: CalendarCheck },
+  { key: "max", icon: Bot },
+];
+const TIER_ITEMS = {
+  base: ["i1", "i2", "i3", "i4"],
+  pro: ["i1", "i2", "i3", "i4", "i5"],
+  max: ["i1", "i2", "i3", "i4", "i5"],
+} as const;
 const PROOF_SLUGS = ["aulon-detailing", "nonsolofitness", "schiano"] as const;
 
 export async function generateMetadata({
@@ -189,47 +196,165 @@ export default async function FormulaPage({
           </Reveal>
         </div>
 
-        <ol className="relative mt-16 grid gap-12 lg:grid-cols-4 lg:gap-8">
-          <div
-            aria-hidden
-            className="absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-accent-deep/60 via-ink/20 to-ink/5 lg:block"
+        <Reveal delay={0.1}>
+          <FormulaSteps
+            switchLabel={t("how.switch")}
+            tiers={TIER_KEYS.map((tier) => ({
+              key: tier,
+              label: t(`tiers.${tier}.name`),
+              steps: STEP_KEYS.map((step) => ({
+                title: t(`how.steps.${tier}.${step}.title`),
+                description: t(`how.steps.${tier}.${step}.description`),
+              })),
+            }))}
           />
-          <div
-            aria-hidden
-            className="absolute bottom-6 left-7 top-2 w-px bg-gradient-to-b from-accent-deep/60 via-ink/20 to-ink/5 lg:hidden"
-          />
-          {STEPS.map(({ key, icon: Icon }, i) => {
-            const owned = key === "s3";
+        </Reveal>
+      </Section>
+
+      {/* The three formulas — same rules, different insides */}
+      <Section tone="surface">
+        <div className="max-w-2xl">
+          <Reveal>
+            <Eyebrow>{t("tiers.eyebrow")}</Eyebrow>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-semibold">
+              {t("tiers.title")}
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-4 text-lg text-muted">{t("tiers.subtitle")}</p>
+          </Reveal>
+        </div>
+
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:items-start">
+          {TIERS.map(({ key: tier, icon: Icon }, i) => {
+            const pro = tier === "pro";
+            const max = tier === "max";
+            const tone = max ? "text-accent-2" : "text-accent";
+            const tint = max ? "bg-accent-2/15" : "bg-accent/15";
             return (
-              <Reveal as="li" key={key} delay={0.07 * i} className="relative pl-20 lg:pl-0">
-                <div className="absolute left-0 top-0 lg:relative lg:left-auto lg:top-auto">
-                  <div
-                    className={
-                      owned
-                        ? "relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-deep text-white shadow-[0_10px_30px_-8px_rgba(59,69,214,0.55)]"
-                        : "relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-accent-deep shadow-[0_10px_30px_-12px_rgba(21,23,28,0.35)] ring-1 ring-ink/10"
-                    }
-                  >
-                    <Icon size={24} aria-hidden />
+              <Reveal key={tier} delay={0.07 * i} className={pro ? "lg:-translate-y-4" : undefined}>
+                <SpotlightCard
+                  faceted
+                  interactive
+                  className={cn(
+                    "group flex h-full flex-col overflow-hidden p-7",
+                    max ? "gradient-ring-2" : pro ? "gradient-ring" : "",
+                  )}
+                  style={{ "--tier-color": max ? "var(--color-accent-2)" : "var(--color-accent)" } as React.CSSProperties}
+                >
+                  <span aria-hidden className="ghost-num absolute -right-2 -top-4 select-none">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+
+                  <div className="relative flex items-start justify-between gap-3">
+                    <div
+                      className={cn(
+                        "flex h-11 w-11 items-center justify-center rounded-xl ring-1 ring-inset transition-transform duration-300 group-hover:scale-110",
+                        tint,
+                        tone,
+                        max ? "ring-accent-2/25" : "ring-accent/25",
+                      )}
+                    >
+                      <Icon size={22} aria-hidden />
+                    </div>
+                    {tier !== "base" ? (
+                      <Badge
+                        accent={pro}
+                        className={max ? "bg-accent-2/15 text-accent-2 ring-accent-2/35" : undefined}
+                      >
+                        {t(`tiers.${tier}.badge`)}
+                      </Badge>
+                    ) : null}
                   </div>
-                </div>
-                <div className="lg:mt-7">
-                  <div className="flex items-baseline gap-3">
-                    <span className="font-mono text-sm font-semibold text-accent-deep">
-                      {String(i + 1).padStart(2, "0")}
+
+                  <h3 className="relative mt-5 text-2xl font-semibold">{t(`tiers.${tier}.name`)}</h3>
+                  <p className="relative mt-1 text-muted">{t(`tiers.${tier}.tagline`)}</p>
+
+                  <div className="relative mt-7 flex items-baseline gap-2">
+                    <span
+                      className={cn(
+                        "text-[clamp(3rem,5.5vw,4rem)] font-bold leading-none tracking-[-0.04em]",
+                        max && "text-gradient-animated",
+                      )}
+                    >
+                      {t(`tiers.${tier}.price`)}
                     </span>
-                    <h3 className="text-xl font-semibold">
-                      {t(`how.steps.${key}.title`)}
-                    </h3>
+                    <span className="text-muted">{t("tiers.monthLabel")}</span>
                   </div>
-                  <p className="mt-2.5 max-w-xs text-[15px] leading-relaxed text-muted">
-                    {t(`how.steps.${key}.description`)}
+
+                  {/* Nine months to ownership */}
+                  <div className="relative mt-6">
+                    <div className="flex items-baseline justify-between font-mono text-[12px]">
+                      <span className="text-muted">{t("tiers.totalLabel")}</span>
+                      <span className={cn("text-[15px] font-bold", tone)}>{t(`tiers.${tier}.total`)}</span>
+                    </div>
+                    <div className="mt-2.5 flex gap-1">
+                      {Array.from({ length: 9 }, (_, m) => (
+                        <span
+                          key={m}
+                          className={cn("tier-seg h-2 flex-1 rounded-sm", m === 8 && "tier-seg-owned")}
+                          style={{ "--i": m } as React.CSSProperties}
+                        />
+                      ))}
+                    </div>
+                    <div className="mt-2 flex items-baseline justify-between font-mono text-[12px] text-muted">
+                      <span>{t(`tiers.${tier}.months`)}</span>
+                      <span className={cn("font-semibold uppercase tracking-[0.1em]", tone)}>
+                        {t("tiers.ownedLabel")}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="relative mt-5 flex items-baseline justify-between gap-4 border-t border-dashed border-border pt-4 font-mono text-[12px]">
+                    <span className="text-muted">{t("tiers.afterLabel")}</span>
+                    <span className="text-right text-text/90">{t(`tiers.${tier}.after`)}</span>
+                  </div>
+
+                  <p className="relative mt-6 text-[15px] leading-relaxed text-text/90">
+                    {t(`tiers.${tier}.for`)}
                   </p>
-                </div>
+
+                  <p className="relative mt-6 text-xs font-medium uppercase tracking-[0.12em] text-muted">
+                    {t("tiers.includesLabel")}
+                  </p>
+                  <ul className="relative mt-3 space-y-2.5">
+                    {TIER_ITEMS[tier].map((key) => (
+                      <li key={key} className="flex items-start gap-3">
+                        <span
+                          className={cn(
+                            "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full",
+                            tint,
+                            tone,
+                          )}
+                        >
+                          <Check size={12} aria-hidden />
+                        </span>
+                        <span className="text-[15px] text-text/90">
+                          {t(`tiers.${tier}.items.${key}`)}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="relative mt-auto pt-8">
+                    <CalButton
+                      variant={tier === "base" ? "secondary" : "primary"}
+                      className="w-full"
+                    >
+                      {t("tiers.cta", { name: t(`tiers.${tier}.name`) })}
+                    </CalButton>
+                  </div>
+                </SpotlightCard>
               </Reveal>
             );
           })}
-        </ol>
+        </div>
+
+        <Reveal delay={0.15}>
+          <p className="mt-8 max-w-2xl text-sm text-muted">{t("tiers.note")}</p>
+        </Reveal>
       </Section>
 
       {/* What the first month includes + the other two doors */}

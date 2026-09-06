@@ -126,7 +126,7 @@
     "items": {
       "local": {
         "title": "Attività locali",
-        "description": "Niente tutto-e-subito: inizi con 100€ e paghi 100€ al mese. Decidi tu ogni mese se continuare, e a 900€ il sito è tuo.",
+        "description": "Niente tutto-e-subito: inizi con 100€ e paghi 100€ al mese. Decidi tu ogni mese se continuare, e a 900€ il sito è tuo. Pro e Max per chi vuole prenotazioni, ordini e risposte automatiche.",
         "cta": "Scopri la formula"
       },
       "project": {
@@ -147,7 +147,7 @@
   "formula": {
     "meta": {
       "title": "La tua attività online in pochi giorni — 100€",
-      "description": "Le agenzie chiedono tutto subito. Con la Formula inizi con 100€ e paghi 100€ al mese: decidi tu ogni mese se continuare, e a 900€ il sito è tuo per sempre."
+      "description": "Le agenzie chiedono tutto subito. Con la Formula inizi con 100€ e paghi 100€ al mese: decidi tu ogni mese se continuare, e a 900€ il sito è tuo per sempre. Formula Pro per i siti con prenotazioni e ordini online."
     },
     "eyebrow": "Per le attività locali",
     "titleBefore": "La tua attività online in pochi giorni.",
@@ -173,23 +173,123 @@
       "eyebrow": "Come funziona",
       "title": "Online in pochi giorni. Poi decidi tu, ogni mese.",
       "steps": {
-        "s1": {
-          "title": "Primo mese — 100€, sei online",
-          "description": "In pochi giorni metto online tutto: sito, dominio, scheda Google, SEO locale e recensioni via QR. Se il sito l'ho già costruito, anche domani."
+        "base": {
+          "s1": {
+            "title": "Primo mese — 100€, sei online",
+            "description": "In pochi giorni metto online tutto: sito, dominio, scheda Google, SEO locale e recensioni via QR. Se il sito l'ho già costruito, anche domani."
+          },
+          "s2": {
+            "title": "Ogni mese decidi tu",
+            "description": "100€ al mese, senza vincoli. Ogni mese ricevi i numeri veri — visite, chiamate, recensioni — e sei tu, con quelli in mano, a decidere se continuare. Se un mese decidi di no, ti fermi: nessuna penale."
+          },
+          "s3": {
+            "title": "A 900€ il sito è tuo",
+            "description": "Nove mesi da 100€ — oppure saldi la differenza quando vuoi. Dominio, sito e codice passano a te. Per sempre."
+          },
+          "s4": {
+            "title": "Dopo: 30€/mese, se vuoi",
+            "description": "Menù, prezzi, foto e novità sempre aggiornati da noi. Opzionale: il sito resta tuo anche senza."
+          }
         },
-        "s2": {
-          "title": "Ogni mese decidi tu",
-          "description": "100€ al mese, senza vincoli. Ogni mese ricevi i numeri veri — visite, chiamate, recensioni — e sei tu, con quelli in mano, a decidere se continuare. Se un mese decidi di no, ti fermi: nessuna penale."
+        "pro": {
+          "s1": {
+            "title": "Primo mese — 150€, sei online",
+            "description": "In pochi giorni metto online tutto: sito, dominio, scheda Google, SEO locale, recensioni via QR — e il sistema di prenotazioni o ordini, con il tuo pannello. Se il sito l'ho già costruito, anche domani."
+          },
+          "s2": {
+            "title": "Ogni mese decidi tu",
+            "description": "150€ al mese, senza vincoli. Ogni mese ricevi i numeri veri — visite, prenotazioni, ordini — e sei tu, con quelli in mano, a decidere se continuare. Se un mese decidi di no, ti fermi: nessuna penale."
+          },
+          "s3": {
+            "title": "A 1.350€ il sito è tuo",
+            "description": "Nove mesi da 150€ — oppure saldi la differenza quando vuoi. Dominio, sito, sistema e codice passano a te. Per sempre."
+          },
+          "s4": {
+            "title": "Dopo: 50€/mese, se vuoi",
+            "description": "Menù, prezzi, foto e novità aggiornati da noi, e il sistema di prenotazioni tenuto in piedi. Opzionale: il sito resta tuo anche senza."
+          }
         },
-        "s3": {
-          "title": "A 900€ il sito è tuo",
-          "description": "Nove mesi da 100€ — oppure saldi la differenza quando vuoi. Dominio, sito e codice passano a te. Per sempre."
-        },
-        "s4": {
-          "title": "Dopo: 30€/mese, se vuoi",
-          "description": "Menù, prezzi, foto e novità sempre aggiornati da noi. Opzionale: il sito resta tuo anche senza."
+        "max": {
+          "s1": {
+            "title": "Primo mese — 200€, sei online",
+            "description": "In pochi giorni metto online tutto: sito, prenotazioni e ordini, WhatsApp automatico e l'IA che risponde al telefono. Se il sito l'ho già costruito, anche domani."
+          },
+          "s2": {
+            "title": "Ogni mese decidi tu",
+            "description": "200€ al mese, senza vincoli. Ogni mese ricevi i numeri veri — prenotazioni, ordini, chiamate gestite — e sei tu, con quelli in mano, a decidere se continuare. Se un mese decidi di no, ti fermi: nessuna penale."
+          },
+          "s3": {
+            "title": "A 1.800€ è tutto tuo",
+            "description": "Nove mesi da 200€ — oppure saldi la differenza quando vuoi. Dominio, sito, sistema e codice passano a te. Per sempre."
+          },
+          "s4": {
+            "title": "Dopo: 80€/mese, se vuoi",
+            "description": "Aggiornamenti, assistenza prioritaria e i servizi che rispondono per te — WhatsApp e telefono — tenuti attivi da noi. Opzionale: il sito resta tuo anche senza."
+          }
         }
-      }
+      },
+      "switch": "Scegli la formula"
+    },
+    "tiers": {
+      "eyebrow": "Tre formule",
+      "title": "Una vetrina, o un sito che lavora per te.",
+      "subtitle": "Stesse regole per tutte: paghi mese per mese, senza vincoli, e in nove mesi il sito è tuo. Cambia solo cosa c'è dentro.",
+      "monthLabel": "al mese",
+      "totalLabel": "Totale per farlo tuo",
+      "afterLabel": "Dopo, se vuoi",
+      "includesLabel": "Cosa comprende",
+      "base": {
+        "name": "Formula",
+        "tagline": "La vetrina della tua attività.",
+        "price": "100€",
+        "total": "900€",
+        "months": "9 mesi da 100€, o saldi prima",
+        "after": "30€/mese di aggiornamenti",
+        "for": "Per ristoranti, negozi, palestre, studi: chi ha bisogno di essere trovato e di fare bella figura.",
+        "items": {
+          "i1": "Sito professionale su misura, bilingue se serve",
+          "i2": "Dominio, hosting, scheda Google e SEO locale",
+          "i3": "Cartelli QR per le recensioni",
+          "i4": "Report mensile su WhatsApp"
+        }
+      },
+      "pro": {
+        "name": "Formula Pro",
+        "badge": "La più scelta",
+        "tagline": "Un sito con un sistema dentro.",
+        "price": "150€",
+        "total": "1.350€",
+        "months": "9 mesi da 150€, o saldi prima",
+        "after": "50€/mese di aggiornamenti e assistenza",
+        "for": "Per chi vuole che il sito faccia un lavoro: prendere prenotazioni, ordini, pagamenti. Serve un sistema che gira ogni giorno, e lo teniamo in piedi noi.",
+        "items": {
+          "i1": "Tutto quello che c'è nella Formula",
+          "i2": "Prenotazioni o ordini online, con conferme automatiche",
+          "i3": "Menù o catalogo completo, con ricerca e categorie",
+          "i4": "Pannello gestionale tuo: prenotazioni, orari, prezzi",
+          "i5": "Acconti e pagamenti online, quando servono"
+        }
+      },
+      "max": {
+        "name": "Formula Max",
+        "badge": "Tutto compreso",
+        "tagline": "Il sito, e tutto quello che lavora intorno.",
+        "price": "200€",
+        "total": "1.800€",
+        "months": "9 mesi da 200€, o saldi prima",
+        "after": "80€/mese di aggiornamenti e assistenza prioritaria",
+        "for": "Per chi vuole smettere di stare al telefono: le prenotazioni, gli ordini e le domande dei clienti arrivano già gestiti, dal sito, da WhatsApp e dal telefono.",
+        "items": {
+          "i1": "Tutto quello che c'è nella Pro",
+          "i2": "WhatsApp Business automatico: conferme, promemoria, risposte",
+          "i3": "Un'IA che risponde al telefono e prende ordini e prenotazioni",
+          "i4": "Ordini e delivery con pagamento online",
+          "i5": "Assistenza prioritaria, modifiche entro il giorno"
+        }
+      },
+      "note": "Non sai quale fa per te? Te lo diciamo noi, guardando l'attività: nessuno viene spinto sulla Pro se non gli serve.",
+      "cta": "Inizia con la {name}",
+      "ownedLabel": "tuo"
     },
     "includes": {
       "eyebrow": "Il primo mese",
@@ -208,8 +308,8 @@
       "title": "Preferisci fare diversamente?",
       "upfront": {
         "title": "Tutto subito",
-        "price": "900€ una tantum",
-        "description": "Vuoi il sito tuo dal primo giorno? Lo compri in un'unica soluzione, con tutto quello che attiviamo il primo mese incluso."
+        "price": "900€, 1.350€ o 1.800€ una tantum",
+        "description": "Vuoi il sito tuo dal primo giorno? Lo compri in un'unica soluzione — 900€ la Formula, 1.350€ la Pro, 1.800€ la Max — con tutto quello che attiviamo il primo mese incluso."
       },
       "custom": {
         "title": "Progetti su misura",
@@ -255,13 +355,17 @@
           "q": "E se al secondo mese non voglio continuare?",
           "a": "Smetti di pagare e basta. Nessuna penale, nessun vincolo. Il sito va offline e hai speso solo i mesi che hai usato."
         },
+        "which": {
+          "q": "Formula, Pro o Max?",
+          "a": "Se ti serve essere trovato e fare bella figura, Formula. Se vuoi che il sito prenda prenotazioni o ordini da solo, Pro. Se vuoi che anche WhatsApp e il telefono rispondano da soli, Max. Le regole sono le stesse: mese per mese, senza vincoli, e in nove mesi è tuo."
+        },
         "own": {
           "q": "Di chi è il sito mentre pago?",
-          "a": "Finché non arrivi a 900€ resta di Fentriq — è per questo che puoi provarlo con così poco rischio. Completati i 900€, dominio, sito e codice diventano tuoi al 100%."
+          "a": "Finché non arrivi al totale della tua formula — 900€, 1.350€ o 1.800€ — resta di Fentriq: è per questo che puoi provarlo con così poco rischio. Completato il totale, dominio, sito e codice diventano tuoi al 100%."
         },
         "fast": {
           "q": "Posso chiudere prima e pagare tutto?",
-          "a": "Sì, quando vuoi: saldi la differenza fino a 900€ e da quel momento il sito è tuo."
+          "a": "Sì, quando vuoi: saldi la differenza fino al totale della tua formula e da quel momento il sito è tuo."
         },
         "report": {
           "q": "Come faccio a sapere se funziona?",
@@ -269,7 +373,7 @@
         },
         "after": {
           "q": "E dopo che è mio?",
-          "a": "Puoi gestirlo da solo, oppure con 30€ al mese lo teniamo aggiornato noi: menù, prezzi, foto, novità. Nessun obbligo."
+          "a": "Puoi gestirlo da solo, oppure lo teniamo aggiornato noi: 30€ al mese con la Formula, 50€ con la Pro, 80€ con la Max, perché più c'è dentro più c'è da tenere in piedi. Nessun obbligo."
         }
       }
     }

@@ -205,6 +205,33 @@ a {
   border: 1px solid transparent;
 }
 
+/* Violet-led variant for the top tier: same construction, second accent leads. */
+.gradient-ring-2 {
+  position: relative;
+  background:
+    linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+    linear-gradient(135deg, rgba(138, 92, 255, 0.85), rgba(69, 80, 255, 0.3) 40%, rgba(138, 92, 255, 0.1) 70%, rgba(69, 80, 255, 0.55)) border-box;
+  border: 1px solid transparent;
+}
+.gradient-ring-2.spotlight::before {
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(138, 92, 255, 0.14),
+    transparent 65%
+  );
+}
+
+/* Formula tier cards: the nine months to ownership, filled in sequence on hover. */
+.tier-seg {
+  background: color-mix(in oklab, var(--tier-color) 18%, transparent);
+  transition: background-color 0.25s ease;
+  transition-delay: calc(var(--i) * 45ms);
+}
+.tier-seg-owned,
+.group:hover .tier-seg {
+  background: var(--tier-color);
+}
+
 /* Cursor-tracking glow for interactive cards (vars set from JS). */
 .spotlight::before {
   content: "";

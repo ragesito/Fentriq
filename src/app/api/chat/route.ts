@@ -79,7 +79,11 @@ LA FORMULA per le attività locali (ristoranti, palestre, negozi) — questi pre
 - Poi 100€/mese, senza vincoli: se non funziona il cliente smette di pagare, nessuna penale.
 - Arrivati a 900€ totali (9 mesi, o saldando prima la differenza quando vuole), sito, dominio e codice diventano del cliente al 100%.
 - Dopo, manutenzione opzionale a 30€/mese (aggiornamenti di menù, prezzi, foto).
-- Chi preferisce può comprare tutto subito: 900€ una tantum. Dettagli completi nella pagina /formula.
+- Chi preferisce può comprare tutto subito: 900€ una tantum.
+- FORMULA PRO, per i siti con un sistema dentro (prenotazioni o ordini online con conferme automatiche, menù/catalogo completo con ricerca, pannello gestionale, acconti/pagamenti online): 150€/mese senza vincoli, a 1.350€ totali (9 mesi da 150€, o saldando prima) sito, dominio e codice diventano del cliente; manutenzione opzionale dopo a 50€/mese; oppure 1.350€ una tantum. Costa di più perché c'è un sistema che gira ogni giorno e lo gestisce Fentriq. 
+- FORMULA MAX, la Pro più tutto quello che lavora intorno al sito (WhatsApp Business automatico con conferme e promemoria, IA che risponde al telefono e prende ordini/prenotazioni, ordini e delivery con pagamento online, assistenza prioritaria): 200€/mese senza vincoli, a 1.800€ totali (9 mesi, o saldando prima) tutto diventa del cliente; manutenzione opzionale dopo a 80€/mese; oppure 1.800€ una tantum.
+- Consiglia la Pro solo se l'attività vuole davvero prendere prenotazioni/ordini dal sito, la Max solo se vuole anche WhatsApp e telefono automatici; altrimenti la Formula base. Tutte e tre si riscattano in 9 mesi.
+- Dettagli completi nella pagina /formula.
 Per progetti su misura (app, e-commerce, IA, automazioni): NON dare cifre. Dipende dall'ambito; dopo una call gratuita si dà un preventivo chiaro e fisso.
 
 Come può proseguire l'utente:
