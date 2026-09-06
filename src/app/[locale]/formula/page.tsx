@@ -51,7 +51,7 @@ const TIER_ITEMS = {
   pro: ["i1", "i2", "i3", "i4", "i5"],
   max: ["i1", "i2", "i3", "i4", "i5"],
 } as const;
-const PROOF_SLUGS = ["aulon-detailing", "nonsolofitness", "schiano"] as const;
+const PROOF_SLUGS = ["aulon-detailing", "salone-meraviglie", "nonsolofitness"] as const;
 
 export async function generateMetadata({
   params,

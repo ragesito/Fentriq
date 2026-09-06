@@ -118,6 +118,48 @@ export const caseStudies: CaseStudy[] = [
     },
   },
   {
+    slug: "salone-meraviglie",
+    title: "Il Salone delle Meraviglie di ALI",
+    year: 2026,
+    featured: false,
+    kind: "client",
+    sector: {
+      it: "Salone di bellezza · Torvaianica (RM)",
+      en: "Beauty salon · Torvaianica (RM)",
+    },
+    cover: "/work/salone-meraviglie.jpg",
+    mobile: "/work/mobile/salone-meraviglie.jpg",
+    stack: ["Web", "E-commerce", "Pagamenti"],
+    links: { live: "https://salone-meraviglie.salone-meraviglie.workers.dev" },
+    roles: {
+      it: ["Sito bilingue", "Shop online", "Area clienti e pannello"],
+      en: ["Bilingual site", "Online shop", "Customer area and admin"],
+    },
+    badge: { it: "Online", en: "Live" },
+    summary: {
+      it: "Sito bilingue con shop integrato per un salone di parrucchiere, barbiere ed estetica dal 2013: prodotti, carrello, pagamento sicuro, ritiro in salone e area clienti. Il secondo cliente entrato con la Formula.",
+      en: "Bilingual site with a built-in shop for a hair, barber and beauty salon open since 2013: products, cart, secure checkout, in-salon pickup and a customer area. The second client to join through the Formula.",
+    },
+    sections: {
+      problem: {
+        it: "Un salone con 4,7 su Google e oltre 120 recensioni, aperto dal 2013, che vendeva i prodotti solo al banco: chi li voleva doveva passare in negozio, e online non c'era nulla che raccontasse il salone.",
+        en: "A salon rated 4.7 on Google with 120+ reviews, open since 2013, that sold its products only over the counter: anyone who wanted them had to come by, and online there was nothing telling the salon's story.",
+      },
+      solution: {
+        it: "Un sito luminoso — avorio, oro e orchidea — con servizi, lavori, storia e contatti, e uno shop vero: catalogo con ricerca e categorie, carrello, pagamento sicuro, spedizione o ritiro gratuito in salone, e un'area personale con ordini e indirizzi.",
+        en: "A bright site — ivory, gold and orchid — with services, work, story and contacts, and a real shop: catalogue with search and categories, cart, secure checkout, shipping or free in-salon pickup, and a personal area with orders and addresses.",
+      },
+      build: {
+        it: "Italiano e inglese, prenotazione via WhatsApp, pannello riservato al salone per prodotti, scorte, ordini e clienti con il fatturato mese per mese, e dati strutturati per Google. Il titolare aggiorna tutto senza toccare codice.",
+        en: "Italian and English, booking via WhatsApp, a private panel for the salon to manage products, stock, orders and customers with month-by-month revenue, and structured data for Google. The owner updates everything without touching code.",
+      },
+      result: {
+        it: "Online e in uso, con il dominio proprio in arrivo all'avvio della Formula: il secondo cliente a entrarci, e il primo con uno shop.",
+        en: "Live and in use, with its own domain arriving when the Formula starts: the second client to join it, and the first with a shop.",
+      },
+    },
+  },
+  {
     slug: "schiano",
     title: "Schiano Cantina & Cucina",
     year: 2026,
