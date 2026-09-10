@@ -404,6 +404,15 @@
       }
     }
   },
+  "formulaCta": {
+    "eyebrow": "The Formula",
+    "title": "A website for €100 a month. At €900 it's yours.",
+    "subtitle": "For restaurants, shops, gyms and practices: no all-at-once. You start with €100, decide month by month whether to carry on, and in nine months you own the site. Three formulas with the same rules: only how much the site works for you changes.",
+    "cta": "See the three formulas",
+    "ctaCall": "Book a free call",
+    "ledgerLabel": "The three formulas",
+    "footer": "Nine months, then the site is yours. Or settle earlier."
+  },
   "cta": {
     "title": "Got an idea or a process to automate? Let's talk.",
     "subtitle": "A free, no-strings 30-minute call. We'll tell you right away if we can help.",

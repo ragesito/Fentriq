@@ -5,6 +5,7 @@ import { Services } from "@/components/sections/Services";
 import { Work } from "@/components/sections/Work";
 import { Process } from "@/components/sections/Process";
 import { WhyUs } from "@/components/sections/WhyUs";
+import { FormulaCTA } from "@/components/sections/FormulaCTA";
 import { Pricing } from "@/components/sections/Pricing";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
@@ -27,6 +28,7 @@ export default async function HomePage({
       {/* The cream→dark boundary is its own divider — no seam needed here. */}
       <Showcase />
       <Services />
+      <FormulaCTA />
       <Work />
       <Process />
       <WhyUs />

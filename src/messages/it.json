@@ -404,6 +404,15 @@
       }
     }
   },
+  "formulaCta": {
+    "eyebrow": "La Formula",
+    "title": "Un sito da 100€ al mese. A 900€ è tuo.",
+    "subtitle": "Per ristoranti, negozi, palestre e studi: niente tutto-e-subito. Inizi con 100€, decidi mese per mese se continuare, e in nove mesi il sito è di tua proprietà. Tre formule con le stesse regole: cambia solo quanto il sito lavora per te.",
+    "cta": "Scopri le tre formule",
+    "ctaCall": "Prenota una call gratuita",
+    "ledgerLabel": "Le tre formule",
+    "footer": "Nove mesi, poi il sito è tuo. O saldi prima."
+  },
   "cta": {
     "title": "Hai un'idea o un processo da automatizzare? Parliamone.",
     "subtitle": "Una call di 30 minuti, gratuita e senza impegno. Ti diciamo subito se possiamo aiutarti.",

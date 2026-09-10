@@ -212,7 +212,7 @@ export default async function FormulaPage({
       </Section>
 
       {/* The three formulas — same rules, different insides */}
-      <Section tone="surface">
+      <Section id="formule" tone="surface">
         <div className="max-w-2xl">
           <Reveal>
             <Eyebrow>{t("tiers.eyebrow")}</Eyebrow>
