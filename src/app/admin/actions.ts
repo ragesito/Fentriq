@@ -16,7 +16,7 @@ import {
   saveReport,
   upsertClient,
 } from "@/lib/admin/store";
-import type { Client, Payment } from "@/lib/admin/formula";
+import { addDays, daysBetween, type Client, type Payment } from "@/lib/admin/formula";
 import { sourceLabels } from "@/lib/admin/i18n";
 
 /** Every mutating action re-checks the session: a stale form must not write. */
@@ -59,6 +59,9 @@ export async function logout() {
 export async function saveClient(form: FormData) {
   await requireSession();
   const existingId = str(form.get("id"));
+  // Pause is owned by its own section on the client page, not by this form:
+  // an edit must never resume a plan by omission.
+  const existing = existingId ? await getClient(existingId) : null;
   const client: Client = {
     id: existingId || id(),
     name: str(form.get("name")),
@@ -69,7 +72,8 @@ export async function saveClient(form: FormData) {
     totalPriceCents: cents(form.get("totalPrice")),
     startedOn: str(form.get("startedOn")) || new Date().toISOString().slice(0, 10),
     lang: str(form.get("lang")) === "en" ? "en" : "it",
-    paused: form.get("paused") === "on",
+    paused: existing?.paused ?? false,
+    pausedOn: existing?.pausedOn ?? null,
     notes: str(form.get("notes")),
   };
   if (!client.name) return;
@@ -77,6 +81,43 @@ export async function saveClient(form: FormData) {
   revalidatePath("/admin");
   revalidatePath(`/admin/clienti/${client.id}`);
   redirect(`/admin/clienti/${client.id}`);
+}
+
+/**
+ * Pauses or resumes a plan.
+ *
+ * A pause stops the expected-collection clock: no next due date, and the
+ * client stops counting toward the monthly recurring total. Resuming pushes
+ * the first month forward by however long the plan was stopped, so the next
+ * collection stays as far away as it was on the day it was paused instead of
+ * coming back as arrears the client never owed.
+ */
+export async function setPaused(form: FormData) {
+  await requireSession();
+  const clientId = str(form.get("clientId"));
+  const client = await getClient(clientId);
+  if (!client) return;
+
+  const pause = str(form.get("paused")) === "1";
+  if (pause === client.paused) return;
+  const today = new Date().toISOString().slice(0, 10);
+
+  if (pause) {
+    await upsertClient({ ...client, paused: true, pausedOn: today });
+  } else {
+    const stoppedDays = client.pausedOn
+      ? Math.max(0, daysBetween(client.pausedOn, today))
+      : 0;
+    await upsertClient({
+      ...client,
+      paused: false,
+      pausedOn: null,
+      startedOn: addDays(client.startedOn, stoppedDays),
+    });
+  }
+
+  revalidatePath("/admin");
+  revalidatePath(`/admin/clienti/${clientId}`);
 }
 
 export async function removeClient(form: FormData) {

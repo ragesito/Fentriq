@@ -48,15 +48,6 @@ export default async function EditClientPage({
             <Field label="Primer mes" name="startedOn" type="date" defaultValue={c.startedOn} />
             <LangSelect value={c.lang} />
           </div>
-          <label className="flex items-center gap-2.5 text-sm">
-            <input
-              type="checkbox"
-              name="paused"
-              defaultChecked={c.paused}
-              className="h-4 w-4 rounded border-border bg-surface-2 accent-[var(--color-accent)]"
-            />
-            <span className="text-muted">En pausa (no contar los cobros previstos)</span>
-          </label>
           <TextArea label="Notas" name="notes" rows={3} defaultValue={c.notes} />
           <button
             type="submit"

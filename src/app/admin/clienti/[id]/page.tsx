@@ -10,7 +10,7 @@ import {
 import { computeProgress, euros, esDate } from "@/lib/admin/formula";
 import { sourceLabels } from "@/lib/admin/i18n";
 import { AdminShell, Card, DueBadge, Field, FormulaBar, TextArea } from "@/components/admin/ui";
-import { recordPayment, removePayment, saveMonthlyReport } from "../../actions";
+import { recordPayment, removePayment, saveMonthlyReport, setPaused } from "../../actions";
 
 export const dynamic = "force-dynamic";
 
@@ -74,6 +74,46 @@ export default async function ClientPage({
               } meses para el traspaso.`}
         </p>
       </Card>
+
+      {/* Plan state: pause stops the collection clock without touching history */}
+      {!progress.owned ? (
+        <>
+          <h2 className="mt-10 font-mono text-xs uppercase tracking-[0.14em] text-accent">
+            Estado del plan
+          </h2>
+          <Card className="mt-3">
+            <form
+              action={setPaused}
+              className="flex flex-wrap items-center justify-between gap-4"
+            >
+              <input type="hidden" name="clientId" value={client.id} />
+              <input type="hidden" name="paused" value={client.paused ? "0" : "1"} />
+              <div className="min-w-0 sm:max-w-md">
+                <p className="font-semibold">
+                  {client.paused
+                    ? `En pausa desde el ${esDate(client.pausedOn ?? today)}`
+                    : "Plan activo"}
+                </p>
+                <p className="mt-1 text-sm text-muted">
+                  {client.paused
+                    ? "No se cuentan cobros previstos mientras esté parado. Al reanudar, el próximo cobro se aplaza tantos días como haya durado la pausa."
+                    : "Pausar detiene el recuento de cobros previstos y saca su cuota del recurrente. Los cobros y los informes se quedan como están."}
+                </p>
+              </div>
+              <button
+                type="submit"
+                className={
+                  client.paused
+                    ? "h-11 shrink-0 rounded-full bg-accent px-6 text-sm font-medium text-on-accent transition-colors hover:bg-accent-2"
+                    : "h-11 shrink-0 rounded-full border border-border px-6 text-sm font-medium text-muted transition-colors hover:border-amber-400/60 hover:text-amber-300"
+                }
+              >
+                {client.paused ? "Reanudar plan" : "Pausar plan"}
+              </button>
+            </form>
+          </Card>
+        </>
+      ) : null}
 
       {/* Record a payment */}
       <h2 className="mt-10 font-mono text-xs uppercase tracking-[0.14em] text-accent">

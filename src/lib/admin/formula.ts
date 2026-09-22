@@ -28,6 +28,8 @@ export interface Client {
   /** Language of the report this client receives — not of the admin. */
   lang: ClientLang;
   paused: boolean;
+  /** ISO date the plan was paused, null while it runs. */
+  pausedOn: string | null;
   notes: string;
 }
 
@@ -67,6 +69,12 @@ export function addMonths(iso: string, months: number): string {
   ).getUTCDate();
   target.setUTCDate(Math.min(d, lastDay));
   return target.toISOString().slice(0, 10);
+}
+
+/** Adds whole days — used to push a due date back by a pause. */
+export function addDays(iso: string, days: number): string {
+  const t = Date.parse(iso + "T00:00:00Z") + days * 86_400_000;
+  return new Date(t).toISOString().slice(0, 10);
 }
 
 export function daysBetween(fromIso: string, toIso: string): number {
