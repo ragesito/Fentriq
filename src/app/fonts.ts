@@ -1,4 +1,4 @@
-import { Bricolage_Grotesque, Geist, Space_Grotesk } from "next/font/google";
+import { Bricolage_Grotesque, Geist, Outfit } from "next/font/google";
 
 export const display = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -14,9 +14,9 @@ export const body = Geist({
   display: "swap",
 });
 
-export const mark = Space_Grotesk({
+export const mark = Outfit({
   subsets: ["latin"],
-  weight: ["300"],
+  weight: ["400"],
   variable: "--font-mark",
   display: "swap",
 });

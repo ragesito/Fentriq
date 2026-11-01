@@ -7,18 +7,11 @@ import * as THREE from "three";
  */
 
 export interface SceneState {
-  /** A drawer is open: the mark moves aside and opens up behind it. */
+  /** A drawer is open: the blurred scene behind it holds still. */
   open: boolean;
-  /** Width of the open drawer, so the mark can centre in the space left. */
-  drawerWidth: number;
 }
 
 const PHONE_WIDTH = 820;
-/** Touch screens have no cursor to follow, so the mark performs on its own. */
-const FOLD_EVERY = 9;
-const FOLD_LENGTH = 3.2;
-
-const easeInOut = (q: number) => (q < 0.5 ? 4 * q * q * q : 1 - (-2 * q + 2) ** 3 / 2);
 
 function buildSurface(size: number) {
   const n = size * size;
@@ -196,7 +189,10 @@ export function startScene(
   world.add(logo);
 
   const pointer = { x: 0, y: 0, active: false };
-  let explode = reduced ? 0 : 1.9;
+  // Touch screens have no cursor to follow: the whole mark just sways on its
+  // axis, and it never comes apart there, not even on arrival.
+  const calm = matchMedia("(hover: none)").matches || innerWidth <= PHONE_WIDTH;
+  let explode = reduced || calm ? 0 : 1.9;
   let last = performance.now();
   const start = last;
   let visW = 1;
@@ -212,16 +208,10 @@ export function startScene(
     visW = visH * camera.aspect;
   }
   function target() {
-    // On phones the drawer covers everything, so the scene behind it stays put.
     if (innerWidth <= PHONE_WIDTH) {
-      return { x: 0, y: (0.5 - 0.18) * visH, s: Math.min(visW * 0.62, visH * 0.3) / 74, explode: 0 };
+      return { x: 0, y: (0.5 - 0.18) * visH, s: Math.min(visW * 0.62, visH * 0.3) / 74 };
     }
-    const open = state.open;
-    const free = 1 - state.drawerWidth / innerWidth;
-    const fx = open ? free / 2 : 0.74;
-    const fy = open ? 0.46 : 0.32;
-    const logoW = open ? Math.min(visW * free * 0.62, visH * 0.66) : Math.min(visW * 0.34, visH * 0.55);
-    return { x: (fx - 0.5) * visW, y: (0.5 - fy) * visH, s: logoW / 74, explode: open ? 0.2 : 0 };
+    return { x: (0.74 - 0.5) * visW, y: (0.5 - 0.32) * visH, s: Math.min(visW * 0.34, visH * 0.55) / 74 };
   }
   resize();
   const place = target();
@@ -232,21 +222,9 @@ export function startScene(
     pointer.y = (e.clientY / innerHeight) * 2 - 1;
     pointer.active = true;
   };
-  // A tap on the bare wall makes the mark fold right away.
-  const onTap = (e: PointerEvent) => {
-    if (e.pointerType === "mouse" || state.open) return;
-    if ((e.target as Element | null)?.closest?.("a, button, input, textarea, dialog")) return;
-    wantFold = true;
-  };
   addEventListener("resize", resize);
   addEventListener("pointermove", onPointer, { passive: true });
-  addEventListener("pointerdown", onTap, { passive: true });
 
-  const touch = matchMedia("(hover: none)").matches;
-  let wantFold = false;
-  let foldStart = -1;
-  let nextFold = 3;
-  let baseY = 0;
   let coveredSince = -1;
   let raf = 0;
   let first = true;
@@ -255,10 +233,10 @@ export function startScene(
     last = now;
     const t = (now - start) / 1000;
 
-    // Nothing of the scene shows behind a full-screen drawer: stop drawing it.
-    if (state.open && innerWidth <= PHONE_WIDTH) {
+    // Behind the blur the scene holds still, and costs nothing while it does.
+    if (state.open) {
       if (coveredSince < 0) coveredSince = t;
-      if (t - coveredSince > 0.9 && !reduced) {
+      if (t - coveredSince > 0.5 && !reduced) {
         raf = requestAnimationFrame(frame);
         return;
       }
@@ -266,39 +244,26 @@ export function startScene(
       coveredSince = -1;
     }
 
-    const auto = touch && !pointer.active && !reduced;
-    const foldDone = foldStart < 0 || t - foldStart >= FOLD_LENGTH;
-    if (foldDone && !state.open && (wantFold || (auto && t >= nextFold))) {
-      foldStart = t;
-      nextFold = t + FOLD_EVERY;
-    }
-    wantFold = false;
-    const q = foldStart < 0 ? 1 : Math.min(1, (t - foldStart) / FOLD_LENGTH);
-    const spin = q < 1 ? easeInOut(q) * Math.PI * 2 : 0;
-
     const k = reduced ? 1 : 1 - Math.exp(-dt * 5);
     const tg = target();
     place.x += (tg.x - place.x) * k;
     place.y += (tg.y - place.y) * k;
     place.s += (tg.s - place.s) * k;
-    explode += (tg.explode - explode) * (reduced ? 1 : 1 - Math.exp(-dt * 3.6));
+    explode -= explode * (reduced ? 1 : 1 - Math.exp(-dt * 3.6));
 
     logo.position.set(place.x, place.y, 1.2);
     logo.scale.setScalar(place.s);
-    const px = pointer.active ? pointer.x : auto ? Math.sin(t * 0.5) * 0.9 : Math.sin(t * 0.35) * 0.55;
-    const py = pointer.active ? pointer.y : auto ? Math.cos(t * 0.37) * 0.6 : Math.cos(t * 0.27) * 0.4;
-    baseY += (px * 0.42 - 0.2 - baseY) * k;
-    logo.rotation.y = baseY + spin;
+    const sway = calm ? 0.4 : 0.55;
+    const px = pointer.active ? pointer.x : Math.sin(t * 0.35) * sway;
+    const py = pointer.active ? pointer.y : Math.cos(t * 0.27) * (calm ? 0.3 : 0.4);
+    logo.rotation.y += (px * 0.42 - 0.2 - logo.rotation.y) * k;
     logo.rotation.x += (py * 0.28 + 0.1 - logo.rotation.x) * k;
 
-    meshes.forEach((f, i) => {
-      // During a fold the facets part and come back in a wave, one after another.
-      const wave = Math.min(1, Math.max(0, (q - i * 0.06) / 0.82));
-      const e = explode + Math.sin(Math.PI * wave) ** 2 * 0.55;
-      f.mesh.position.set(f.home.x + f.dir.x * e * 14, f.home.y + f.dir.y * e * 14, f.lift * e * 9);
-      f.mesh.rotation.z = f.spin * e * 0.3;
-      f.mesh.rotation.y = f.spin * e * 0.35;
-    });
+    for (const f of meshes) {
+      f.mesh.position.set(f.home.x + f.dir.x * explode * 14, f.home.y + f.dir.y * explode * 14, f.lift * explode * 9);
+      f.mesh.rotation.z = f.spin * explode * 0.3;
+      f.mesh.rotation.y = f.spin * explode * 0.35;
+    }
 
     light.position.x += (px * visW * 0.5 - light.position.x) * k;
     light.position.y += (-py * visH * 0.5 - light.position.y) * k;
@@ -338,7 +303,6 @@ export function startScene(
     removeEventListener("resize", once);
     removeEventListener("hashchange", onceSoon);
     removeEventListener("pointermove", onPointer);
-    removeEventListener("pointerdown", onTap);
     document.removeEventListener("visibilitychange", onVisibility);
     world.environment?.dispose();
     wall.geometry.dispose();

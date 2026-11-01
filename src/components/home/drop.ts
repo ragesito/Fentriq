@@ -1,11 +1,11 @@
 /**
  * The phone drawer's reveal: an upside-down water drop. Its tail stays on the
  * point the visitor tapped while the round head rises and swells until it
- * fills the screen; closing runs it backwards.
+ * fills the card; closing runs it backwards.
  */
 
-const OPEN_MS = 680;
-const CLOSE_MS = 460;
+const OPEN_MS = 560;
+const CLOSE_MS = 380;
 const CIRCLE = 0.5523; // Cubic handle length that draws a quarter circle.
 
 export interface Point {
@@ -65,8 +65,17 @@ export function createDrop(el: HTMLElement): Drop {
     stop,
     play(target, from, onDone) {
       stop();
-      // A new origin only makes sense for a drop that hasn't started yet.
-      if (progress === 0) origin = from ?? null;
+      // A new origin only makes sense for a drop that hasn't started yet. The
+      // path is drawn in the card's own coordinates, and the drop starts inside it.
+      if (progress === 0) {
+        const box = el.getBoundingClientRect();
+        origin = from
+          ? {
+              x: Math.max(0, Math.min(box.width, from.x - box.left)),
+              y: Math.max(0, Math.min(box.height, from.y - box.top)),
+            }
+          : null;
+      }
       draw();
       if (progress === target) {
         onDone?.();

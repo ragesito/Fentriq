@@ -77,7 +77,7 @@ export function Home() {
 
   const drawer = useRef<HTMLDialogElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
-  const sceneState = useRef<SceneState>({ open: false, drawerWidth: 0 });
+  const sceneState = useRef<SceneState>({ open: false });
   const openedHere = useRef(false);
   const drop = useRef<Drop | null>(null);
   const lastTap = useRef<Point | null>(null);
@@ -143,8 +143,9 @@ export function Home() {
     const isOpen = panel !== null;
     document.body.classList.toggle("panel-open", isOpen);
     sceneState.current.open = isOpen;
-    // On phones the drawer takes the whole screen and opens as a drop.
-    const phoneDrop = matchMedia(PHONE_QUERY).matches && dropSupported();
+    // On phones the card opens as a drop.
+    const phone = matchMedia(PHONE_QUERY).matches;
+    const phoneDrop = phone && dropSupported();
     if (phoneDrop) drop.current ??= createDrop(d);
     if (!isOpen) {
       d.classList.remove("in");
@@ -163,7 +164,6 @@ export function Home() {
       d.showModal();
       d.scrollTop = 0;
     }
-    sceneState.current.drawerWidth = d.offsetWidth;
     if (phoneDrop) drop.current?.play(1, lastTap.current);
     lastTap.current = null;
     const raf = requestAnimationFrame(() => d.classList.add("in"));
@@ -171,10 +171,12 @@ export function Home() {
       const typed = ask.trim();
       // eslint-disable-next-line react-hooks/set-state-in-effect -- carries the hero's text into the form as it opens
       if (typed) setForm((f) => (f.message ? f : { ...f, message: typed }));
-      document.getElementById(typed ? "w-name" : "w-idea")?.focus();
+    }
+    // On phones a focused field would throw the keyboard over the card right away.
+    if (panel === "scrivimi" && !phone) {
+      document.getElementById(ask.trim() ? "w-name" : "w-idea")?.focus();
     } else {
-      const heading = d.querySelector<HTMLElement>(`[data-panel="${panel}"] h2`);
-      heading?.focus({ preventScroll: true });
+      d.querySelector<HTMLElement>(`[data-panel="${panel}"] h2`)?.focus({ preventScroll: true });
     }
     return () => {
       cancelAnimationFrame(raf);
@@ -348,7 +350,9 @@ export function Home() {
         ref={drawer}
         className="drawer"
         aria-labelledby={shown ? `title-${shown}` : undefined}
-        data-wide={shown === "privacy" ? "" : undefined}
+        data-size={
+          shown === "privacy" ? "wide" : shown === "chiama" || shown === "email" ? "small" : undefined
+        }
         onCancel={(e) => {
           e.preventDefault();
           leave();
