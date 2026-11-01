@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from "react"
 import { siteConfig } from "@/config/site";
 import { homeCopy, type Locale } from "@/content/home";
 import { cookieDoc, privacyDoc, type LegalDoc } from "@/content/legal";
+import { createDrop, dropSupported, type Drop, type Point } from "./drop";
 import type { SceneState } from "./scene";
 
 const PANELS = ["scrivimi", "come-lavoro", "chiama", "email", "privacy", "cookie"] as const;
@@ -12,6 +13,7 @@ type SendStatus = "idle" | "sending" | "sent" | "contact" | "rate" | "failed";
 
 const LANG_KEY = "fq-lang";
 const CLOSE_MS = 420;
+const PHONE_QUERY = "(max-width: 820px)";
 
 function panelFromHash(): Panel | null {
   const name = location.hash.slice(1);
@@ -45,14 +47,16 @@ function CopyButton({ value, label, done }: { value: string; label: string; done
 function LegalBody({ doc, locale, updated }: { doc: LegalDoc; locale: Locale; updated: string }) {
   return (
     <>
-      {doc.blocks[locale].map((block) => (
-        <div className="legal-block" key={block.heading}>
-          <h3>{block.heading}</h3>
-          {block.body.map((text) => (
-            <p key={text}>{text}</p>
-          ))}
-        </div>
-      ))}
+      <div className="legal-cols">
+        {doc.blocks[locale].map((block) => (
+          <div className="legal-block" key={block.heading}>
+            <h3>{block.heading}</h3>
+            {block.body.map((text) => (
+              <p key={text}>{text}</p>
+            ))}
+          </div>
+        ))}
+      </div>
       <p className="note">{updated}</p>
     </>
   );
@@ -61,6 +65,9 @@ function LegalBody({ doc, locale, updated }: { doc: LegalDoc; locale: Locale; up
 export function Home() {
   const [locale, setLocale] = useState<Locale>("it");
   const [panel, setPanel] = useState<Panel | null>(null);
+  // The last open panel: its content stays in place while the drawer leaves.
+  const [shown, setShown] = useState<Panel | null>(null);
+  if (panel && panel !== shown) setShown(panel);
   const [ask, setAsk] = useState("");
   const [ideaIndex, setIdeaIndex] = useState(0);
   const [askFocused, setAskFocused] = useState(false);
@@ -70,8 +77,10 @@ export function Home() {
 
   const drawer = useRef<HTMLDialogElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
-  const sceneState = useRef<SceneState>({ open: false });
+  const sceneState = useRef<SceneState>({ open: false, drawerWidth: 0 });
   const openedHere = useRef(false);
+  const drop = useRef<Drop | null>(null);
+  const lastTap = useRef<Point | null>(null);
   const t = homeCopy[locale];
 
   // The language lives on this one address: it never changes the URL, so the
@@ -101,12 +110,21 @@ export function Home() {
   useEffect(() => {
     const sync = () => setPanel(panelFromHash());
     const onHash = () => {
-      openedHere.current = panelFromHash() !== null;
+      const next = panelFromHash();
+      openedHere.current = next !== null;
+      if (next === "scrivimi") setStatus((s) => (s === "sent" ? "idle" : s));
       sync();
+    };
+    const onTap = (e: PointerEvent) => {
+      lastTap.current = { x: e.clientX, y: e.clientY };
     };
     sync();
     addEventListener("hashchange", onHash);
-    return () => removeEventListener("hashchange", onHash);
+    addEventListener("pointerdown", onTap, { passive: true });
+    return () => {
+      removeEventListener("hashchange", onHash);
+      removeEventListener("pointerdown", onTap);
+    };
   }, []);
 
   const leave = useCallback(() => {
@@ -125,14 +143,29 @@ export function Home() {
     const isOpen = panel !== null;
     document.body.classList.toggle("panel-open", isOpen);
     sceneState.current.open = isOpen;
+    // On phones the drawer takes the whole screen and opens as a drop.
+    const phoneDrop = matchMedia(PHONE_QUERY).matches && dropSupported();
+    if (phoneDrop) drop.current ??= createDrop(d);
     if (!isOpen) {
       d.classList.remove("in");
+      if (phoneDrop) {
+        drop.current?.play(0, null, () => {
+          if (d.open) d.close();
+        });
+        return () => drop.current?.stop();
+      }
       const timer = setTimeout(() => {
         if (d.open) d.close();
       }, CLOSE_MS);
       return () => clearTimeout(timer);
     }
-    if (!d.open) d.showModal();
+    if (!d.open) {
+      d.showModal();
+      d.scrollTop = 0;
+    }
+    sceneState.current.drawerWidth = d.offsetWidth;
+    if (phoneDrop) drop.current?.play(1, lastTap.current);
+    lastTap.current = null;
     const raf = requestAnimationFrame(() => d.classList.add("in"));
     if (panel === "scrivimi") {
       const typed = ask.trim();
@@ -143,7 +176,10 @@ export function Home() {
       const heading = d.querySelector<HTMLElement>(`[data-panel="${panel}"] h2`);
       heading?.focus({ preventScroll: true });
     }
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      drop.current?.stop();
+    };
     // `ask` is read only at the moment the drawer opens.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [panel]);
@@ -311,7 +347,8 @@ export function Home() {
       <dialog
         ref={drawer}
         className="drawer"
-        aria-labelledby={panel ? `title-${panel}` : undefined}
+        aria-labelledby={shown ? `title-${shown}` : undefined}
+        data-wide={shown === "privacy" ? "" : undefined}
         onCancel={(e) => {
           e.preventDefault();
           leave();
@@ -325,7 +362,7 @@ export function Home() {
             <CloseIcon />
           </button>
 
-          <section data-panel="scrivimi" hidden={panel !== "scrivimi"}>
+          <section data-panel="scrivimi" hidden={shown !== "scrivimi"}>
             <h2 id="title-scrivimi" tabIndex={-1}>
               {status === "sent" ? t.sentTitle : t.writeTitle}
             </h2>
@@ -413,7 +450,7 @@ export function Home() {
             )}
           </section>
 
-          <section data-panel="come-lavoro" hidden={panel !== "come-lavoro"}>
+          <section data-panel="come-lavoro" hidden={shown !== "come-lavoro"}>
             <h2 id="title-come-lavoro" tabIndex={-1}>
               {t.howTitle}
             </h2>
@@ -439,7 +476,7 @@ export function Home() {
             </a>
           </section>
 
-          <section data-panel="chiama" hidden={panel !== "chiama"}>
+          <section data-panel="chiama" hidden={shown !== "chiama"}>
             <h2 id="title-chiama" tabIndex={-1}>
               {t.callTitle}
             </h2>
@@ -450,7 +487,7 @@ export function Home() {
             <CopyButton value={siteConfig.phone.display} label={t.callCopy} done={t.copied} />
           </section>
 
-          <section data-panel="email" hidden={panel !== "email"}>
+          <section data-panel="email" hidden={shown !== "email"}>
             <h2 id="title-email" tabIndex={-1}>
               {t.mailTitle}
             </h2>
@@ -461,14 +498,14 @@ export function Home() {
             <CopyButton value={siteConfig.email} label={t.mailCopy} done={t.copied} />
           </section>
 
-          <section data-panel="privacy" hidden={panel !== "privacy"}>
+          <section data-panel="privacy" hidden={shown !== "privacy"}>
             <h2 id="title-privacy" tabIndex={-1}>
               {privacyDoc.title[locale]}
             </h2>
             <LegalBody doc={privacyDoc} locale={locale} updated={t.updated} />
           </section>
 
-          <section data-panel="cookie" hidden={panel !== "cookie"}>
+          <section data-panel="cookie" hidden={shown !== "cookie"}>
             <h2 id="title-cookie" tabIndex={-1}>
               {cookieDoc.title[locale]}
             </h2>

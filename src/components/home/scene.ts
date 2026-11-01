@@ -9,7 +9,16 @@ import * as THREE from "three";
 export interface SceneState {
   /** A drawer is open: the mark moves aside and opens up behind it. */
   open: boolean;
+  /** Width of the open drawer, so the mark can centre in the space left. */
+  drawerWidth: number;
 }
+
+const PHONE_WIDTH = 820;
+/** Touch screens have no cursor to follow, so the mark performs on its own. */
+const FOLD_EVERY = 9;
+const FOLD_LENGTH = 3.2;
+
+const easeInOut = (q: number) => (q < 0.5 ? 4 * q * q * q : 1 - (-2 * q + 2) ** 3 / 2);
 
 function buildSurface(size: number) {
   const n = size * size;
@@ -203,33 +212,70 @@ export function startScene(
     visW = visH * camera.aspect;
   }
   function target() {
-    const mobile = innerWidth <= 820;
+    // On phones the drawer covers everything, so the scene behind it stays put.
+    if (innerWidth <= PHONE_WIDTH) {
+      return { x: 0, y: (0.5 - 0.18) * visH, s: Math.min(visW * 0.62, visH * 0.3) / 74, explode: 0 };
+    }
     const open = state.open;
-    const drawerW = Math.min(500, innerWidth);
-    const fx = mobile ? 0.5 : open ? (innerWidth - drawerW) / 2 / innerWidth : 0.74;
-    const fy = mobile ? (open ? 0.06 : 0.18) : open ? 0.46 : 0.32;
-    const logoW = mobile
-      ? Math.min(visW * 0.62, visH * 0.3) * (open ? 0.6 : 1)
-      : Math.min(visW * 0.34, visH * 0.55) * (open ? 1.2 : 1);
+    const free = 1 - state.drawerWidth / innerWidth;
+    const fx = open ? free / 2 : 0.74;
+    const fy = open ? 0.46 : 0.32;
+    const logoW = open ? Math.min(visW * free * 0.62, visH * 0.66) : Math.min(visW * 0.34, visH * 0.55);
     return { x: (fx - 0.5) * visW, y: (0.5 - fy) * visH, s: logoW / 74, explode: open ? 0.2 : 0 };
   }
   resize();
   const place = target();
 
   const onPointer = (e: PointerEvent) => {
+    if (e.pointerType !== "mouse") return;
     pointer.x = (e.clientX / innerWidth) * 2 - 1;
     pointer.y = (e.clientY / innerHeight) * 2 - 1;
     pointer.active = true;
   };
+  // A tap on the bare wall makes the mark fold right away.
+  const onTap = (e: PointerEvent) => {
+    if (e.pointerType === "mouse" || state.open) return;
+    if ((e.target as Element | null)?.closest?.("a, button, input, textarea, dialog")) return;
+    wantFold = true;
+  };
   addEventListener("resize", resize);
   addEventListener("pointermove", onPointer, { passive: true });
+  addEventListener("pointerdown", onTap, { passive: true });
 
+  const touch = matchMedia("(hover: none)").matches;
+  let wantFold = false;
+  let foldStart = -1;
+  let nextFold = 3;
+  let baseY = 0;
+  let coveredSince = -1;
   let raf = 0;
   let first = true;
   function frame(now: number) {
     const dt = Math.min(0.25, (now - last) / 1000);
     last = now;
     const t = (now - start) / 1000;
+
+    // Nothing of the scene shows behind a full-screen drawer: stop drawing it.
+    if (state.open && innerWidth <= PHONE_WIDTH) {
+      if (coveredSince < 0) coveredSince = t;
+      if (t - coveredSince > 0.9 && !reduced) {
+        raf = requestAnimationFrame(frame);
+        return;
+      }
+    } else {
+      coveredSince = -1;
+    }
+
+    const auto = touch && !pointer.active && !reduced;
+    const foldDone = foldStart < 0 || t - foldStart >= FOLD_LENGTH;
+    if (foldDone && !state.open && (wantFold || (auto && t >= nextFold))) {
+      foldStart = t;
+      nextFold = t + FOLD_EVERY;
+    }
+    wantFold = false;
+    const q = foldStart < 0 ? 1 : Math.min(1, (t - foldStart) / FOLD_LENGTH);
+    const spin = q < 1 ? easeInOut(q) * Math.PI * 2 : 0;
+
     const k = reduced ? 1 : 1 - Math.exp(-dt * 5);
     const tg = target();
     place.x += (tg.x - place.x) * k;
@@ -239,16 +285,20 @@ export function startScene(
 
     logo.position.set(place.x, place.y, 1.2);
     logo.scale.setScalar(place.s);
-    const px = pointer.active ? pointer.x : Math.sin(t * 0.35) * 0.55;
-    const py = pointer.active ? pointer.y : Math.cos(t * 0.27) * 0.4;
-    logo.rotation.y += (px * 0.42 - 0.2 - logo.rotation.y) * k;
+    const px = pointer.active ? pointer.x : auto ? Math.sin(t * 0.5) * 0.9 : Math.sin(t * 0.35) * 0.55;
+    const py = pointer.active ? pointer.y : auto ? Math.cos(t * 0.37) * 0.6 : Math.cos(t * 0.27) * 0.4;
+    baseY += (px * 0.42 - 0.2 - baseY) * k;
+    logo.rotation.y = baseY + spin;
     logo.rotation.x += (py * 0.28 + 0.1 - logo.rotation.x) * k;
 
-    for (const f of meshes) {
-      f.mesh.position.set(f.home.x + f.dir.x * explode * 14, f.home.y + f.dir.y * explode * 14, f.lift * explode * 9);
-      f.mesh.rotation.z = f.spin * explode * 0.3;
-      f.mesh.rotation.y = f.spin * explode * 0.35;
-    }
+    meshes.forEach((f, i) => {
+      // During a fold the facets part and come back in a wave, one after another.
+      const wave = Math.min(1, Math.max(0, (q - i * 0.06) / 0.82));
+      const e = explode + Math.sin(Math.PI * wave) ** 2 * 0.55;
+      f.mesh.position.set(f.home.x + f.dir.x * e * 14, f.home.y + f.dir.y * e * 14, f.lift * e * 9);
+      f.mesh.rotation.z = f.spin * e * 0.3;
+      f.mesh.rotation.y = f.spin * e * 0.35;
+    });
 
     light.position.x += (px * visW * 0.5 - light.position.x) * k;
     light.position.y += (-py * visH * 0.5 - light.position.y) * k;
@@ -288,6 +338,7 @@ export function startScene(
     removeEventListener("resize", once);
     removeEventListener("hashchange", onceSoon);
     removeEventListener("pointermove", onPointer);
+    removeEventListener("pointerdown", onTap);
     document.removeEventListener("visibilitychange", onVisibility);
     world.environment?.dispose();
     wall.geometry.dispose();
