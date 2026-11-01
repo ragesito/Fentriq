@@ -14,6 +14,12 @@ type SendStatus = "idle" | "sending" | "sent" | "contact" | "rate" | "failed";
 const LANG_KEY = "fq-lang";
 const CLOSE_MS = 420;
 const PHONE_QUERY = "(max-width: 820px)";
+const ENTERED_KEY = "fq-entered";
+// Long enough to see the metal form and catch the light. By ENTRY_CAP the page opens
+// even if the 3D is late: the still holds the logo's place until it arrives.
+const ENTRY_HOLD = 1300;
+const ENTRY_CAP = 2600;
+const ENTRY_OUT = 1200;
 
 function panelFromHash(): Panel | null {
   const name = location.hash.slice(1);
@@ -77,7 +83,8 @@ export function Home() {
 
   const drawer = useRef<HTMLDialogElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
-  const sceneState = useRef<SceneState>({ open: false });
+  const sceneState = useRef<SceneState>({ open: false, entering: true });
+  const entered = useRef(false);
   const openedHere = useRef(false);
   const drop = useRef<Drop | null>(null);
   const lastTap = useRef<Point | null>(null);
@@ -194,6 +201,25 @@ export function Home() {
     return () => clearInterval(id);
   }, [askIdle]);
 
+  // The entrance opens once the 3D is ready, timed from the start of the page load.
+  useEffect(() => {
+    const root = document.documentElement;
+    if (root.classList.contains("no-entry")) sceneState.current.entering = false;
+    if (!sceneState.current.entering || entered.current) return;
+    const open = () => {
+      entered.current = true;
+      sceneState.current.entering = false;
+      root.classList.add("open", "enter");
+      setTimeout(() => root.classList.add("done"), ENTRY_OUT + 80);
+      try {
+        sessionStorage.setItem(ENTERED_KEY, "1");
+      } catch {}
+    };
+    const until = sceneMode === "loading" ? ENTRY_CAP : ENTRY_HOLD;
+    const timer = setTimeout(open, Math.max(0, until - performance.now()));
+    return () => clearTimeout(timer);
+  }, [sceneMode]);
+
   // 3D comes in after the first paint: the text is never waiting for it.
   useEffect(() => {
     let alive = true;
@@ -249,15 +275,7 @@ export function Home() {
         className={sceneMode === "ready" ? "ready" : undefined}
         aria-hidden="true"
       />
-      {sceneMode === "flat" ? (
-        <svg id="flat-logo" viewBox="6 24 86 60" aria-hidden="true">
-          <path d="M26 30 L56 30 L42 54 L12 54 Z" fill="#403CF3" />
-          <path d="M56 30 L86 30 L72 54 L42 54 Z" fill="#B2B6C2" />
-          <path d="M42 54 L72 54 L58 78 L28 78 Z" fill="#F1F2F4" />
-          <path d="M58 78 L72 54 L86 54 L72 78 Z" fill="#7431E4" />
-          <path d="M56 30 L42 54 L72 54 L58 78" fill="none" stroke="#08090B" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
-        </svg>
-      ) : null}
+      <div id="still" aria-hidden="true" />
       <div className="film" aria-hidden="true" />
 
       <div className="ui">
@@ -360,6 +378,22 @@ export function Home() {
             <a href="#privacy">Privacy</a> · <a href="#cookie">Cookie</a>
           </span>
         </footer>
+      </div>
+
+      <div id="cover" aria-hidden="true">
+        <div className="cover-block">
+          <i className="s1" />
+          <i className="s2" />
+          <i className="s3" />
+          <i className="s4" />
+          <div className="cover-field">
+            <div className="cover-wall" />
+            <div className="cover-logo">
+              <div className="cover-metal" />
+              <div className="cover-sheen" />
+            </div>
+          </div>
+        </div>
       </div>
 
       <dialog

@@ -45,7 +45,22 @@ body {
   background-image: var(--grain);
   opacity: .07;
 }
-#flat-logo { position: fixed; right: 12vw; top: 14vh; width: 30vw; }
+/* A still of the same 3D logo, in its exact place: it holds until the 3D is ready,
+   and stays if this browser has no 3D. */
+#still {
+  --D: min(34vw, 55vh);
+  --cx: 74vw;
+  --cy: 32vh;
+  position: fixed;
+  left: calc(var(--cx) + var(--D) * -.4962);
+  top: calc(var(--cy) + var(--D) * -.3404);
+  width: calc(var(--D) * 1.0328);
+  height: calc(var(--D) * 1.0328 * .648);
+  background: url("/brand/fentriq-metal.webp") center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+/* It lets go only once the 3D has fully faded in underneath, so the logo never dips dark. */
+#scene.ready ~ #still { opacity: 0; transition: opacity .3s ease .5s; }
 
 .ui {
   position: fixed; inset: 0;
@@ -158,6 +173,82 @@ h1 .quiet { color: var(--quiet); font-weight: 400; }
 }
 .foot a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #4a4e5c; }
 .foot a:hover { color: var(--text); }
+
+/* The entrance: the lit wall and the metal logo hold still, and a slanted wipe at the
+   logo's own 14:24 slope erases them, trailing its four colours. */
+#cover {
+  --T: calc(135vw + 125vh);
+  --mw: calc(min(58vw, 32vh) * 1.0328);
+  position: fixed; inset: 0; z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+  animation: cover-failsafe 0s linear 7s forwards;
+}
+.no-entry #cover, .done #cover { display: none; }
+@keyframes cover-failsafe { to { visibility: hidden; } }
+.cover-block {
+  position: absolute; top: 0; bottom: 0; left: -60vh; right: -60vh;
+  transform: translateX(0) skewX(-30.26deg);
+  transition: transform 1.15s cubic-bezier(.72, 0, .2, 1);
+}
+.open .cover-block { transform: translateX(var(--T)) skewX(-30.26deg); }
+.cover-block i { position: absolute; top: 0; bottom: 0; right: 100%; }
+.cover-block .s1 { width: 4vmax; margin-right: 22vmax; background: linear-gradient(#8e3ff2, #5a22d6); }
+.cover-block .s2 { width: 8vmax; margin-right: 14vmax; background: linear-gradient(#ffffff, #e2e4e9); }
+.cover-block .s3 { width: 6vmax; margin-right: 8vmax; background: linear-gradient(#d5d8e0, #8e93a3); }
+.cover-block .s4 { width: 8vmax; background: linear-gradient(#2a31ee, #5546f7); }
+/* The black clips what's inside, so the leading stripe erases it as it passes. */
+.cover-field { position: absolute; inset: 0; overflow: hidden; background: var(--wall); }
+.cover-field::after { content: ""; position: absolute; inset: 0; background-image: var(--grain); opacity: .07; }
+/* Wall and logo never move: they undo the block's slant and its travel, step for step. */
+.cover-wall, .cover-logo {
+  position: absolute;
+  transform: skewX(30.26deg) translateX(0);
+  transition: transform 1.15s cubic-bezier(.72, 0, .2, 1);
+}
+.open .cover-wall, .open .cover-logo { transform: skewX(30.26deg) translateX(calc(var(--T) * -1)); }
+.cover-wall {
+  top: 0; bottom: 0; left: 60vh; width: 100vw;
+  background: url("/brand/fentriq-wall.webp") center / cover no-repeat;
+}
+.cover-logo {
+  z-index: 1;
+  left: calc(60vh + 50vw - var(--mw) / 2);
+  top: calc(50% - var(--mw) * .324);
+  width: var(--mw);
+  height: calc(var(--mw) * .648);
+  filter: drop-shadow(calc(var(--mw) * -.035) calc(var(--mw) * .05) calc(var(--mw) * .035) rgba(0, 0, 0, .85));
+}
+.cover-metal, .cover-sheen { position: absolute; inset: 0; }
+.cover-metal {
+  background: url("/brand/fentriq-metal.webp") center / 100% 100% no-repeat;
+  -webkit-mask: linear-gradient(120deg, #000 44%, transparent 56%) 0 0 / 300% 100% no-repeat;
+  mask: linear-gradient(120deg, #000 44%, transparent 56%) 0 0 / 300% 100% no-repeat;
+  animation: metal-in .8s cubic-bezier(.3, .6, .2, 1) backwards;
+}
+.cover-sheen {
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0) 42%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, 0) 58%) 100% 0 / 300% 100% no-repeat;
+  -webkit-mask: url("/brand/fentriq-metal.webp") center / 100% 100% no-repeat;
+  mask: url("/brand/fentriq-metal.webp") center / 100% 100% no-repeat;
+  animation: metal-sheen 2.4s cubic-bezier(.45, 0, .3, 1) .35s infinite;
+}
+@keyframes metal-in {
+  from { -webkit-mask-position: 100% 0; mask-position: 100% 0; transform: scale(.985); }
+  to { -webkit-mask-position: 0 0; mask-position: 0 0; transform: none; }
+}
+@keyframes metal-sheen {
+  from { background-position: 100% 0; }
+  45%, to { background-position: 0 0; }
+}
+/* The page rises as the wipe uncovers it. */
+@keyframes entry-rise { from { opacity: 0; transform: translateY(16px); } }
+@keyframes entry-fade { from { opacity: 0; } }
+.enter h1 span { animation: entry-rise .75s cubic-bezier(.2, .7, .2, 1) .32s backwards; }
+.enter h1 span:nth-of-type(2) { animation-delay: .38s; }
+.enter h1 span:nth-of-type(3) { animation-delay: .44s; }
+.enter h1 span:nth-of-type(4) { animation-delay: .5s; }
+.enter .lede, .enter .ask, .enter .side { animation: entry-rise .75s cubic-bezier(.2, .7, .2, 1) .56s backwards; }
+.enter .top, .enter .foot { animation: entry-fade .7s ease .62s backwards; }
 
 /* The drawer: a glass card as tall as its content, over the same scene, blurred. */
 .drawer {
@@ -318,7 +409,7 @@ ul.inside span { color: var(--muted); }
   textarea.field { height: 110px; }
   .drawer[data-size="wide"] .legal-cols { columns: 1; }
   .legal-block p { font-size: 15px; }
-  #flat-logo { right: 25vw; top: 9vh; width: 50vw; }
+  #still { --D: min(62vw, 30vh); --cx: 50vw; --cy: 18vh; }
 }
 /* Low laptop screens: a wider drawer keeps every panel on one screen. */
 @media (min-width: 821px) and (max-height: 820px) {

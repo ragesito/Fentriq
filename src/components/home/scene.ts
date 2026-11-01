@@ -9,6 +9,8 @@ import * as THREE from "three";
 export interface SceneState {
   /** A drawer is open: the blurred scene behind it holds still. */
   open: boolean;
+  /** The entrance still covers the page: the logo waits at an angle, to settle as it opens. */
+  entering: boolean;
 }
 
 const PHONE_WIDTH = 820;
@@ -196,7 +198,7 @@ export function startScene(
   });
   const SLANT = 1.04;
 
-  // Logo: the four facets from the brand mark, one mesh each so they can open.
+  // Logo: the four facets from the brand mark.
   const facets = [
     { pts: [[26, 30], [56, 30], [42, 54], [12, 54]], color: 0x2430f0, metal: 1, rough: 0.72, finish: brushed(0) },
     { pts: [[56, 30], [86, 30], [72, 54], [42, 54]], color: 0x9297a6, metal: 1, rough: 0.68, finish: brushed(SLANT) },
@@ -205,7 +207,7 @@ export function startScene(
   ];
   const MARK_CENTER = [49, 54];
   const logo = new THREE.Group();
-  const meshes = facets.map((f, i) => {
+  const meshes = facets.map((f) => {
     const cx = f.pts.reduce((s, p) => s + p[0], 0) / 4;
     const cy = f.pts.reduce((s, p) => s + p[1], 0) / 4;
     const shape = new THREE.Shape(f.pts.map((p) => new THREE.Vector2(p[0] - cx, cy - p[1])));
@@ -226,17 +228,18 @@ export function startScene(
     ]);
     mesh.castShadow = true;
     mesh.receiveShadow = true;
-    const home = new THREE.Vector2(cx - MARK_CENTER[0], MARK_CENTER[1] - cy);
+    mesh.position.set(cx - MARK_CENTER[0], MARK_CENTER[1] - cy, 0);
     logo.add(mesh);
-    return { mesh, home, dir: home.clone().normalize(), spin: i % 2 ? 1 : -1, lift: i - 1.5 };
+    return mesh;
   });
   world.add(logo);
+  if (state.entering) logo.rotation.set(0.22, -0.5, 0);
 
   const pointer = { x: 0, y: 0, active: false };
-  // Touch screens have no cursor to follow: the whole mark just sways on its
-  // axis, and it never comes apart there, not even on arrival.
+  // Touch screens have no cursor to follow: the whole mark just sways on its axis.
   const calm = matchMedia("(hover: none)").matches || innerWidth <= PHONE_WIDTH;
-  let explode = reduced || calm ? 0 : 1.9;
+  // When the entrance let go of the logo; long ago if it never held it.
+  let releasedAt = state.entering ? -1 : -10;
   let last = performance.now();
   const start = last;
   let visW = 1;
@@ -293,20 +296,17 @@ export function startScene(
     place.x += (tg.x - place.x) * k;
     place.y += (tg.y - place.y) * k;
     place.s += (tg.s - place.s) * k;
-    explode -= explode * (reduced ? 1 : 1 - Math.exp(-dt * 3.6));
 
     logo.position.set(place.x, place.y, 1.2);
     logo.scale.setScalar(place.s);
     const sway = calm ? 0.4 : 0.55;
     const px = pointer.active ? pointer.x : Math.sin(t * 0.35) * sway;
     const py = pointer.active ? pointer.y : Math.cos(t * 0.27) * (calm ? 0.3 : 0.4);
-    logo.rotation.y += (px * 0.42 - 0.2 - logo.rotation.y) * k;
-    logo.rotation.x += (py * 0.28 + 0.1 - logo.rotation.x) * k;
-
-    for (const f of meshes) {
-      f.mesh.position.set(f.home.x + f.dir.x * explode * 14, f.home.y + f.dir.y * explode * 14, f.lift * explode * 9);
-      f.mesh.rotation.z = f.spin * explode * 0.3;
-      f.mesh.rotation.y = f.spin * explode * 0.35;
+    if (!state.entering) {
+      if (releasedAt === -1) releasedAt = t;
+      const turn = t - releasedAt < 1.4 ? 1 - Math.exp(-dt * 2.4) : k;
+      logo.rotation.y += (px * 0.42 - 0.2 - logo.rotation.y) * turn;
+      logo.rotation.x += (py * 0.28 + 0.1 - logo.rotation.x) * turn;
     }
 
     light.position.x += (px * visW * 0.5 - light.position.x) * k;
@@ -353,9 +353,9 @@ export function startScene(
     wall.material.normalMap?.dispose();
     wall.material.roughnessMap?.dispose();
     wall.material.dispose();
-    for (const f of meshes) {
-      f.mesh.geometry.dispose();
-      for (const m of f.mesh.material) m.dispose();
+    for (const mesh of meshes) {
+      mesh.geometry.dispose();
+      for (const m of mesh.material) m.dispose();
     }
     for (const t of finishTextures) t.dispose();
     renderer.dispose();

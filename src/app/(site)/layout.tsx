@@ -8,6 +8,9 @@ const title = "Fentriq | Studio di sviluppo software | Web, App, IA, Automazioni
 const description =
   "Quel prodotto che hai in mente non richiede un'agenzia. Siti, app, automazioni e intelligenza artificiale su misura, dall'idea al lancio. Rispondo ogni giorno.";
 
+// Once a session, and never over a panel someone came straight to or for reduced motion.
+const SKIP_ENTRANCE = `(function(){var r=document.documentElement;try{if(location.hash||sessionStorage.getItem("fq-entered")||matchMedia("(prefers-reduced-motion: reduce)").matches)r.classList.add("no-entry")}catch(e){r.classList.add("no-entry")}})()`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title,
@@ -52,6 +55,15 @@ export const viewport: Viewport = {
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it" className={fontVariables} suppressHydrationWarning>
+      <head>
+        {/* Decided before the first paint, so a repeat visit never flashes the entrance. */}
+        <script dangerouslySetInnerHTML={{ __html: SKIP_ENTRANCE }} />
+        <noscript>
+          <style dangerouslySetInnerHTML={{ __html: "#cover{display:none}" }} />
+        </noscript>
+        <link rel="preload" as="image" type="image/webp" href="/brand/fentriq-metal.webp" fetchPriority="high" />
+        <link rel="preload" as="image" type="image/webp" href="/brand/fentriq-wall.webp" fetchPriority="high" />
+      </head>
       <body>
         {children}
         {siteConfig.plausibleDomain ? (
