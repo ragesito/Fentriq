@@ -276,7 +276,8 @@ export function startScene(
   let raf = 0;
   let first = true;
   function frame(now: number) {
-    const dt = Math.min(0.25, (now - last) / 1000);
+    // The first frame's stamp can predate the setup that just finished: time never runs back.
+    const dt = Math.max(0, Math.min(0.25, (now - last) / 1000));
     last = now;
     const t = (now - start) / 1000;
 
