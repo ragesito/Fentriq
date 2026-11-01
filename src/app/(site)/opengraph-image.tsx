@@ -25,10 +25,29 @@ export default async function OgImage() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           <div style={{ fontSize: 34, fontWeight: 300 }}>{siteConfig.name}</div>
           <svg width={190} height={133} viewBox="6 24 86 60">
-            <path d="M26 30 L56 30 L42 54 L12 54 Z" fill="#4F5BF7" />
-            <path d="M56 30 L86 30 L72 54 L42 54 Z" fill="#AEB4C2" />
-            <path d="M42 54 L72 54 L58 78 L28 78 Z" fill="#F4F6F8" />
-            <path d="M58 78 L72 54 L86 54 L72 78 Z" fill="#8A6CFF" />
+            <defs>
+              <linearGradient id="blue" gradientUnits="userSpaceOnUse" x1="0" y1="30" x2="0" y2="54">
+                <stop offset="0" stopColor="#2A31EE" />
+                <stop offset="1" stopColor="#5546F7" />
+              </linearGradient>
+              <linearGradient id="titanium" gradientUnits="userSpaceOnUse" x1="0" y1="30" x2="0" y2="54">
+                <stop offset="0" stopColor="#D5D8E0" />
+                <stop offset="1" stopColor="#8E93A3" />
+              </linearGradient>
+              <linearGradient id="pale" gradientUnits="userSpaceOnUse" x1="0" y1="54" x2="0" y2="78">
+                <stop offset="0" stopColor="#FFFFFF" />
+                <stop offset="1" stopColor="#E2E4E9" />
+              </linearGradient>
+              <linearGradient id="violet" gradientUnits="userSpaceOnUse" x1="0" y1="54" x2="0" y2="78">
+                <stop offset="0" stopColor="#8E3FF2" />
+                <stop offset="1" stopColor="#5A22D6" />
+              </linearGradient>
+            </defs>
+            <path d="M26 30 L56 30 L42 54 L12 54 Z" fill="url(#blue)" />
+            <path d="M56 30 L86 30 L72 54 L42 54 Z" fill="url(#titanium)" />
+            <path d="M42 54 L72 54 L58 78 L28 78 Z" fill="url(#pale)" />
+            <path d="M58 78 L72 54 L86 54 L72 78 Z" fill="url(#violet)" />
+            <path d="M56 30 L42 54 L72 54 L58 78" fill="none" stroke="#08090B" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
           </svg>
         </div>
 

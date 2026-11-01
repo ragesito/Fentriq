@@ -251,10 +251,11 @@ export function Home() {
       />
       {sceneMode === "flat" ? (
         <svg id="flat-logo" viewBox="6 24 86 60" aria-hidden="true">
-          <path d="M26 30 L56 30 L42 54 L12 54 Z" fill="#4F5BF7" />
-          <path d="M56 30 L86 30 L72 54 L42 54 Z" fill="#AEB4C2" />
-          <path d="M42 54 L72 54 L58 78 L28 78 Z" fill="#F4F6F8" />
-          <path d="M58 78 L72 54 L86 54 L72 78 Z" fill="#8A6CFF" />
+          <path d="M26 30 L56 30 L42 54 L12 54 Z" fill="#403CF3" />
+          <path d="M56 30 L86 30 L72 54 L42 54 Z" fill="#B2B6C2" />
+          <path d="M42 54 L72 54 L58 78 L28 78 Z" fill="#F1F2F4" />
+          <path d="M58 78 L72 54 L86 54 L72 78 Z" fill="#7431E4" />
+          <path d="M56 30 L42 54 L72 54 L58 78" fill="none" stroke="#08090B" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
         </svg>
       ) : null}
       <div className="film" aria-hidden="true" />

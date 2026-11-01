@@ -8,8 +8,8 @@
   --text: #f4f6f8;
   --muted: #a2a8b6;
   --quiet: #8b90a0;
-  --accent: #4550ff;
-  --accent-soft: #8a5cff;
+  --accent: #3a46ff;
+  --accent-soft: #7a45ff;
   --display: var(--font-display-home), "Helvetica Neue", Arial, sans-serif;
   --body: var(--font-body-home), "Helvetica Neue", Arial, sans-serif;
   --mark: var(--font-mark), "Helvetica Neue", Arial, sans-serif;
@@ -249,7 +249,7 @@ textarea.field { height: clamp(66px, 15vh, 140px); resize: none; }
   text-decoration: none;
   transition: background .2s ease;
 }
-.send:hover { background: #5a64ff; }
+.send:hover { background: #5560ff; }
 .send:disabled { opacity: .6; cursor: progress; }
 .err { margin: 16px 0 0 !important; color: #ff9d9d !important; }
 .note { margin-top: clamp(8px, 1.5vh, 14px) !important; margin-bottom: 0 !important; font-size: 13px; }

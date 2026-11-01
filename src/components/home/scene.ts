@@ -13,7 +13,8 @@ export interface SceneState {
 
 const PHONE_WIDTH = 820;
 
-function buildSurface(size: number) {
+/** Random height field, tiling. With alongX the noise only smears sideways, into long streaks. */
+function buildHeight(size: number, layers: number[][], alongX = false) {
   const n = size * size;
   const height = new Float32Array(n);
   const blur = (src: Float32Array, r: number) => {
@@ -28,6 +29,7 @@ function buildSurface(size: number) {
         sum += src[y * size + ((x + r + 1) % size)] - src[y * size + ((x - r + size) % size)];
       }
     }
+    if (alongX) return a;
     for (let x = 0; x < size; x++) {
       let sum = 0;
       for (let k = -r; k <= r; k++) sum += a[((k + size) % size) * size + x];
@@ -38,12 +40,16 @@ function buildSurface(size: number) {
     }
     return out;
   };
-  for (const [r, gain] of [[1, 1.3], [2, 2], [5, 3], [18, 7]]) {
+  for (const [r, gain] of layers) {
     const raw = new Float32Array(n);
     for (let i = 0; i < n; i++) raw[i] = Math.random() - 0.5;
     const b = blur(raw, r);
     for (let i = 0; i < n; i++) height[i] += b[i] * gain;
   }
+  return height;
+}
+
+function buildMaps(height: Float32Array, size: number, strength: number, roughness: (h: number) => number) {
   const make = () => {
     const c = document.createElement("canvas");
     c.width = c.height = size;
@@ -55,7 +61,6 @@ function buildSurface(size: number) {
   const rCtx = rough.getContext("2d")!;
   const nImg = nCtx.createImageData(size, size);
   const rImg = rCtx.createImageData(size, size);
-  const strength = 3.4;
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
       const i = y * size + x;
@@ -63,7 +68,7 @@ function buildSurface(size: number) {
       const dy = (height[((y + 1) % size) * size + x] - height[((y - 1 + size) % size) * size + x]) * strength;
       const len = Math.hypot(dx, dy, 1);
       nImg.data.set([(-dx / len + 1) * 127.5, (-dy / len + 1) * 127.5, (1 / len + 1) * 127.5, 255], i * 4);
-      const v = Math.max(175, Math.min(255, 218 + height[i] * 220));
+      const v = roughness(height[i]);
       rImg.data.set([v, v, v, 255], i * 4);
     }
   }
@@ -71,6 +76,14 @@ function buildSurface(size: number) {
   rCtx.putImageData(rImg, 0, 0);
   return { normal, rough };
 }
+
+const clamp = THREE.MathUtils.clamp;
+const buildSurface = (size: number) =>
+  buildMaps(buildHeight(size, [[1, 1.3], [2, 2], [5, 3], [18, 7]]), size, 3.4, (h) => clamp(218 + h * 220, 175, 255));
+const buildBrushed = (size: number) =>
+  buildMaps(buildHeight(size, [[90, 9], [24, 4]], true), size, 2.2, (h) => clamp(158 + h * 160, 138, 178));
+const buildBead = (size: number) =>
+  buildMaps(buildHeight(size, [[1, 1.1], [2, 1]]), size, 1.5, (h) => clamp(190 + h * 260, 130, 255));
 
 /** Starts the scene. Returns a stop function, or null when WebGL is unavailable. */
 export function startScene(
@@ -98,9 +111,9 @@ export function startScene(
   const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 60);
   camera.position.z = 12;
 
-  // Studio reflections for the logo: a dark room with long light strips.
+  // Studio reflections for the logo: a dark room with soft boxes and a rim.
   const room = new THREE.Scene();
-  room.background = new THREE.Color(0x020203);
+  room.background = new THREE.Color(0x07080c);
   const strip = (w: number, h: number, x: number, y: number, z: number, power: number, tint: number) => {
     const m = new THREE.Mesh(
       new THREE.PlaneGeometry(w, h),
@@ -110,9 +123,11 @@ export function startScene(
     m.lookAt(0, 0, 0);
     room.add(m);
   };
-  strip(9, 2, -4, 7, 6, 9, 0xffffff);
-  strip(2, 9, 8, 1, 5, 5, 0xc9ceff);
-  strip(10, 1.2, 0, -7, 5, 2.5, 0x8a7cff);
+  strip(12, 5, -3, 8, 6, 5.5, 0xffffff);
+  strip(1.6, 11, 9, 1, 4, 7, 0xdfe3ff);
+  strip(1, 9, -9, -1, 5, 3, 0xaab2ff);
+  strip(12, 1.4, 1, -8, 5, 2.2, 0x7f78ff);
+  strip(6, 6, 0, 1, 12, 0.45, 0xffffff);
   const pmrem = new THREE.PMREMGenerator(renderer);
   world.environment = pmrem.fromScene(room, 0.035).texture;
   pmrem.dispose();
@@ -153,12 +168,40 @@ export function startScene(
   light.shadow.normalBias = 0.02;
   world.add(light, light.target);
 
+  // The logo's finish: brushed anodized metal, with the grain following the mark's
+  // own slanted edge, and one blasted white ceramic facet.
+  const brushedMaps = buildBrushed(512);
+  const beadMaps = buildBead(512);
+  const finishTextures: THREE.Texture[] = [];
+  const finishTex = (c: HTMLCanvasElement, repeat: number, rotation: number) => {
+    const t = new THREE.CanvasTexture(c);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(repeat, repeat);
+    t.rotation = rotation;
+    t.colorSpace = THREE.NoColorSpace;
+    t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    finishTextures.push(t);
+    return t;
+  };
+  const brushed = (rotation: number) => ({
+    normalMap: finishTex(brushedMaps.normal, 0.09, rotation),
+    normalScale: new THREE.Vector2(0.13, 0.13),
+    roughnessMap: finishTex(brushedMaps.rough, 0.09, rotation),
+    anisotropy: 0.75,
+  });
+  const bead = () => ({
+    normalMap: finishTex(beadMaps.normal, 0.12, 0),
+    normalScale: new THREE.Vector2(0.18, 0.18),
+    roughnessMap: finishTex(beadMaps.rough, 0.12, 0),
+  });
+  const SLANT = 1.04;
+
   // Logo: the four facets from the brand mark, one mesh each so they can open.
   const facets = [
-    { pts: [[26, 30], [56, 30], [42, 54], [12, 54]], color: 0x4450f0, metal: 0.35, rough: 0.46 },
-    { pts: [[56, 30], [86, 30], [72, 54], [42, 54]], color: 0xaeb4c2, metal: 0.85, rough: 0.4 },
-    { pts: [[42, 54], [72, 54], [58, 78], [28, 78]], color: 0xe6e9ef, metal: 0.1, rough: 0.5 },
-    { pts: [[58, 78], [72, 54], [86, 54], [72, 78]], color: 0x7d5cf5, metal: 0.35, rough: 0.46 },
+    { pts: [[26, 30], [56, 30], [42, 54], [12, 54]], color: 0x2430f0, metal: 1, rough: 0.72, finish: brushed(0) },
+    { pts: [[56, 30], [86, 30], [72, 54], [42, 54]], color: 0x9297a6, metal: 1, rough: 0.68, finish: brushed(SLANT) },
+    { pts: [[42, 54], [72, 54], [58, 78], [28, 78]], color: 0xc8cad2, metal: 0, rough: 0.74, finish: bead() },
+    { pts: [[58, 78], [72, 54], [86, 54], [72, 78]], color: 0x6a35f0, metal: 1, rough: 0.72, finish: brushed(SLANT) },
   ];
   const MARK_CENTER = [49, 54];
   const logo = new THREE.Group();
@@ -176,10 +219,11 @@ export function startScene(
       curveSegments: 1,
     });
     geo.translate(0, 0, -3);
-    const mesh = new THREE.Mesh(
-      geo,
-      new THREE.MeshStandardMaterial({ color: f.color, metalness: f.metal, roughness: f.rough, envMapIntensity: 1.25 }),
-    );
+    // ExtrudeGeometry groups: 0 is the textured face, 1 the bevel and sides, polished clean.
+    const mesh = new THREE.Mesh(geo, [
+      new THREE.MeshPhysicalMaterial({ color: f.color, metalness: f.metal, roughness: f.rough, envMapIntensity: 1.5, ...f.finish }),
+      new THREE.MeshPhysicalMaterial({ color: f.color, metalness: f.metal, roughness: f.metal ? 0.26 : f.rough, envMapIntensity: 1.5 }),
+    ]);
     mesh.castShadow = true;
     mesh.receiveShadow = true;
     const home = new THREE.Vector2(cx - MARK_CENTER[0], MARK_CENTER[1] - cy);
@@ -311,8 +355,9 @@ export function startScene(
     wall.material.dispose();
     for (const f of meshes) {
       f.mesh.geometry.dispose();
-      f.mesh.material.dispose();
+      for (const m of f.mesh.material) m.dispose();
     }
+    for (const t of finishTextures) t.dispose();
     renderer.dispose();
   };
 }

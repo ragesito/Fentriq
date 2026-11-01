@@ -1,17 +1,19 @@
 {
   "name": "Fentriq",
   "short_name": "Fentriq",
-  "theme_color": "#15171C",
-  "background_color": "#15171C",
+  "description": "Siti, app, automazioni e intelligenza artificiale su misura. Marcelo Amaro.",
+  "theme_color": "#08090B",
+  "background_color": "#08090B",
   "display": "standalone",
+  "start_url": "/",
   "icons": [
     {
-      "src": "icon-512.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "fentriq-icon-maskable-512.png",
+      "src": "/fentriq-icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
