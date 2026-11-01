@@ -1,0 +1,487 @@
+"use client";
+
+import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
+import { siteConfig } from "@/config/site";
+import { homeCopy, type Locale } from "@/content/home";
+import { cookieDoc, privacyDoc, type LegalDoc } from "@/content/legal";
+import type { SceneState } from "./scene";
+
+const PANELS = ["scrivimi", "come-lavoro", "chiama", "email", "privacy", "cookie"] as const;
+type Panel = (typeof PANELS)[number];
+type SendStatus = "idle" | "sending" | "sent" | "contact" | "rate" | "failed";
+
+const LANG_KEY = "fq-lang";
+const CLOSE_MS = 420;
+
+function panelFromHash(): Panel | null {
+  const name = location.hash.slice(1);
+  return (PANELS as readonly string[]).includes(name) ? (name as Panel) : null;
+}
+
+const CloseIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+    <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.6" />
+  </svg>
+);
+
+function CopyButton({ value, label, done }: { value: string; label: string; done: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      className="ghost"
+      type="button"
+      onClick={() => {
+        navigator.clipboard?.writeText(value).then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        });
+      }}
+    >
+      {copied ? done : label}
+    </button>
+  );
+}
+
+function LegalBody({ doc, locale, updated }: { doc: LegalDoc; locale: Locale; updated: string }) {
+  return (
+    <>
+      {doc.blocks[locale].map((block) => (
+        <div className="legal-block" key={block.heading}>
+          <h3>{block.heading}</h3>
+          {block.body.map((text) => (
+            <p key={text}>{text}</p>
+          ))}
+        </div>
+      ))}
+      <p className="note">{updated}</p>
+    </>
+  );
+}
+
+export function Home() {
+  const [locale, setLocale] = useState<Locale>("it");
+  const [panel, setPanel] = useState<Panel | null>(null);
+  const [ask, setAsk] = useState("");
+  const [ideaIndex, setIdeaIndex] = useState(0);
+  const [askFocused, setAskFocused] = useState(false);
+  const [form, setForm] = useState({ message: "", name: "", contact: "", website: "" });
+  const [status, setStatus] = useState<SendStatus>("idle");
+  const [sceneMode, setSceneMode] = useState<"loading" | "ready" | "flat">("loading");
+
+  const drawer = useRef<HTMLDialogElement>(null);
+  const canvas = useRef<HTMLCanvasElement>(null);
+  const sceneState = useRef<SceneState>({ open: false });
+  const openedHere = useRef(false);
+  const t = homeCopy[locale];
+
+  // The language lives on this one address: it never changes the URL, so the
+  // page Google indexes stays Italian and nothing reloads.
+  useEffect(() => {
+    let saved: string | null = null;
+    try {
+      saved = localStorage.getItem(LANG_KEY);
+    } catch {}
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- browser-only preference, unknown during prerender
+    if (saved === "en") setLocale("en");
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
+
+  const chooseLocale = (next: Locale) => {
+    setLocale(next);
+    setIdeaIndex(0);
+    try {
+      localStorage.setItem(LANG_KEY, next);
+    } catch {}
+  };
+
+  // The hash drives the drawer, so links, the back button and shared URLs all work.
+  useEffect(() => {
+    const sync = () => setPanel(panelFromHash());
+    const onHash = () => {
+      openedHere.current = panelFromHash() !== null;
+      sync();
+    };
+    sync();
+    addEventListener("hashchange", onHash);
+    return () => removeEventListener("hashchange", onHash);
+  }, []);
+
+  const leave = useCallback(() => {
+    if (openedHere.current) {
+      openedHere.current = false;
+      history.back();
+    } else {
+      history.replaceState(null, "", location.pathname + location.search);
+      setPanel(null);
+    }
+  }, []);
+
+  useEffect(() => {
+    const d = drawer.current;
+    if (!d) return;
+    const isOpen = panel !== null;
+    document.body.classList.toggle("panel-open", isOpen);
+    sceneState.current.open = isOpen;
+    if (!isOpen) {
+      d.classList.remove("in");
+      const timer = setTimeout(() => {
+        if (d.open) d.close();
+      }, CLOSE_MS);
+      return () => clearTimeout(timer);
+    }
+    if (!d.open) d.showModal();
+    const raf = requestAnimationFrame(() => d.classList.add("in"));
+    if (panel === "scrivimi") {
+      const typed = ask.trim();
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- carries the hero's text into the form as it opens
+      if (typed) setForm((f) => (f.message ? f : { ...f, message: typed }));
+      document.getElementById(typed ? "w-name" : "w-idea")?.focus();
+    } else {
+      const heading = d.querySelector<HTMLElement>(`[data-panel="${panel}"] h2`);
+      heading?.focus({ preventScroll: true });
+    }
+    return () => cancelAnimationFrame(raf);
+    // `ask` is read only at the moment the drawer opens.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [panel]);
+
+  useEffect(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => setIdeaIndex((i) => i + 1), 2800);
+    return () => clearInterval(id);
+  }, []);
+
+  // 3D comes in after the first paint: the text is never waiting for it.
+  useEffect(() => {
+    let alive = true;
+    let stop: (() => void) | null = null;
+    const timer = setTimeout(() => {
+      import("./scene")
+        .then(({ startScene }) => {
+          if (!alive || !canvas.current) return;
+          stop = startScene(canvas.current, sceneState.current, () => setSceneMode("ready"));
+          if (!stop) setSceneMode("flat");
+        })
+        .catch(() => setSceneMode("flat"));
+    }, 60);
+    return () => {
+      alive = false;
+      clearTimeout(timer);
+      stop?.();
+    };
+  }, []);
+
+  const submit = async (e: FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, locale }),
+      });
+      if (res.ok) {
+        setStatus("sent");
+        setForm({ message: "", name: "", contact: "", website: "" });
+        setAsk("");
+        window.plausible?.("form_submit");
+      } else if (res.status === 400) setStatus("contact");
+      else if (res.status === 429) setStatus("rate");
+      else setStatus("failed");
+    } catch {
+      setStatus("failed");
+    }
+  };
+
+  const errorText =
+    status === "contact" ? t.errContact : status === "rate" ? t.errRate : status === "failed" ? t.errSend : null;
+  const placeholder = askFocused ? t.ideas[0] : t.ideas[ideaIndex % t.ideas.length];
+
+  return (
+    <>
+      <canvas
+        ref={canvas}
+        id="scene"
+        className={sceneMode === "ready" ? "ready" : undefined}
+        aria-hidden="true"
+      />
+      {sceneMode === "flat" ? (
+        <svg id="flat-logo" viewBox="6 24 86 60" aria-hidden="true">
+          <path d="M26 30 L56 30 L42 54 L12 54 Z" fill="#4F5BF7" />
+          <path d="M56 30 L86 30 L72 54 L42 54 Z" fill="#AEB4C2" />
+          <path d="M42 54 L72 54 L58 78 L28 78 Z" fill="#F4F6F8" />
+          <path d="M58 78 L72 54 L86 54 L72 78 Z" fill="#8A6CFF" />
+        </svg>
+      ) : null}
+      <div className="film" aria-hidden="true" />
+
+      <div className="ui">
+        <header className="top">
+          <span className="word">{siteConfig.name}</span>
+          <div className="top-right">
+            {(["it", "en"] as const).map((code, i) => (
+              <span key={code}>
+                {i > 0 ? <span aria-hidden="true"> / </span> : null}
+                <button
+                  className="lang"
+                  type="button"
+                  aria-pressed={locale === code}
+                  onClick={() => chooseLocale(code)}
+                >
+                  {code.toUpperCase()}
+                </button>
+              </span>
+            ))}
+          </div>
+        </header>
+
+        <main className="stage">
+          <div>
+            <h1>
+              <span className="quiet">{t.h1a}</span> <span className="quiet">{t.h1b}</span>{" "}
+              <span>{t.h1c}</span>
+            </h1>
+            <p className="lede">{t.lede}</p>
+            <form
+              className="ask"
+              onSubmit={(e) => {
+                e.preventDefault();
+                location.hash = "scrivimi";
+              }}
+            >
+              <label htmlFor="ask-input" className="sr">
+                {t.askLabel}
+              </label>
+              <input
+                id="ask-input"
+                type="text"
+                autoComplete="off"
+                value={ask}
+                placeholder={placeholder}
+                onChange={(e) => setAsk(e.target.value)}
+                onFocus={() => setAskFocused(true)}
+                onBlur={() => setAskFocused(false)}
+              />
+              <button type="submit" aria-label={t.askSend}>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" strokeWidth="1.8" />
+                </svg>
+              </button>
+            </form>
+          </div>
+
+          <aside className="side">
+            <div className="sign">
+              <strong>{siteConfig.owner}</strong>
+              <small>{t.reply}</small>
+            </div>
+            <a className="how-line" href="#come-lavoro">
+              {t.howLine}
+            </a>
+            <nav className="acts" aria-label={t.actsLabel}>
+              <a href="#come-lavoro">
+                <span>{t.actHow}</span>
+                <i>{t.actHowSub}</i>
+              </a>
+              <a href="#chiama">
+                <span>{t.actCall}</span>
+                <i>{t.actCallSub}</i>
+              </a>
+              <a href="#email">
+                <span>Email</span>
+                <i>{siteConfig.email}</i>
+              </a>
+            </nav>
+          </aside>
+        </main>
+
+        <footer className="foot">
+          <span>
+            © {new Date().getFullYear()} {siteConfig.name}
+          </span>
+          <span>
+            <a href="#privacy">Privacy</a> · <a href="#cookie">Cookie</a>
+          </span>
+        </footer>
+      </div>
+
+      <dialog
+        ref={drawer}
+        className="drawer"
+        aria-labelledby={panel ? `title-${panel}` : undefined}
+        onCancel={(e) => {
+          e.preventDefault();
+          leave();
+        }}
+        onClick={(e) => {
+          if (e.target === drawer.current) leave();
+        }}
+      >
+        <div className="drawer-inner">
+          <button className="close" type="button" aria-label={t.close} onClick={leave}>
+            <CloseIcon />
+          </button>
+
+          <section data-panel="scrivimi" hidden={panel !== "scrivimi"}>
+            <h2 id="title-scrivimi" tabIndex={-1}>
+              {status === "sent" ? t.sentTitle : t.writeTitle}
+            </h2>
+            {status === "sent" ? (
+              <p role="status">{t.sentText}</p>
+            ) : (
+              <>
+                <p>{t.writeLede}</p>
+                <form onSubmit={submit}>
+                  <label htmlFor="w-idea">
+                    <span>{t.wIdea}</span>
+                    <small>{t.wIdeaHelp}</small>
+                  </label>
+                  <textarea
+                    className="field"
+                    id="w-idea"
+                    required
+                    minLength={3}
+                    maxLength={4000}
+                    value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  />
+                  <label htmlFor="w-name">
+                    <span>{t.wName}</span>
+                  </label>
+                  <input
+                    className="field"
+                    id="w-name"
+                    type="text"
+                    autoComplete="name"
+                    required
+                    minLength={2}
+                    maxLength={120}
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  />
+                  <label htmlFor="w-back">
+                    <span>{t.wBack}</span>
+                    <small>{t.wBackHelp}</small>
+                  </label>
+                  <input
+                    className="field"
+                    id="w-back"
+                    type="text"
+                    required
+                    maxLength={200}
+                    value={form.contact}
+                    onChange={(e) => setForm({ ...form, contact: e.target.value })}
+                  />
+                  {/* Honeypot: hidden from people, tempting for bots. */}
+                  <input
+                    className="trap"
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    value={form.website}
+                    onChange={(e) => setForm({ ...form, website: e.target.value })}
+                  />
+                  {errorText ? (
+                    <p className="err" role="alert">
+                      {errorText}
+                    </p>
+                  ) : null}
+                  <button className="send" type="submit" disabled={status === "sending"}>
+                    <span>{status === "sending" ? t.wSending : t.wSend}</span>
+                    <span aria-hidden="true">→</span>
+                  </button>
+                  <p className="note">
+                    {t.wNote}{" "}
+                    <a
+                      href="#privacy"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        location.replace("#privacy");
+                      }}
+                    >
+                      {t.wNoteLink}
+                    </a>
+                    .
+                  </p>
+                </form>
+              </>
+            )}
+          </section>
+
+          <section data-panel="come-lavoro" hidden={panel !== "come-lavoro"}>
+            <h2 id="title-come-lavoro" tabIndex={-1}>
+              {t.howTitle}
+            </h2>
+            <p>{t.howLede}</p>
+            <ul className="inside">
+              {t.how.map((item) => (
+                <li key={item.t}>
+                  <b>{item.t}</b>
+                  <span>{item.d}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              className="send"
+              href="#scrivimi"
+              onClick={(e) => {
+                e.preventDefault();
+                location.replace("#scrivimi");
+              }}
+            >
+              <span>{t.howCta}</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </section>
+
+          <section data-panel="chiama" hidden={panel !== "chiama"}>
+            <h2 id="title-chiama" tabIndex={-1}>
+              {t.callTitle}
+            </h2>
+            <p>{t.callLede}</p>
+            <a className="big" href={`tel:${siteConfig.phone.e164}`}>
+              {siteConfig.phone.display}
+            </a>
+            <CopyButton value={siteConfig.phone.display} label={t.callCopy} done={t.copied} />
+          </section>
+
+          <section data-panel="email" hidden={panel !== "email"}>
+            <h2 id="title-email" tabIndex={-1}>
+              {t.mailTitle}
+            </h2>
+            <p>{t.mailLede}</p>
+            <a className="big" href={`mailto:${siteConfig.email}`}>
+              {siteConfig.email}
+            </a>
+            <CopyButton value={siteConfig.email} label={t.mailCopy} done={t.copied} />
+          </section>
+
+          <section data-panel="privacy" hidden={panel !== "privacy"}>
+            <h2 id="title-privacy" tabIndex={-1}>
+              {privacyDoc.title[locale]}
+            </h2>
+            <LegalBody doc={privacyDoc} locale={locale} updated={t.updated} />
+          </section>
+
+          <section data-panel="cookie" hidden={panel !== "cookie"}>
+            <h2 id="title-cookie" tabIndex={-1}>
+              {cookieDoc.title[locale]}
+            </h2>
+            <LegalBody doc={cookieDoc} locale={locale} updated={t.updated} />
+          </section>
+        </div>
+      </dialog>
+    </>
+  );
+}
+
+declare global {
+  interface Window {
+    plausible?: (event: string) => void;
+  }
+}

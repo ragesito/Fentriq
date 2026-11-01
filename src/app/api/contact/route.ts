@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { contactSchema } from "@/lib/contact-schema";
+import { contactSchema, isEmail } from "@/lib/contact-schema";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -59,74 +59,74 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  const { website: _hp, consent: _c, ...clean } = parsed.data;
-  void _hp;
-  void _c;
-
+  const { name, contact, message, locale } = parsed.data;
+  const replyByEmail = isEmail(contact);
   const payload = {
-    ...clean,
-    locale: clean.locale ?? "it",
+    name,
+    email: replyByEmail ? contact : "",
+    phone: replyByEmail ? "" : contact,
+    message,
+    locale: locale ?? "it",
     ts: new Date().toISOString(),
     source: "fentriq.app",
     ip,
   };
 
-  // 1) Primary: fire the n8n webhook (the dogfooded automation).
-  let delivered = false;
-  const webhookUrl = process.env.N8N_WEBHOOK_URL;
-  if (webhookUrl) {
+  // Email goes out directly, and the n8n webhook gets the same lead. Either
+  // one arriving is enough: a phone-only lead has no email for n8n to rely on,
+  // so it can't be the only channel.
+  async function sendEmail(): Promise<boolean> {
+    const apiKey = process.env.RESEND_API_KEY;
+    const to = process.env.LEAD_EMAIL;
+    if (!apiKey || !to) return false;
     try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 8000);
+      const resend = new Resend(apiKey);
+      const { error } = await resend.emails.send({
+        from: process.env.RESEND_FROM ?? "Fentriq <info@fentriq.app>",
+        to,
+        replyTo: replyByEmail ? contact : undefined,
+        subject: `Nuovo messaggio: ${name}`,
+        text: [
+          `Nome: ${name}`,
+          `Dove rispondere: ${contact}`,
+          `Lingua: ${payload.locale}`,
+          "",
+          message,
+          "",
+          `— ${payload.ts} · ${payload.source}`,
+        ].join("\n"),
+      });
+      if (error) throw new Error(error.message);
+      return true;
+    } catch (err) {
+      console.error("[contact] Resend failed:", err);
+      return false;
+    }
+  }
+
+  async function callWebhook(): Promise<boolean> {
+    const webhookUrl = process.env.N8N_WEBHOOK_URL;
+    if (!webhookUrl) return false;
+    try {
       const r = await fetch(webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
-        signal: controller.signal,
+        signal: AbortSignal.timeout(8000),
       });
-      clearTimeout(timeout);
       if (!r.ok) throw new Error(`n8n responded ${r.status}`);
-      delivered = true;
+      return true;
     } catch (err) {
       console.error("[contact] n8n webhook failed:", err);
+      return false;
     }
   }
 
-  // 2) Fallback: send a direct email via Resend so leads are never lost.
-  if (!delivered) {
-    const apiKey = process.env.RESEND_API_KEY;
-    const to = process.env.LEAD_EMAIL;
-    if (apiKey && to) {
-      try {
-        const resend = new Resend(apiKey);
-        await resend.emails.send({
-          from: process.env.RESEND_FROM ?? "Fentriq <info@fentriq.app>",
-          to,
-          replyTo: payload.email,
-          subject: `Nuovo lead: ${payload.name}${payload.company ? ` (${payload.company})` : ""}`,
-          text: [
-            `Nome: ${payload.name}`,
-            `Email: ${payload.email}`,
-            `Telefono: ${payload.phone || "—"}`,
-            `Azienda: ${payload.company || "—"}`,
-            `Budget: ${payload.budget || "—"}`,
-            `Lingua: ${payload.locale}`,
-            "",
-            payload.message,
-            "",
-            `— ${payload.ts} · ${payload.source}`,
-          ].join("\n"),
-        });
-        delivered = true;
-      } catch (err) {
-        console.error("[contact] Resend fallback failed:", err);
-      }
-    }
-  }
+  const [emailed, hooked] = await Promise.all([sendEmail(), callWebhook()]);
 
-  if (!delivered) {
+  if (!emailed && !hooked) {
     // Both channels unconfigured/failed — surface an error so the UI can
-    // offer WhatsApp as a manual fallback.
+    // point the visitor to the email address and the phone number.
     return NextResponse.json(
       { ok: false, error: "delivery_failed" },
       { status: 502 },

@@ -1,4 +1,4 @@
-import type { Locale } from "@/i18n/routing";
+import type { Locale } from "@/content/home";
 
 export interface LegalBlock {
   heading: string;
@@ -17,39 +17,39 @@ export interface LegalDoc {
  */
 export const privacyDoc: LegalDoc = {
   title: { it: "Privacy Policy", en: "Privacy Policy" },
-  updated: "2026-06-18",
+  updated: "2026-11-01",
   blocks: {
     it: [
       {
         heading: "Titolare del trattamento",
         body: [
-          "Il Titolare del trattamento dei dati è Fentriq. Per qualsiasi richiesta relativa ai tuoi dati personali puoi scriverci a info@fentriq.app.",
+          "Il Titolare del trattamento dei dati è Marcelo Amaro, che opera con il nome Fentriq. Per qualsiasi richiesta relativa ai tuoi dati personali puoi scrivere a info@fentriq.app.",
         ],
       },
       {
-        heading: "Quali dati raccogliamo",
+        heading: "Quali dati raccolgo",
         body: [
-          "Quando compili il modulo di contatto raccogliamo i dati che ci fornisci: nome, email, eventuale nome dell'azienda, budget indicativo e il contenuto del messaggio.",
-          "Per finalità statistiche utilizziamo Plausible Analytics, uno strumento che non usa cookie e non raccoglie dati personali identificativi.",
+          "Quando compili il modulo di contatto raccolgo i dati che mi fornisci: il tuo nome, il telefono o l'email su cui rispondere e il contenuto del messaggio.",
+          "Per finalità statistiche utilizzo Plausible Analytics, uno strumento che non usa cookie e non raccoglie dati personali identificativi.",
         ],
       },
       {
-        heading: "Perché trattiamo i dati",
+        heading: "Perché tratto i dati",
         body: [
-          "Trattiamo i tuoi dati esclusivamente per rispondere alla tua richiesta e gestire l'eventuale rapporto commerciale. La base giuridica è il consenso che presti inviando il modulo e l'esecuzione di misure precontrattuali.",
+          "Tratto i tuoi dati esclusivamente per rispondere alla tua richiesta e gestire l'eventuale rapporto commerciale. La base giuridica è il consenso che presti inviando il modulo e l'esecuzione di misure precontrattuali.",
         ],
       },
       {
-        heading: "Come e dove conserviamo i dati",
+        heading: "Come e dove conservo i dati",
         body: [
-          "I dati del modulo vengono trasmessi alla nostra infrastruttura di automazione (n8n) e ai nostri strumenti di posta (Resend) e CRM. I fornitori sono selezionati per garantire un adeguato livello di protezione dei dati.",
-          "Conserviamo i dati per il tempo necessario a gestire la tua richiesta e gli obblighi di legge.",
+          "I dati del modulo vengono trasmessi ai miei strumenti di posta (Resend) e di automazione (n8n). I fornitori sono selezionati per garantire un adeguato livello di protezione dei dati.",
+          "Conservo i dati per il tempo necessario a gestire la tua richiesta e gli obblighi di legge.",
         ],
       },
       {
         heading: "I tuoi diritti",
         body: [
-          "Hai diritto di accedere, rettificare, cancellare e limitare il trattamento dei tuoi dati, oltre al diritto di opposizione e portabilità. Per esercitarli scrivici a info@fentriq.app. Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali.",
+          "Hai diritto di accedere, rettificare, cancellare e limitare il trattamento dei tuoi dati, oltre al diritto di opposizione e portabilità. Per esercitarli scrivi a info@fentriq.app. Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali.",
         ],
       },
     ],
@@ -57,27 +57,27 @@ export const privacyDoc: LegalDoc = {
       {
         heading: "Data controller",
         body: [
-          "The data controller is Fentriq. For any request about your personal data, write to info@fentriq.app.",
+          "The data controller is Marcelo Amaro, operating under the name Fentriq. For any request about your personal data, write to info@fentriq.app.",
         ],
       },
       {
-        heading: "What data we collect",
+        heading: "What data I collect",
         body: [
-          "When you fill in the contact form we collect the data you provide: name, email, optional company name, indicative budget and the content of your message.",
-          "For analytics we use Plausible Analytics, a cookie-less tool that does not collect personally identifiable data.",
+          "When you fill in the contact form I collect the data you provide: your name, the phone or email to reply on and the content of your message.",
+          "For analytics I use Plausible Analytics, a cookie-less tool that does not collect personally identifiable data.",
         ],
       },
       {
-        heading: "Why we process data",
+        heading: "Why I process data",
         body: [
-          "We process your data solely to respond to your request and manage any resulting business relationship. The legal basis is the consent you give by submitting the form and the performance of pre-contractual measures.",
+          "I process your data solely to respond to your request and manage any resulting business relationship. The legal basis is the consent you give by submitting the form and the performance of pre-contractual measures.",
         ],
       },
       {
-        heading: "How and where we store data",
+        heading: "How and where I store data",
         body: [
-          "Form data is sent to our automation infrastructure (n8n) and to our email (Resend) and CRM tools. Providers are selected to ensure an adequate level of data protection.",
-          "We keep data for as long as needed to handle your request and meet legal obligations.",
+          "Form data is sent to my email (Resend) and automation (n8n) tools. Providers are selected to ensure an adequate level of data protection.",
+          "I keep data for as long as needed to handle your request and meet legal obligations.",
         ],
       },
       {
@@ -92,26 +92,20 @@ export const privacyDoc: LegalDoc = {
 
 export const cookieDoc: LegalDoc = {
   title: { it: "Cookie Policy", en: "Cookie Policy" },
-  updated: "2026-06-18",
+  updated: "2026-11-01",
   blocks: {
     it: [
       {
         heading: "Uso dei cookie",
         body: [
           "Questo sito non utilizza cookie di profilazione né cookie di tracciamento di terze parti.",
-          "Per le statistiche di visita usiamo Plausible Analytics, che funziona senza cookie e senza raccogliere dati personali. Per questo motivo non è necessario alcun banner di consenso ai cookie.",
+          "Per le statistiche di visita uso Plausible Analytics, che funziona senza cookie e senza raccogliere dati personali. Per questo motivo non è necessario alcun banner di consenso ai cookie.",
         ],
       },
       {
-        heading: "Cookie tecnici",
+        heading: "Preferenza della lingua",
         body: [
-          "Possono essere utilizzati cookie tecnici strettamente necessari al funzionamento del sito (ad esempio per ricordare la lingua selezionata). Questi cookie non richiedono consenso.",
-        ],
-      },
-      {
-        heading: "Servizi esterni",
-        body: [
-          "Quando prenoti una call tramite Cal.com vieni reindirizzato a un servizio di terze parti che applica la propria informativa sulla privacy. L'assistente IA del sito elabora i messaggi tramite un fornitore terzo (OpenAI) al solo scopo di rispondere alle tue domande.",
+          "La lingua che scegli viene ricordata solo nel tuo browser, per mostrarti il sito nella stessa lingua alla visita successiva. Questa memorizzazione tecnica non richiede consenso.",
         ],
       },
     ],
@@ -120,19 +114,13 @@ export const cookieDoc: LegalDoc = {
         heading: "Use of cookies",
         body: [
           "This site does not use profiling cookies or third-party tracking cookies.",
-          "For visit statistics we use Plausible Analytics, which works without cookies and without collecting personal data. For this reason no cookie consent banner is required.",
+          "For visit statistics I use Plausible Analytics, which works without cookies and without collecting personal data. For this reason no cookie consent banner is required.",
         ],
       },
       {
-        heading: "Technical cookies",
+        heading: "Language preference",
         body: [
-          "Strictly necessary technical cookies may be used for the site to function (e.g. to remember the selected language). These cookies do not require consent.",
-        ],
-      },
-      {
-        heading: "External services",
-        body: [
-          "When you book a call via Cal.com you are redirected to a third-party service that applies its own privacy policy. The site's AI assistant processes your messages through a third-party provider (OpenAI) solely to answer your questions.",
+          "The language you choose is remembered only in your browser, to show you the site in the same language on your next visit. This technical storage does not require consent.",
         ],
       },
     ],

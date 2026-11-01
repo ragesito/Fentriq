@@ -1,9 +1,9 @@
 {
   "name": "Fentriq",
   "short_name": "Fentriq",
-  "description": "Studio di sviluppo software: web, app, IA, automazioni, Web3.",
-  "theme_color": "#15171C",
-  "background_color": "#0B0C0F",
+  "description": "Siti, app, automazioni e intelligenza artificiale su misura. Marcelo Amaro.",
+  "theme_color": "#08090B",
+  "background_color": "#08090B",
   "display": "standalone",
   "start_url": "/",
   "icons": [

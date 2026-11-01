@@ -1,13 +1,30 @@
 import type { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
-
-const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  images: {
-    formats: ["image/avif", "image/webp"],
+  async redirects() {
+    return [
+      // The site is one page: every address it used to have lands on it, with
+      // permanent redirects so search engines move their signals to the home.
+      { source: "/contatti", destination: "/#scrivimi", permanent: true },
+      { source: "/en/contatti", destination: "/#scrivimi", permanent: true },
+      { source: "/privacy", destination: "/#privacy", permanent: true },
+      { source: "/en/privacy", destination: "/#privacy", permanent: true },
+      { source: "/cookie", destination: "/#cookie", permanent: true },
+      { source: "/en/cookie", destination: "/#cookie", permanent: true },
+      { source: "/formula", destination: "/", permanent: true },
+      { source: "/lavori", destination: "/", permanent: true },
+      { source: "/lavori/:slug", destination: "/", permanent: true },
+      { source: "/en", destination: "/", permanent: true },
+      { source: "/en/:path*", destination: "/", permanent: true },
+      // Anything else that isn't the API, the admin, a build asset or a file.
+      {
+        source: "/:path((?!api/|admin|_next/|_vercel/|opengraph-image|.*\\.).+)",
+        destination: "/",
+        permanent: false,
+      },
+    ];
   },
   async headers() {
     return [
@@ -27,4 +44,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withNextIntl(nextConfig);
+export default nextConfig;

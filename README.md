@@ -1,85 +1,53 @@
 # Fentriq
 
-Marketing site for **Fentriq**, a full-stack software studio for Italian SMEs.
-Dark, bilingual (Italian / English), conversion-focused (book a call → contact
-form → AI assistant), and static-first for speed.
+The site of **Fentriq**, Marcelo Amaro's software practice. It is one page at one
+address: nothing reloads, and everything the visitor asks for opens in a drawer
+over the same 3D scene.
 
-🔗 **Live:** [fentriq.app](https://fentriq.app)
+**Live:** [fentriq.app](https://fentriq.app)
 
-![Next.js](https://img.shields.io/badge/Next.js-16-black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8)
-![License](https://img.shields.io/badge/license-MIT-green)
+## How it is built
 
-## Features
+- **Next.js 16** (App Router) with a statically prerendered home
+- **Three.js** scene loaded after first paint, so the text never waits for it
+- **Drawers driven by the URL hash** (`#scrivimi`, `#come-lavoro`, `#chiama`,
+  `#email`, `#privacy`, `#cookie`), so links and the back button work
+- **Italian and English on the same address**: Italian is what gets indexed,
+  and the visitor's choice is remembered in their browser
+- **Contact form** with Zod validation, honeypot and rate limit, delivered by
+  Resend email and an n8n webhook
+- **`/admin`**: the private client and payments tool, in its own root layout
 
-- ⚡ **Static-first** Next.js (App Router) — everything prerendered except the API routes
-- 🌍 **Bilingual** (IT default + EN) via `next-intl`, locale-aware routing & SEO
-- 🤖 **AI assistant** — streaming chat (OpenAI) grounded in the studio's offering
-- 📥 **Lead pipeline** — contact form with Zod validation, honeypot and rate-limit,
-  delivered via an n8n webhook with a Resend email fallback
-- 📅 **Cal.com** booking integration
-- 🎬 **Product showcase reel** built with [Remotion](https://remotion.dev) (code → MP4)
-- 🔎 **SEO** — metadata, OpenGraph image (`next/og`), JSON-LD, sitemap, robots, hreflang
-- 🎨 Signature "folded band" brand system, custom motion, `prefers-reduced-motion` aware
+Every address from the previous multi-page site redirects to the home
+(`next.config.ts`).
 
-## Tech stack
+## Layout
 
-Next.js 16 · TypeScript · Tailwind CSS v4 · next-intl · Framer Motion ·
-React Hook Form + Zod · Resend · OpenAI · Remotion
+```
+src/app/(site)/        home: layout, page, styles, OpenGraph image
+src/app/admin/         private admin
+src/app/api/contact/   contact form endpoint
+src/components/home/   the page and the 3D scene
+src/content/           page copy (IT/EN) and legal text
+src/config/site.ts     name, contacts, socials
+```
 
-## Getting started
+## Development
 
 ```bash
 npm install
-# create a .env.local with the variables below (optional for local dev)
-npm run dev                  # http://localhost:3000
+cp .env.example .env.local   # if available; see the variables below
+npm run dev
 ```
 
-Scripts: `dev` · `build` · `start` · `lint` · `typecheck`
+Other commands: `npm run build`, `npm run lint`, `npm run typecheck`.
 
-## Environment variables
+Environment variables: `RESEND_API_KEY`, `RESEND_FROM`, `LEAD_EMAIL`,
+`N8N_WEBHOOK_URL`, `NEXT_PUBLIC_SITE_URL`, `DATABASE_URL`, `ADMIN_PASSWORD`,
+`ADMIN_SECRET`.
 
-None are required to build; in production set:
-
-| Variable | Purpose |
-|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Canonical URL (sitemap, OG, JSON-LD) |
-| `NEXT_PUBLIC_CALCOM_LINK` / `NEXT_PUBLIC_CALCOM_ORIGIN` | Cal.com booking slug + region |
-| `OPENAI_API_KEY` / `OPENAI_MODEL` | AI chat assistant |
-| `RESEND_API_KEY` / `RESEND_FROM` / `LEAD_EMAIL` | Email delivery for leads |
-| `N8N_WEBHOOK_URL` | Lead automation webhook (optional) |
-| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Analytics (optional) |
-
-## Project structure
-
-```
-src/
-├─ app/[locale]/        # localized pages (home, work, contact, legal)
-├─ app/api/             # contact + chat route handlers
-├─ components/          # ui primitives, sections, chat widget
-├─ content/             # case studies + legal copy (typed, bilingual)
-├─ messages/            # it.json · en.json (all copy)
-├─ config/ · i18n/ · lib/
-public/                 # brand assets, case covers, showcase.mp4
-video/                  # Remotion workspace for the showcase reel
-```
-
-## The showcase video
-
-The home reel is a Remotion composition in [`video/`](video/). To work on it:
-
-```bash
-cd video
-npm install
-npm run studio          # preview/edit in the browser
-npm run render          # render out/showcase.mp4
-```
+Hosted on Vercel, which deploys `main` automatically.
 
 ## License
 
-Source code is released under the [MIT License](LICENSE).
-
-> The **Fentriq** name, logo and brand assets are **not** covered by the license
-> and remain the property of Fentriq — please don't reuse them to represent your
-> own project.
+See [LICENSE](LICENSE).

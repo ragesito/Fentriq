@@ -1,17 +1,25 @@
 import { z } from "zod";
 
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE = /^\+?[\d\s().-]{7,20}$/;
+
+export function isEmail(value: string): boolean {
+  return EMAIL.test(value);
+}
+
 /**
  * Shared contact-form schema (used on both the client and the server).
+ * `contact` is whatever the visitor wants a reply on: a phone or an email.
  * `website` is a honeypot field — real users never fill it.
  */
 export const contactSchema = z.object({
-  name: z.string().trim().min(2, { message: "name" }).max(120),
-  email: z.email({ message: "email" }).max(200),
-  company: z.string().trim().max(160).optional().or(z.literal("")),
-  phone: z.string().trim().max(40).optional().or(z.literal("")),
-  message: z.string().trim().min(10, { message: "message" }).max(4000),
-  budget: z.string().max(40).optional().or(z.literal("")),
-  consent: z.literal(true, { message: "consent" }),
+  name: z.string().trim().min(2).max(120),
+  contact: z
+    .string()
+    .trim()
+    .max(200)
+    .refine((value) => EMAIL.test(value) || PHONE.test(value)),
+  message: z.string().trim().min(3).max(4000),
   locale: z.string().min(2).max(5).optional(),
   // Honeypot: accepted by the schema so the server can silently discard bots
   // (rather than returning a validation error that signals the trap).
@@ -19,10 +27,3 @@ export const contactSchema = z.object({
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
-
-export const budgetOptions = [
-  "100 – 500 €",
-  "500 – 1.000 €",
-  "1.000 – 2.000 €",
-  "> 2.000 €",
-] as const;

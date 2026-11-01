@@ -1,24 +1,24 @@
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Geist, Space_Grotesk } from "next/font/google";
 
-export const grotesk = Space_Grotesk({
+export const display = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-grotesk",
+  axes: ["opsz"],
+  variable: "--font-display-home",
   display: "swap",
 });
 
-export const inter = Inter({
+export const body = Geist({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-inter",
+  weight: ["400", "500"],
+  variable: "--font-body-home",
   display: "swap",
 });
 
-export const jetbrains = JetBrains_Mono({
+export const mark = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["500"],
-  variable: "--font-jetbrains",
+  weight: ["300"],
+  variable: "--font-mark",
   display: "swap",
 });
 
-export const fontVariables = `${grotesk.variable} ${inter.variable} ${jetbrains.variable}`;
+export const fontVariables = `${display.variable} ${body.variable} ${mark.variable}`;
