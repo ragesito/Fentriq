@@ -186,11 +186,13 @@ export function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [panel]);
 
+  // The examples only rotate while nobody is using the field.
+  const askIdle = !askFocused && !ask;
   useEffect(() => {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = setInterval(() => setIdeaIndex((i) => i + 1), 2800);
+    if (!askIdle || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => setIdeaIndex((i) => i + 1), 3600);
     return () => clearInterval(id);
-  }, []);
+  }, [askIdle]);
 
   // 3D comes in after the first paint: the text is never waiting for it.
   useEffect(() => {
@@ -236,7 +238,8 @@ export function Home() {
 
   const errorText =
     status === "contact" ? t.errContact : status === "rate" ? t.errRate : status === "failed" ? t.errSend : null;
-  const placeholder = askFocused ? t.ideas[0] : t.ideas[ideaIndex % t.ideas.length];
+  const idea = t.ideas[ideaIndex % t.ideas.length];
+  const lastIdea = t.ideas[(ideaIndex + t.ideas.length - 1) % t.ideas.length];
 
   return (
     <>
@@ -280,7 +283,7 @@ export function Home() {
           <div>
             <h1>
               <span className="quiet">{t.h1a}</span> <span className="quiet">{t.h1b}</span>{" "}
-              <span>{t.h1c}</span>
+              <span>{t.h1c}</span> <span>{t.h1d}</span>
             </h1>
             <p className="lede">{t.lede}</p>
             <form
@@ -298,11 +301,23 @@ export function Home() {
                 type="text"
                 autoComplete="off"
                 value={ask}
-                placeholder={placeholder}
                 onChange={(e) => setAsk(e.target.value)}
                 onFocus={() => setAskFocused(true)}
                 onBlur={() => setAskFocused(false)}
               />
+              {/* Not a native placeholder: those can't animate from one text to the next. */}
+              {ask ? null : (
+                <span className="ask-hint" aria-hidden="true">
+                  {ideaIndex > 0 ? (
+                    <span key={`out-${ideaIndex}`} className="hint-out">
+                      {lastIdea}
+                    </span>
+                  ) : null}
+                  <span key={`in-${ideaIndex}`} className={ideaIndex > 0 ? "hint-in" : undefined}>
+                    {idea}
+                  </span>
+                </span>
+              )}
               <button type="submit" aria-label={t.askSend}>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                   <path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" strokeWidth="1.8" />

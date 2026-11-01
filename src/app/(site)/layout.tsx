@@ -6,7 +6,7 @@ import "./home.css";
 
 const title = "Fentriq · Software, app e IA su misura · Marcelo Amaro";
 const description =
-  "Non ti serve un'agenzia. Siti, app, automazioni e intelligenza artificiale su misura, dall'idea al lancio, con una persona sola. Rispondo ogni giorno.";
+  "Quel prodotto che hai in mente non richiede un'agenzia. Siti, app, automazioni e intelligenza artificiale su misura, dall'idea al lancio. Rispondo ogni giorno.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

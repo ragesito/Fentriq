@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { siteConfig } from "@/config/site";
 
 export const runtime = "nodejs";
-export const alt = "Non ti serve un'agenzia. Ti servo io. Marcelo Amaro, Fentriq";
+export const alt = "Quel prodotto che hai in mente non richiede un'agenzia. Marcelo Amaro, Fentriq";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -32,9 +32,9 @@ export default async function OgImage() {
           </svg>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", fontSize: 104, lineHeight: 1, letterSpacing: -4 }}>
-          <div style={{ display: "flex", color: "#8B90A0" }}>Non ti serve un&apos;agenzia.</div>
-          <div style={{ display: "flex", fontWeight: 700 }}>Ti servo io.</div>
+        <div style={{ display: "flex", flexDirection: "column", fontSize: 74, lineHeight: 1.05, letterSpacing: -2.5 }}>
+          <div style={{ display: "flex", color: "#8B90A0" }}>Quel prodotto che hai in mente</div>
+          <div style={{ display: "flex", fontWeight: 700 }}>non richiede un&apos;agenzia.</div>
         </div>
 
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 30, color: "#A2A8B6" }}>
