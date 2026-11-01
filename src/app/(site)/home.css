@@ -148,8 +148,7 @@ h1 .quiet { color: var(--quiet); font-weight: 400; }
   padding: 0;
   border: 1px solid rgba(255, 255, 255, .11);
   border-radius: 16px;
-  background: rgba(17, 18, 24, .74) var(--grain);
-  background-blend-mode: soft-light;
+  background: rgba(17, 18, 24, .84);
   -webkit-backdrop-filter: blur(26px) saturate(1.25);
   backdrop-filter: blur(26px) saturate(1.25);
   box-shadow: 0 24px 80px rgba(0, 0, 0, .5);
@@ -171,10 +170,27 @@ h1 .quiet { color: var(--quiet); font-weight: 400; }
   transition: opacity .35s ease;
 }
 .drawer.in::backdrop { opacity: 1; }
+/* Without blur, the page behind would show through the text. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .drawer { background: #111218; }
+  .drawer::backdrop { background: rgba(6, 7, 9, .8); }
+}
 .drawer-inner {
+  position: relative;
+  isolation: isolate;
   padding-block: clamp(14px, 3.2vh, 40px);
   padding-left: max(clamp(20px, 3vw, 40px), env(safe-area-inset-left, 0px));
   padding-right: max(clamp(20px, 3vw, 40px), env(safe-area-inset-right, 0px));
+}
+/* Grain with its own opacity: as a background layer on the card, iOS Safari
+   skips background-blend-mode and paints the white noise at full strength. */
+.drawer-inner::before {
+  content: "";
+  position: absolute; inset: 0;
+  z-index: -1;
+  background-image: var(--grain);
+  opacity: .05;
+  pointer-events: none;
 }
 .close {
   position: sticky; top: 0; float: right;
