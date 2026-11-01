@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/site";
 import { fontVariables } from "../fonts";
 import "./home.css";
 
-const title = "Fentriq · Software, app e IA su misura · Marcelo Amaro";
+const title = "Fentriq | Studio di sviluppo software | Web, App, IA, Automazioni";
 const description =
   "Quel prodotto che hai in mente non richiede un'agenzia. Siti, app, automazioni e intelligenza artificiale su misura, dall'idea al lancio. Rispondo ogni giorno.";
 
