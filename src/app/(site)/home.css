@@ -217,28 +217,59 @@ h1 .quiet { color: var(--quiet); font-weight: 400; }
   top: calc(50% - var(--mw) * .324);
   width: var(--mw);
   height: calc(var(--mw) * .648);
-  filter: drop-shadow(calc(var(--mw) * -.035) calc(var(--mw) * .05) calc(var(--mw) * .035) rgba(0, 0, 0, .85));
 }
-.cover-metal, .cover-sheen { position: absolute; inset: 0; }
-.cover-metal {
+/* The metal appears behind a slanted window that slides across it. Window and contents
+   move in opposite directions, so the logo itself stays put. Everything here animates
+   transforms only: it keeps running smoothly while the 3D is being built. */
+.cover-reveal {
+  position: absolute;
+  left: calc(var(--mw) * -.3);
+  top: calc(var(--mw) * -.06);
+  width: calc(var(--mw) * 1.6);
+  height: calc(var(--mw) * .768);
+  overflow: hidden;
+  transform: skewX(-30.26deg) translateX(0);
+  animation: reveal-window .8s cubic-bezier(.3, .6, .2, 1) backwards;
+}
+.cover-unskew {
+  position: absolute;
+  left: calc(var(--mw) * .3);
+  top: calc(var(--mw) * .06);
+  width: var(--mw);
+  height: calc(var(--mw) * .648);
+  transform: translateX(0) skewX(30.26deg);
+  animation: reveal-content .8s cubic-bezier(.3, .6, .2, 1) backwards;
+}
+@keyframes reveal-window { from { transform: skewX(-30.26deg) translateX(calc(var(--mw) * -2)); } }
+@keyframes reveal-content { from { transform: translateX(calc(var(--mw) * 2)) skewX(30.26deg); } }
+.cover-shade, .cover-metal, .cover-sheen { position: absolute; inset: 0; }
+/* The logo's shadow on the wall, painted once. */
+.cover-shade {
   background: url("/brand/fentriq-metal.webp") center / 100% 100% no-repeat;
-  -webkit-mask: linear-gradient(120deg, #000 44%, transparent 56%) 0 0 / 300% 100% no-repeat;
-  mask: linear-gradient(120deg, #000 44%, transparent 56%) 0 0 / 300% 100% no-repeat;
-  animation: metal-in .8s cubic-bezier(.3, .6, .2, 1) backwards;
+  filter: brightness(0) blur(calc(var(--mw) * .0175));
+  opacity: .85;
+  transform: translate(calc(var(--mw) * -.035), calc(var(--mw) * .05));
 }
+.cover-metal { background: url("/brand/fentriq-metal.webp") center / 100% 100% no-repeat; }
+/* The light crossing the metal: a band that slides inside the logo's own shape. */
 .cover-sheen {
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0) 42%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, 0) 58%) 100% 0 / 300% 100% no-repeat;
+  overflow: hidden;
   -webkit-mask: url("/brand/fentriq-metal.webp") center / 100% 100% no-repeat;
   mask: url("/brand/fentriq-metal.webp") center / 100% 100% no-repeat;
+}
+.cover-band {
+  position: absolute; top: 0; bottom: 0; left: -100%; width: 300%;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0) 42%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, 0) 58%);
+  transform: translateX(-50%);
   animation: metal-sheen 2.4s cubic-bezier(.45, 0, .3, 1) .35s infinite;
 }
-@keyframes metal-in {
-  from { -webkit-mask-position: 100% 0; mask-position: 100% 0; transform: scale(.985); }
-  to { -webkit-mask-position: 0 0; mask-position: 0 0; transform: none; }
-}
 @keyframes metal-sheen {
-  from { background-position: 100% 0; }
-  45%, to { background-position: 0 0; }
+  from { transform: translateX(-50%); }
+  45%, to { transform: translateX(50%); }
+}
+/* Layers made ahead, under the cover, so nothing has to be drawn as the wipe starts. */
+:root:not(.no-entry):not(.done) :is(.cover-block, .cover-wall, .cover-logo, h1 span, .lede, .ask, .side, .top, .foot) {
+  will-change: transform, opacity;
 }
 /* The page rises as the wipe uncovers it. */
 @keyframes entry-rise { from { opacity: 0; transform: translateY(16px); } }

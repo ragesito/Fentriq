@@ -208,9 +208,11 @@ export function Home() {
     if (!sceneState.current.entering || entered.current) return;
     const open = () => {
       entered.current = true;
-      sceneState.current.entering = false;
       root.classList.add("open", "enter");
-      setTimeout(() => root.classList.add("done"), ENTRY_OUT + 80);
+      setTimeout(() => {
+        root.classList.add("done");
+        sceneState.current.entering = false;
+      }, ENTRY_OUT + 80);
       try {
         sessionStorage.setItem(ENTERED_KEY, "1");
       } catch {}
@@ -389,8 +391,15 @@ export function Home() {
           <div className="cover-field">
             <div className="cover-wall" />
             <div className="cover-logo">
-              <div className="cover-metal" />
-              <div className="cover-sheen" />
+              <div className="cover-reveal">
+                <div className="cover-unskew">
+                  <div className="cover-shade" />
+                  <div className="cover-metal" />
+                  <div className="cover-sheen">
+                    <div className="cover-band" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

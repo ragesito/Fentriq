@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { bakeMaps, type BakedMap, type MapJob } from "./maps";
 
 /**
  * The home's 3D scene: a black wall with a real surface, lit by one moving
@@ -9,83 +10,17 @@ import * as THREE from "three";
 export interface SceneState {
   /** A drawer is open: the blurred scene behind it holds still. */
   open: boolean;
-  /** The entrance still covers the page: the logo waits at an angle, to settle as it opens. */
+  /** The entrance is on screen: the scene draws one frame and waits, the logo at an angle,
+   *  so the GPU is free for the cover. It settles once the wipe has passed. */
   entering: boolean;
 }
 
 const PHONE_WIDTH = 820;
 
-/** Random height field, tiling. With alongX the noise only smears sideways, into long streaks. */
-function buildHeight(size: number, layers: number[][], alongX = false) {
-  const n = size * size;
-  const height = new Float32Array(n);
-  const blur = (src: Float32Array, r: number) => {
-    const a = new Float32Array(n);
-    const out = new Float32Array(n);
-    const w = 2 * r + 1;
-    for (let y = 0; y < size; y++) {
-      let sum = 0;
-      for (let k = -r; k <= r; k++) sum += src[y * size + ((k + size) % size)];
-      for (let x = 0; x < size; x++) {
-        a[y * size + x] = sum / w;
-        sum += src[y * size + ((x + r + 1) % size)] - src[y * size + ((x - r + size) % size)];
-      }
-    }
-    if (alongX) return a;
-    for (let x = 0; x < size; x++) {
-      let sum = 0;
-      for (let k = -r; k <= r; k++) sum += a[((k + size) % size) * size + x];
-      for (let y = 0; y < size; y++) {
-        out[y * size + x] = sum / w;
-        sum += a[((y + r + 1) % size) * size + x] - a[((y - r + size) % size) * size + x];
-      }
-    }
-    return out;
-  };
-  for (const [r, gain] of layers) {
-    const raw = new Float32Array(n);
-    for (let i = 0; i < n; i++) raw[i] = Math.random() - 0.5;
-    const b = blur(raw, r);
-    for (let i = 0; i < n; i++) height[i] += b[i] * gain;
-  }
-  return height;
-}
-
-function buildMaps(height: Float32Array, size: number, strength: number, roughness: (h: number) => number) {
-  const make = () => {
-    const c = document.createElement("canvas");
-    c.width = c.height = size;
-    return c;
-  };
-  const normal = make();
-  const rough = make();
-  const nCtx = normal.getContext("2d")!;
-  const rCtx = rough.getContext("2d")!;
-  const nImg = nCtx.createImageData(size, size);
-  const rImg = rCtx.createImageData(size, size);
-  for (let y = 0; y < size; y++) {
-    for (let x = 0; x < size; x++) {
-      const i = y * size + x;
-      const dx = (height[y * size + (x + 1) % size] - height[y * size + (x - 1 + size) % size]) * strength;
-      const dy = (height[((y + 1) % size) * size + x] - height[((y - 1 + size) % size) * size + x]) * strength;
-      const len = Math.hypot(dx, dy, 1);
-      nImg.data.set([(-dx / len + 1) * 127.5, (-dy / len + 1) * 127.5, (1 / len + 1) * 127.5, 255], i * 4);
-      const v = roughness(height[i]);
-      rImg.data.set([v, v, v, 255], i * 4);
-    }
-  }
-  nCtx.putImageData(nImg, 0, 0);
-  rCtx.putImageData(rImg, 0, 0);
-  return { normal, rough };
-}
-
-const clamp = THREE.MathUtils.clamp;
-const buildSurface = (size: number) =>
-  buildMaps(buildHeight(size, [[1, 1.3], [2, 2], [5, 3], [18, 7]]), size, 3.4, (h) => clamp(218 + h * 220, 175, 255));
-const buildBrushed = (size: number) =>
-  buildMaps(buildHeight(size, [[90, 9], [24, 4]], true), size, 2.2, (h) => clamp(158 + h * 160, 138, 178));
-const buildBead = (size: number) =>
-  buildMaps(buildHeight(size, [[1, 1.1], [2, 1]]), size, 1.5, (h) => clamp(190 + h * 260, 130, 255));
+// The surfaces: the wall's grit, the logo's brushed metal and its blasted ceramic.
+const WALL: MapJob = { size: 512, layers: [[1, 1.3], [2, 2], [5, 3], [18, 7]], alongX: false, strength: 3.4, rough: [218, 220, 175, 255] };
+const BRUSHED: MapJob = { size: 512, layers: [[90, 9], [24, 4]], alongX: true, strength: 2.2, rough: [158, 160, 138, 178] };
+const BEAD: MapJob = { size: 512, layers: [[1, 1.1], [2, 1]], alongX: false, strength: 1.5, rough: [190, 260, 130, 255] };
 
 /** Starts the scene. Returns a stop function, or null when WebGL is unavailable. */
 export function startScene(
@@ -99,7 +34,27 @@ export function startScene(
   } catch {
     return null;
   }
+  const gl = renderer;
+  let stop: (() => void) | null = null;
+  let cancelled = false;
+  bakeMaps([WALL, BRUSHED, BEAD]).then(([wallMaps, brushedMaps, beadMaps]) => {
+    if (!cancelled) stop = build(gl, state, onFirstFrame, wallMaps, brushedMaps, beadMaps);
+  });
+  return () => {
+    cancelled = true;
+    if (stop) stop();
+    else gl.dispose();
+  };
+}
 
+function build(
+  renderer: THREE.WebGLRenderer,
+  state: SceneState,
+  onFirstFrame: () => void,
+  wallMaps: BakedMap,
+  brushedMaps: BakedMap,
+  beadMaps: BakedMap,
+): () => void {
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const small = innerWidth < 820;
   renderer.setPixelRatio(Math.min(devicePixelRatio, small ? 1.5 : 1.75));
@@ -134,23 +89,33 @@ export function startScene(
   world.environment = pmrem.fromScene(room, 0.035).texture;
   pmrem.dispose();
 
-  // Wall
-  const surface = buildSurface(512);
-  const tex = (c: HTMLCanvasElement) => {
-    const t = new THREE.CanvasTexture(c);
+  const textures: THREE.Texture[] = [];
+  const dataTex = (data: Uint8Array<ArrayBuffer>, size: number) => {
+    const t = new THREE.DataTexture(data, size, size, THREE.RGBAFormat);
     t.wrapS = t.wrapT = THREE.RepeatWrapping;
-    t.repeat.set(14, 14);
+    t.magFilter = THREE.LinearFilter;
+    t.minFilter = THREE.LinearMipmapLinearFilter;
+    t.generateMipmaps = true;
     t.colorSpace = THREE.NoColorSpace;
     t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    t.needsUpdate = true;
+    textures.push(t);
+    return t;
+  };
+
+  // Wall
+  const tex = (data: Uint8Array<ArrayBuffer>) => {
+    const t = dataTex(data, wallMaps.size);
+    t.repeat.set(14, 14);
     return t;
   };
   const wall = new THREE.Mesh(
     new THREE.PlaneGeometry(40, 40),
     new THREE.MeshStandardMaterial({
       color: 0x24262c,
-      normalMap: tex(surface.normal),
+      normalMap: tex(wallMaps.normal),
       normalScale: new THREE.Vector2(0.6, 0.6),
-      roughnessMap: tex(surface.rough),
+      roughnessMap: tex(wallMaps.rough),
       roughness: 1,
       metalness: 0,
       envMapIntensity: 0.08,
@@ -172,17 +137,14 @@ export function startScene(
 
   // The logo's finish: brushed anodized metal, with the grain following the mark's
   // own slanted edge, and one blasted white ceramic facet.
-  const brushedMaps = buildBrushed(512);
-  const beadMaps = buildBead(512);
-  const finishTextures: THREE.Texture[] = [];
-  const finishTex = (c: HTMLCanvasElement, repeat: number, rotation: number) => {
-    const t = new THREE.CanvasTexture(c);
-    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  // One upload per map: every facet's copy shares it, with its own scale and grain direction.
+  const shared = new Map<Uint8Array<ArrayBuffer>, THREE.DataTexture>();
+  const finishTex = (data: Uint8Array<ArrayBuffer>, repeat: number, rotation: number) => {
+    if (!shared.has(data)) shared.set(data, dataTex(data, 512));
+    const t = shared.get(data)!.clone();
     t.repeat.set(repeat, repeat);
     t.rotation = rotation;
-    t.colorSpace = THREE.NoColorSpace;
-    t.anisotropy = renderer.capabilities.getMaxAnisotropy();
-    finishTextures.push(t);
+    textures.push(t);
     return t;
   };
   const brushed = (rotation: number) => ({
@@ -281,6 +243,11 @@ export function startScene(
     last = now;
     const t = (now - start) / 1000;
 
+    if (state.entering && !first) {
+      raf = requestAnimationFrame(frame);
+      return;
+    }
+
     // Behind the blur the scene holds still, and costs nothing while it does.
     if (state.open) {
       if (coveredSince < 0) coveredSince = t;
@@ -332,17 +299,24 @@ export function startScene(
       raf = requestAnimationFrame(frame);
     }
   };
-  if (reduced) {
-    // No motion: draw the settled scene, and again whenever the layout changes.
-    once();
-    addEventListener("resize", once);
-    addEventListener("hashchange", onceSoon);
-  } else {
-    raf = requestAnimationFrame(frame);
-    document.addEventListener("visibilitychange", onVisibility);
-  }
+  let dead = false;
+  const begin = () => {
+    if (dead) return;
+    last = performance.now();
+    if (reduced) {
+      // No motion: draw the settled scene, and again whenever the layout changes.
+      once();
+      addEventListener("resize", once);
+      addEventListener("hashchange", onceSoon);
+    } else {
+      raf = requestAnimationFrame(frame);
+      document.addEventListener("visibilitychange", onVisibility);
+    }
+  };
+  renderer.compileAsync(world, camera).then(begin, begin);
 
   return () => {
+    dead = true;
     cancelAnimationFrame(raf);
     removeEventListener("resize", resize);
     removeEventListener("resize", once);
@@ -351,14 +325,12 @@ export function startScene(
     document.removeEventListener("visibilitychange", onVisibility);
     world.environment?.dispose();
     wall.geometry.dispose();
-    wall.material.normalMap?.dispose();
-    wall.material.roughnessMap?.dispose();
     wall.material.dispose();
     for (const mesh of meshes) {
       mesh.geometry.dispose();
       for (const m of mesh.material) m.dispose();
     }
-    for (const t of finishTextures) t.dispose();
+    for (const t of textures) t.dispose();
     renderer.dispose();
   };
 }
